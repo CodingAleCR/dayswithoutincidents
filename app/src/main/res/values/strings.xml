@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Days Without Incidents</string>
+    <string name="days_without_incidents">Days Without Incidents</string>
+    <string name="btn_reset">Reset</string>
+    <string name="days">%s days</string>
+    <string name="title_activity_settings">Settings</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:key="customize"
+            android:title="Customize">
+        <EditTextPreference
+                android:defaultValue="@string/days_without_incidents"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:title="Title" android:key="title" android:summary="The title to be shown in the app."/>
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:key="about"
+            android:title="About">
+        <Preference
+                android:key="version"
+                android:title="Build Version"
+                android:summary="1.0.0"
+        />
+    </PreferenceCategory>
+</PreferenceScreen>

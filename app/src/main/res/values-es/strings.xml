@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Días Sin Incidentes</string>
+    <string name="days_without_incidents">Días Sin Incidentes</string>
+    <string name="btn_reset">Reiniciar</string>
+    <string name="days">%s días</string>
+    <string name="title_activity_settings">Configuración</string>
+</resources>
