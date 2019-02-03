@@ -4,20 +4,22 @@
 
     <PreferenceCategory
             android:key="customize"
-            android:title="Customize">
+            android:title="@string/label_customization">
         <EditTextPreference
                 android:defaultValue="@string/days_without_incidents"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
-                android:title="Title" android:key="title" android:summary="The title to be shown in the app."/>
+                android:title="@string/preference_title"
+                android:key="title"
+                android:summary="@string/summary_title"/>
     </PreferenceCategory>
     <PreferenceCategory
             android:key="about"
-            android:title="About">
+            android:title="@string/label_about">
         <Preference
                 android:key="version"
-                android:title="Build Version"
-                android:summary="1.0.0"
+                android:title="@string/preference_version"
+                android:summary="@string/version"
         />
     </PreferenceCategory>
 </PreferenceScreen>

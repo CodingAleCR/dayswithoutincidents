@@ -5,4 +5,9 @@
     <string name="btn_reset">Reiniciar</string>
     <string name="days">%s días</string>
     <string name="title_activity_settings">Configuración</string>
+    <string name="label_customization">Personalizar</string>
+    <string name="preference_title">Título</string>
+    <string name="summary_title">El título que se muestra en el app.</string>
+    <string name="preference_version">Versión</string>
+    <string name="label_about">Acerca de</string>
 </resources>
