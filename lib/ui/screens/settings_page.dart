@@ -78,7 +78,9 @@ class _SettingsPageState extends State<SettingsPage> {
       lastDate: DateTime(2030),
     );
 
-    _bloc.setIncident(selectedDate);
+    if (selectedDate != null) {
+      _bloc.setIncident(selectedDate);
+    }
   }
 
   @override
