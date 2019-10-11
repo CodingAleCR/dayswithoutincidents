@@ -1,3 +1,4 @@
+import 'package:dwi/core/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class DefaultCounter extends StatefulWidget {
@@ -19,7 +20,10 @@ class DefaultCounter extends StatefulWidget {
 class _DefaultCounterState extends State<DefaultCounter> {
   @override
   Widget build(BuildContext context) {
-    String days = widget.days != 1 ? "${widget.days} days." : "${widget.days} day.";
+    String dayString = widget.days != 1
+        ? AppLocalizations.of(context).translate(AppStrings.DAYS)
+        : AppLocalizations.of(context).translate(AppStrings.DAY);
+    String widgetString = "${widget.days} $dayString.";
 
     return Stack(
       children: <Widget>[
@@ -57,7 +61,7 @@ class _DefaultCounterState extends State<DefaultCounter> {
                       ),
                       child: Center(
                         child: Text(
-                          "${widget.days} days.",
+                          widgetString,
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.display3,
                         ),
@@ -68,7 +72,10 @@ class _DefaultCounterState extends State<DefaultCounter> {
                     alignment: Alignment.bottomRight,
                     child: FlatButton(
                       textColor: Theme.of(context).errorColor,
-                      child: Text("Reset"),
+                      child: Text(
+                        AppLocalizations.of(context)
+                            .translate(AppStrings.BTN_RESET),
+                      ),
                       onPressed: () {
                         widget.onReset();
                       },

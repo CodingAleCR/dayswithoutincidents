@@ -14,14 +14,13 @@ class DayCounterSharedPreferenceProvider implements DayCounterProvider {
   @override
   DayCounter getCounter() {
     if (_prefs.containsKey(TITLE) && _prefs.containsKey(LAST_INCIDENT)) {
-      DateTime now = DateTime.now();
       String title = _prefs.getString(TITLE);
       String lastIncidentString = _prefs.getString(LAST_INCIDENT);
       DateTime lastIncident = DateTime.parse(lastIncidentString);
 
       return DayCounter(title, lastIncident);
     } else {
-      final counter = DayCounter.EMPTY_COUNTER;
+      final counter = DayCounter.empty();
       setCounter(counter);
 
       return counter;

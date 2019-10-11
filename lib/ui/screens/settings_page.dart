@@ -1,3 +1,4 @@
+import 'package:dwi/core/app_localizations.dart';
 import 'package:dwi/domain/bloc/bloc.dart';
 import 'package:dwi/domain/models/day_counter.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,9 @@ class _SettingsPageState extends State<SettingsPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Enter the title'),
+          title: Text(
+            AppLocalizations.of(context).translate(AppStrings.INPUT_TITLE),
+          ),
           content: Row(
             children: <Widget>[
               Expanded(
@@ -35,11 +38,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   controller: controller,
                   autofocus: true,
                   decoration: InputDecoration(
-                      labelText: 'Title',
-                      hintText: 'eg. Days without incidents'),
+                    labelText: AppLocalizations.of(context)
+                        .translate(AppStrings.PREFERENCE_TITLE),
+                    hintText: AppLocalizations.of(context)
+                        .translate(AppStrings.HINT_TITLE),
+                  ),
                   onChanged: (value) {
                     if (value.isEmpty) {
-                      newTitle = "Days without incidents";
+                      newTitle = AppLocalizations.of(context)
+                          .translate(AppStrings.DAYS_WITHOUT_INCIDENTS);
                     } else {
                       newTitle = value;
                     }
@@ -50,13 +57,13 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           actions: <Widget>[
             FlatButton(
-              child: Text('Cancel'),
+              child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               onPressed: () {
                 Navigator.of(context).pop(newTitle);
               },
             ),
             FlatButton(
-              child: Text('Ok'),
+              child: Text(MaterialLocalizations.of(context).okButtonLabel),
               onPressed: () {
                 if (newTitle != null) {
                   _bloc.setTitle(newTitle);
@@ -91,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.white,
         ),
         title: Text(
-          "Settings",
+          AppLocalizations.of(context).translate(AppStrings.TITLE_SETTINGS),
           style: TextStyle(
             color: Colors.white,
           ),
@@ -111,43 +118,49 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: EdgeInsets.only(top: 16, left: 32, right: 16),
             children: <Widget>[
               Text(
-                "Customize",
+                AppLocalizations.of(context)
+                    .translate(AppStrings.LABEL_CUSTOMIZATION),
                 style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold),
               ),
               ListTile(
                 title: Text(
-                  "Title",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.PREFERENCE_TITLE),
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
-                  "This is the title to be shown by the app.",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.SUMMARY_TITLE),
                   style: Theme.of(context).textTheme.caption,
                 ),
                 onTap: () => _titleInputDialog(counter),
               ),
               ListTile(
                 title: Text(
-                  "Last Incident",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.PREFERENCE_DATE),
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
-                  "This is the date of the last incident.",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.SUMMARY_DAY),
                   style: Theme.of(context).textTheme.caption,
                 ),
                 onTap: () => _lastIncidentPicker(counter),
               ),
               Divider(),
               Text(
-                "About",
+                AppLocalizations.of(context).translate(AppStrings.LABEL_ABOUT),
                 style: TextStyle(
                     color: Theme.of(context).accentColor,
                     fontWeight: FontWeight.bold),
               ),
               ListTile(
                 title: Text(
-                  "Version",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.PREFERENCE_VERSION),
                   style: Theme.of(context).textTheme.title,
                 ),
                 subtitle: Text(
@@ -157,12 +170,14 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               ListTile(
                 title: Text(
-                  "Developed with Flutter",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.CREDITS_LN1),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.caption,
                 ),
                 subtitle: Text(
-                  "by CodingAleCR.",
+                  AppLocalizations.of(context)
+                      .translate(AppStrings.CREDITS_LN2),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.caption,
                 ),

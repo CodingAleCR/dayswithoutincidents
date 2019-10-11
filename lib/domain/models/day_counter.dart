@@ -4,8 +4,9 @@ class DayCounter {
 
   DayCounter(this.title, this.incident);
 
-  static final DayCounter EMPTY_COUNTER =
-      DayCounter(DEFAULT_TITLE, DateTime.now());
+  factory DayCounter.empty() {
+    return DayCounter(DEFAULT_TITLE, DateTime.now());
+  }
 }
 
 const String DEFAULT_TITLE = "Days without incidents";

@@ -17,7 +17,7 @@ class Bloc {
   Future<void> fetchCounter() async {
     DayCounter counter = await _repository.getDayCounter();
     if (counter == null) {
-      _counter.add(DayCounter.EMPTY_COUNTER);
+      _counter.add(DayCounter.empty());
     } else {
       _counter.add(counter);
     }
@@ -28,7 +28,7 @@ class Bloc {
     if (counter != null) {
       counter = DayCounter(title, counter.incident);
     } else {
-      counter = DayCounter(title, DayCounter.EMPTY_COUNTER.incident);
+      counter = DayCounter(title, DayCounter.empty().incident);
     }
     _repository.setDayCounter(counter);
     _counter.add(counter);
@@ -39,7 +39,7 @@ class Bloc {
     if (counter != null) {
       counter = DayCounter(counter.title, incident);
     } else {
-      counter = DayCounter(DayCounter.EMPTY_COUNTER.title, incident);
+      counter = DayCounter(DayCounter.empty().title, incident);
     }
     _repository.setDayCounter(counter);
     _counter.add(counter);

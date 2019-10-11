@@ -1,4 +1,5 @@
 
+import 'package:dwi/core/app_localizations.dart';
 import 'package:dwi/domain/bloc/bloc.dart';
 import 'package:dwi/domain/models/day_counter.dart';
 import 'package:dwi/ui/widgets/default_counter.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             child: SafeArea(
               child: FlatButton(
                 child: Text(
-                  "Customize",
+                  AppLocalizations.of(context).translate(AppStrings.LABEL_CUSTOMIZATION),
                   style: TextStyle(color: Theme.of(context).accentColor),
                 ),
                 onPressed: () async {
@@ -63,13 +64,13 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           Positioned(
-            bottom: 8,
+            bottom: 16,
             left: 0,
             right: 0,
             child: SafeArea(
               child: Center(
                 child: Text(
-                  "Made with ♥ from Costa Rica.",
+                  AppLocalizations.of(context).translate(AppStrings.HOME_CREDITS),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
