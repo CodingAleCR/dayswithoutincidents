@@ -1,4 +1,5 @@
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/shared_preferences
+DEFINES_MODULE = YES
 FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../.symlinks/flutter/ios"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 PODS_BUILD_DIR = ${BUILD_DIR}
@@ -7,3 +8,4 @@ PODS_ROOT = ${SRCROOT}
 PODS_TARGET_SRCROOT = ${PODS_ROOT}/../.symlinks/plugins/shared_preferences/ios
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES
+VALID_ARCHS[sdk=iphonesimulator*] = x86_64

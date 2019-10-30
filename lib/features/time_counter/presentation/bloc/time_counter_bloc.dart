@@ -1,0 +1,69 @@
+import 'dart:async';
+import 'package:bloc/bloc.dart';
+import 'package:dwi/features/time_counter/domain/domain.dart';
+import 'package:meta/meta.dart';
+
+import './bloc.dart';
+
+class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
+  final TimeCounterRepository repository;
+
+  TimeCounterBloc({@required this.repository});
+
+  @override
+  TimeCounterState get initialState => TimeCounterInitial();
+
+  @override
+  Stream<TimeCounterState> mapEventToState(
+    TimeCounterEvent event,
+  ) async* {
+    if (event is GetTimeCounter) {
+      yield* _mapGetTimeCounterToState(event);
+    } else if (event is UpdateTimeCounter) {
+      yield* _mapUpdateTimeCounterToState(event);
+    } else if (event is ResetTimeCounter) {
+      yield* _mapResetTimeCounterToState(event);
+    }
+  }
+
+  Stream<TimeCounterState> _mapGetTimeCounterToState(
+      GetTimeCounter event) async* {
+    try {
+      yield TimeCounterLoading();
+      TimeCounter current = await repository.getTimeCounter();
+      yield TimeCounterLoaded(counter: current);
+    } catch (error) {
+      yield TimeCounterError(
+        message: "There was a problem getting the counter.",
+      );
+    }
+  }
+
+  Stream<TimeCounterState> _mapUpdateTimeCounterToState(
+      UpdateTimeCounter event) async* {
+    try {
+      yield TimeCounterLoading();
+      await repository.setTimeCounter(event.counter);
+      TimeCounter current = await repository.getTimeCounter();
+      yield TimeCounterLoaded(counter: current);
+    } catch (error) {
+      print(error);
+      yield TimeCounterError(
+        message: "There was a problem getting the counter.",
+      );
+    }
+  }
+
+  Stream<TimeCounterState> _mapResetTimeCounterToState(
+      ResetTimeCounter event) async* {
+    try {
+      yield TimeCounterLoading();
+      await repository.resetTimeCounter();
+      yield TimeCounterLoaded(counter: TimeCounter.empty());
+    } catch (error) {
+      yield TimeCounterError(
+        message: "There was a problem getting the counter.",
+      );
+    }
+  }
+}

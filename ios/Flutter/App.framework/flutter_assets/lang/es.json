@@ -1,0 +1,20 @@
+{
+  "app_name": "Días Sin Incidentes",
+  "days_without_incidents": "Días Sin Incidentes",
+  "btn_reset": "Reiniciar",
+  "day": "día",
+  "days": "días",
+  "title_activity_settings": "Configuración",
+  "label_customization": "Personalizar",
+  "preference_title": "Título",
+  "summary_title": "El título que se muestra en el app.",
+  "input_title": "Ingrese el título",
+  "hint_title": "ej. Días Sin Incidentes",
+  "preference_day": "Último Incidente",
+  "summary_day": "La fecha del último incidente.",
+  "label_about": "Acerca de",
+  "preference_version": "Versión",
+  "credits_ln1": "Desarrollado con Flutter",
+  "credits_ln2": "por CodingAleCR.",
+  "home_credits": "Hecho con ♥ desde Costa Rica."
+}
