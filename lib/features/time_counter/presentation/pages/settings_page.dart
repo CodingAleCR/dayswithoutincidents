@@ -140,14 +140,15 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget buildSettingsList(TimeCounter counter) {
     return ListView(
-      padding: EdgeInsets.only(top: 16, left: 32, right: 16),
+      padding: EdgeInsets.only(top: 16, left: 16, right: 16),
       children: <Widget>[
         Text(
           AppLocalizations.of(context)
-              .translate(AppStrings.LABEL_CUSTOMIZATION),
-          style: TextStyle(
-              color: Theme.of(context).accentColor,
-              fontWeight: FontWeight.bold),
+              .translate(AppStrings.LABEL_CUSTOMIZATION)
+              .toUpperCase(),
+          style: Theme.of(context).textTheme.overline.copyWith(
+                color: Theme.of(context).accentColor,
+              ),
         ),
         ListTile(
           title: Text(
@@ -171,12 +172,13 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           onTap: () => _lastIncidentPicker(counter),
         ),
-        Divider(),
         Text(
-          AppLocalizations.of(context).translate(AppStrings.LABEL_ABOUT),
-          style: TextStyle(
-              color: Theme.of(context).accentColor,
-              fontWeight: FontWeight.bold),
+          AppLocalizations.of(context)
+              .translate(AppStrings.LABEL_ABOUT)
+              .toUpperCase(),
+          style: Theme.of(context).textTheme.overline.copyWith(
+                color: Theme.of(context).accentColor,
+              ),
         ),
         ListTile(
           title: Text(
