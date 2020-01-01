@@ -27,19 +27,25 @@ class DWIApplication extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocale in supportedLocales) {
-          if (supportedLocale.languageCode == locale.languageCode) {
-            return supportedLocale;
+        if (locale == null) {
+          // If the locale of the device is not defined, use the first one
+          // from the list (English, in this case).
+          return supportedLocales.first;
+        } else {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode) {
+              return supportedLocale;
+            }
           }
+          // If the locale of the device is not supported, use the first one
+          // from the list (English, in this case).
+          return supportedLocales.first;
         }
-        // If the locale of the device is not supported, use the first one
-        // from the list (English, in this case).
-        return supportedLocales.first;
       },
       home: RepositoryProvider<TimeCounterRepository>(
-        builder: (context) => TimeCounterRepositoryImpl(),
+        create: (context) => TimeCounterRepositoryImpl(),
         child: BlocProvider<TimeCounterBloc>(
-          builder: (context) => TimeCounterBloc(
+          create: (context) => TimeCounterBloc(
             repository: RepositoryProvider.of<TimeCounterRepository>(context),
           ),
           child: HomePage(),

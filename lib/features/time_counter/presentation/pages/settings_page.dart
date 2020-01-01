@@ -64,9 +64,14 @@ class _SettingsPageState extends State<SettingsPage> {
               onPressed: () {
                 if (newTitle != null) {
                   BlocProvider.of<TimeCounterBloc>(context)
-                    ..add(UpdateTimeCounter(
+                    ..add(
+                      UpdateTimeCounter(
                         counter: TimeCounter(
-                            title: newTitle, incident: counter.incident)));
+                          title: newTitle,
+                          incident: counter.incident,
+                        ),
+                      ),
+                    );
                   Navigator.of(bContext).pop(newTitle);
                 }
               },
@@ -78,18 +83,24 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _lastIncidentPicker(TimeCounter counter) async {
+    DateTime today = DateTime.now();
     DateTime selectedDate = await showDatePicker(
       context: context,
       initialDate: counter.incident,
-      firstDate: DateTime(2018),
-      lastDate: DateTime(2030),
+      firstDate: DateTime(today.year-1),
+      lastDate: DateTime(today.year+1),
     );
 
     if (selectedDate != null) {
       BlocProvider.of<TimeCounterBloc>(context)
-        ..add(UpdateTimeCounter(
-            counter:
-                TimeCounter(title: counter.title, incident: selectedDate)));
+        ..add(
+          UpdateTimeCounter(
+            counter: TimeCounter(
+              title: counter.title,
+              incident: selectedDate,
+            ),
+          ),
+        );
     }
   }
 
@@ -108,11 +119,13 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
       body: BlocListener<TimeCounterBloc, TimeCounterState>(
+        condition: (prevState, state) => (prevState is TimeCounterLoading),
         listener: (context, state) {
           if (state is TimeCounterError) {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
+                backgroundColor: Colors.red,
               ),
             );
           }

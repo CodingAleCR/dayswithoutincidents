@@ -43,11 +43,18 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
       UpdateTimeCounter event) async* {
     try {
       yield TimeCounterLoading();
-      await repository.setTimeCounter(event.counter);
+      DateTime today = DateTime.now();
+      if (event.counter.incident.isBefore(today)) {
+        await repository.setTimeCounter(event.counter);
+      } else {
+        yield TimeCounterError(
+          message: "Please select a date that is before today.",
+        );
+      }
+
       TimeCounter current = await repository.getTimeCounter();
       yield TimeCounterLoaded(counter: current);
     } catch (error) {
-      print(error);
       yield TimeCounterError(
         message: "There was a problem getting the counter.",
       );
