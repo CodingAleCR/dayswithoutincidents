@@ -42,5 +42,8 @@ lib/generated_plugin_registrant.dart
 # is commented out by default.
 .vscode/
 
+# Signing config files
+.signing/
+
 # Local configuration file (sdk path, etc)
 key.properties
