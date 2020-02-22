@@ -200,7 +200,7 @@ class _SettingsPageState extends State<SettingsPage> {
             style: Theme.of(context).textTheme.subtitle,
           ),
           subtitle: Text(
-            "2.0.0",
+            "2.0.1",
             style: Theme.of(context).textTheme.caption,
           ),
         ),
