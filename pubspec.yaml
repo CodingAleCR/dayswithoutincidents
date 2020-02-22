@@ -42,6 +42,7 @@ dev_dependencies:
 flutter_icons:
   image_path: "assets/launcher/dwi-512x512-android.png"
   android: true # can specify file name here e.g. "ic_launcher"
+  ios: true
 
 flutter:
   uses-material-design: true
