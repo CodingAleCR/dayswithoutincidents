@@ -166,7 +166,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ListTile(
           title: Text(
             AppLocalizations.of(context).translate(AppStrings.PREFERENCE_TITLE),
-            style: Theme.of(context).textTheme.subtitle,
+            style: Theme.of(context).textTheme.subtitle2,
           ),
           subtitle: Text(
             AppLocalizations.of(context).translate(AppStrings.SUMMARY_TITLE),
@@ -177,7 +177,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ListTile(
           title: Text(
             AppLocalizations.of(context).translate(AppStrings.PREFERENCE_DATE),
-            style: Theme.of(context).textTheme.subtitle,
+            style: Theme.of(context).textTheme.subtitle2,
           ),
           subtitle: Text(
             AppLocalizations.of(context).translate(AppStrings.SUMMARY_DAY),
@@ -197,7 +197,7 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             AppLocalizations.of(context)
                 .translate(AppStrings.PREFERENCE_VERSION),
-            style: Theme.of(context).textTheme.subtitle,
+            style: Theme.of(context).textTheme.subtitle2,
           ),
           subtitle: Text(
             "2.0.0",
