@@ -17,6 +17,7 @@ class DWIApplication extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
+      darkTheme: ThemeData.dark(),
       supportedLocales: [
         const Locale('en'),
         const Locale('es'),
