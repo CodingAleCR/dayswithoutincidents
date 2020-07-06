@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../localization/localization.dart';
+import '../theme/theme.dart';
 
 class DWIApplication extends StatelessWidget {
   // This widget is the root of your application.
@@ -15,7 +16,7 @@ class DWIApplication extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Days Without Incidents',
       theme: ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: BrandColors.primary,
       ),
       darkTheme: ThemeData.dark(),
       supportedLocales: [

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Days Without Incidents</string>
+    <string name="counter_description">Counter Time</string>
+    <string name="reset_text">Reset</string>
+
+    <plurals name="counter_text">
+        <item quantity="one">day</item>
+        <item quantity="other">days</item>
+    </plurals>
+</resources>

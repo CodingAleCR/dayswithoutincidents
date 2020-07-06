@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title">Días Sin Incidentes</string>
+    <string name="counter_description">Contador</string>
+    <string name="reset_text">Reiniciar</string>
+
+    <plurals name="counter_text">
+        <item quantity="one">día</item>
+        <item quantity="other">días</item>
+    </plurals>
+</resources>

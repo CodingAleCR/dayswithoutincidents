@@ -26,23 +26,25 @@ dependencies:
   # Bloc for state management
   flutter_bloc: ^3.1.0
   # Value equality
-  equatable: ^1.1.1
+  equatable: ^1.2.0
   # Metadata
-  meta: ^1.1.7
+  meta: ^1.1.8
   # Local cache
-  shared_preferences: ^0.5.4+3
+  shared_preferences: ^0.5.7+3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.0
   bloc_test: ^3.0.0
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: ^0.7.5
 
 flutter_icons:
   image_path: "assets/launcher/dwi-512x512-android.png"
   android: true # can specify file name here e.g. "ic_launcher"
   ios: true
+  adaptive_icon_background: "#56F0D4"
+  adaptive_icon_foreground: "assets/launcher/dwi-foreground.png"
 
 flutter:
   uses-material-design: true
