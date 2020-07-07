@@ -14,7 +14,9 @@ An app based in Flutter that allows you to count days since an incident.
 
 - Customizable title in app screen.
 - Customizable date to the last incident.
-- Support for Engligsh and Spanish.
+- Support for English and Spanish.
+- Support for Android Home widgets.
+- Support for Dark Theme.
 
 ## Coming soon
 
