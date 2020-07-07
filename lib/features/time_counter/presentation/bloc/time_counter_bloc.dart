@@ -66,7 +66,8 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
     try {
       yield TimeCounterLoading();
       await repository.resetTimeCounter();
-      yield TimeCounterLoaded(counter: TimeCounter.empty());
+      TimeCounter current = await repository.getTimeCounter();
+      yield TimeCounterLoaded(counter: current);
     } catch (error) {
       yield TimeCounterError(
         message: "There was a problem getting the counter.",
