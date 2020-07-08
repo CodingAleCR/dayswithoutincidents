@@ -66,7 +66,7 @@ class _DefaultCounterState extends State<DefaultCounter> {
         Text(
           counter.title,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(context).textTheme.headline4,
         ),
         Container(
           height: 32,
@@ -86,7 +86,7 @@ class _DefaultCounterState extends State<DefaultCounter> {
               child: Text(
                 widgetString,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.display3,
+                style: Theme.of(context).textTheme.headline2,
               ),
             ),
           ),

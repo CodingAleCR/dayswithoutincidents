@@ -1,17 +1,7 @@
 name: dwi
 description: A Flutter project that shows a simple Days Without Incidents app.
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.0.1+6
+version: 2.1.0+7
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
@@ -26,23 +16,25 @@ dependencies:
   # Bloc for state management
   flutter_bloc: ^3.1.0
   # Value equality
-  equatable: ^1.0.0
+  equatable: ^1.2.0
   # Metadata
-  meta: ^1.1.7
+  meta: ^1.1.8
   # Local cache
-  shared_preferences: ^0.5.4+3
+  shared_preferences: ^0.5.7+3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.0
   bloc_test: ^3.0.0
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: ^0.7.5
 
 flutter_icons:
   image_path: "assets/launcher/dwi-512x512-android.png"
   android: true # can specify file name here e.g. "ic_launcher"
   ios: true
+  adaptive_icon_background: "#56F0D4"
+  adaptive_icon_foreground: "assets/launcher/dwi-foreground.png"
 
 flutter:
   uses-material-design: true
