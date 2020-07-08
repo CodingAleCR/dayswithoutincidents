@@ -1,7 +1,7 @@
 name: dwi
 description: A Flutter project that shows a simple Days Without Incidents app.
 
-version: 2.0.1+6
+version: 2.1.0+7
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
