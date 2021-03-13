@@ -8,10 +8,7 @@ import './bloc.dart';
 class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
   final TimeCounterRepository repository;
 
-  TimeCounterBloc({@required this.repository});
-
-  @override
-  TimeCounterState get initialState => TimeCounterInitial();
+  TimeCounterBloc({@required this.repository}) : super(TimeCounterInitial());
 
   @override
   Stream<TimeCounterState> mapEventToState(

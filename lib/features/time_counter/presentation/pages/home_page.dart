@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
             top: 8,
             right: 8,
             child: SafeArea(
-              child: FlatButton(
+              child: TextButton(
                 child: Text(
                   AppLocalizations.of(context)
                       .translate(AppStrings.LABEL_CUSTOMIZATION),

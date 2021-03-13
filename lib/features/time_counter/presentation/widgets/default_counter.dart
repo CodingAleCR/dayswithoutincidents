@@ -27,7 +27,7 @@ class _DefaultCounterState extends State<DefaultCounter> {
               child: BlocListener<TimeCounterBloc, TimeCounterState>(
                 listener: (context, state) {
                   if (state is TimeCounterError) {
-                    Scaffold.of(context).showSnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(state.message),
                       ),
@@ -110,8 +110,7 @@ class ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations labels = AppLocalizations.of(context);
-    return FlatButton(
-      textColor: Theme.of(context).errorColor,
+    return TextButton(
       child: Text(
         labels.translate(AppStrings.BTN_RESET),
       ),

@@ -53,13 +53,13 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text(MaterialLocalizations.of(bContext).cancelButtonLabel),
               onPressed: () {
                 Navigator.of(bContext).pop(newTitle);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(MaterialLocalizations.of(bContext).okButtonLabel),
               onPressed: () {
                 if (newTitle != null) {
@@ -87,8 +87,8 @@ class _SettingsPageState extends State<SettingsPage> {
     DateTime selectedDate = await showDatePicker(
       context: context,
       initialDate: counter.incident,
-      firstDate: DateTime(today.year-1),
-      lastDate: DateTime(today.year+1),
+      firstDate: DateTime(today.year - 1),
+      lastDate: DateTime(today.year + 1),
     );
 
     if (selectedDate != null) {
@@ -119,10 +119,10 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
       body: BlocListener<TimeCounterBloc, TimeCounterState>(
-        condition: (prevState, state) => (prevState is TimeCounterLoading),
+        listenWhen: (prevState, state) => (prevState is TimeCounterLoading),
         listener: (context, state) {
           if (state is TimeCounterError) {
-            Scaffold.of(context).showSnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
                 backgroundColor: Colors.red,
