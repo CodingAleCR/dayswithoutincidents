@@ -1,5 +1,5 @@
-import 'package:dwi/features/time_counter/data/data.dart';
-import 'package:dwi/features/time_counter/domain/domain.dart';
+import 'package:domain/domain.dart';
+import 'package:data/data.dart';
 import 'package:dwi/features/time_counter/presentation/presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +15,8 @@ class DWIApplication extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Days Without Incidents',
-      theme: ThemeData(
-        primarySwatch: BrandColors.primary,
-      ),
-      darkTheme: ThemeData.dark(),
+      theme: DWIThemes.light,
+      darkTheme: DWIThemes.dark,
       supportedLocales: [
         const Locale('en'),
         const Locale('es'),

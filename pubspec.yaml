@@ -1,6 +1,6 @@
 name: dwi
 description: A Flutter project that shows a simple Days Without Incidents app.
-
+publish_to: none
 version: 2.1.0+7
 
 environment:
@@ -13,14 +13,20 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  # Domain layer
+  domain:
+    path: domain
+  # Data layer
+  data:
+    path: data
   # Bloc for state management
   flutter_bloc: ^7.0.0-nullsafety.5
   # Value equality
   equatable: ^2.0.0
   # Metadata
   meta: ^1.1.8
-  # Local cache
-  shared_preferences: ^2.0.4
+  # Launcher for URLs
+  url_launcher: ^6.0.2
 
 dev_dependencies:
   flutter_test:
@@ -39,5 +45,52 @@ flutter_icons:
 flutter:
   uses-material-design: true
   assets:
+    - assets/images/
     - lang/en.json
     - lang/es.json
+  fonts:
+    - family: Work Sans
+      fonts:
+        - asset: assets/fonts/WorkSans-Black.ttf
+          weight: 900
+        - asset: assets/fonts/WorkSans-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/WorkSans-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/WorkSans-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/WorkSans-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/WorkSans-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/WorkSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/WorkSans-Regular.ttf
+        - asset: assets/fonts/WorkSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/WorkSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/WorkSans-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/WorkSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/WorkSans-ExtraLightItalic.ttf
+          weight: 200
+          style: italic
+        - asset: assets/fonts/WorkSans-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/WorkSans-ThinItalic.ttf
+          weight: 100
+          style: italic

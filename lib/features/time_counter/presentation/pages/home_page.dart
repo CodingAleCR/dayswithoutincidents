@@ -51,23 +51,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           DefaultCounter(),
-          Positioned(
-            bottom: 16,
-            left: 0,
-            right: 0,
-            child: SafeArea(
-              child: Center(
-                child: Text(
-                  AppLocalizations.of(context)
-                      .translate(AppStrings.HOME_CREDITS),
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          )
         ],
       ),
     );

@@ -1,4 +1,4 @@
-import 'package:dwi/features/time_counter/domain/models/models.dart';
+import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 

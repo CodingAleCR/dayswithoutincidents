@@ -1,6 +1,5 @@
-import 'package:dwi/features/time_counter/domain/domain.dart';
-
-import '../datasources/local/time_counter_preference_provider.dart';
+import 'package:data/local/time_counter_preference_provider.dart';
+import 'package:domain/domain.dart';
 
 class TimeCounterRepositoryImpl extends TimeCounterRepository {
   TimeCounterSharedPreferenceProvider _counterProvider =

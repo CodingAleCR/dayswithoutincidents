@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:dwi/features/time_counter/domain/domain.dart';
+import 'package:domain/domain.dart';
 import 'package:meta/meta.dart';
 
 import './bloc.dart';

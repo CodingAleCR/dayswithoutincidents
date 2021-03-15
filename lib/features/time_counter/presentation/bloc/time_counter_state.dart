@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-
-import '../../domain/models/time_counter.dart';
+import 'package:domain/domain.dart';
 
 abstract class TimeCounterState extends Equatable {
   const TimeCounterState();

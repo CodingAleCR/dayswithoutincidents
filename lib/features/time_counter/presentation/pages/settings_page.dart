@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dwi/core/localization/localization.dart';
-import 'package:dwi/features/time_counter/domain/domain.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/localization/app_localizations.dart';
 import '../bloc/bloc.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -152,71 +154,108 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget buildSettingsList(TimeCounter counter) {
-    return ListView(
-      padding: EdgeInsets.only(top: 16, left: 16, right: 16),
-      children: <Widget>[
-        Text(
-          AppLocalizations.of(context)
-              .translate(AppStrings.LABEL_CUSTOMIZATION)
-              .toUpperCase(),
-          style: Theme.of(context).textTheme.overline.copyWith(
-                color: Theme.of(context).accentColor,
+    return Stack(
+      children: [
+        ListView(
+          padding: EdgeInsets.only(top: 16, left: 16, right: 16),
+          children: <Widget>[
+            Text(
+              AppLocalizations.of(context)
+                  .translate(AppStrings.LABEL_CUSTOMIZATION)
+                  .toUpperCase(),
+              style: Theme.of(context).textTheme.overline.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
+            ),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate(AppStrings.PREFERENCE_TITLE),
+                style: Theme.of(context).textTheme.subtitle2,
               ),
-        ),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).translate(AppStrings.PREFERENCE_TITLE),
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-          subtitle: Text(
-            AppLocalizations.of(context).translate(AppStrings.SUMMARY_TITLE),
-            style: Theme.of(context).textTheme.caption,
-          ),
-          onTap: () => _titleInputDialog(counter),
-        ),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).translate(AppStrings.PREFERENCE_DATE),
-            style: Theme.of(context).textTheme.subtitle2,
-          ),
-          subtitle: Text(
-            AppLocalizations.of(context).translate(AppStrings.SUMMARY_DAY),
-            style: Theme.of(context).textTheme.caption,
-          ),
-          onTap: () => _lastIncidentPicker(counter),
-        ),
-        Text(
-          AppLocalizations.of(context)
-              .translate(AppStrings.LABEL_ABOUT)
-              .toUpperCase(),
-          style: Theme.of(context).textTheme.overline.copyWith(
-                color: Theme.of(context).accentColor,
+              subtitle: Text(
+                AppLocalizations.of(context)
+                    .translate(AppStrings.SUMMARY_TITLE),
+                style: Theme.of(context).textTheme.caption,
               ),
+              onTap: () => _titleInputDialog(counter),
+            ),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate(AppStrings.PREFERENCE_DATE),
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              subtitle: Text(
+                AppLocalizations.of(context).translate(AppStrings.SUMMARY_DAY),
+                style: Theme.of(context).textTheme.caption,
+              ),
+              onTap: () => _lastIncidentPicker(counter),
+            ),
+            Text(
+              AppLocalizations.of(context)
+                  .translate(AppStrings.LABEL_ABOUT)
+                  .toUpperCase(),
+              style: Theme.of(context).textTheme.overline.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
+            ),
+            ListTile(
+              title: Text(
+                AppLocalizations.of(context)
+                    .translate(AppStrings.PREFERENCE_VERSION),
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              subtitle: Text(
+                "2.0.1",
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ),
+          ],
         ),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context)
-                .translate(AppStrings.PREFERENCE_VERSION),
-            style: Theme.of(context).textTheme.subtitle2,
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: SafeArea(
+            child: Center(
+              child: InkWell(
+                onTap: _launchURL,
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  width: 232,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context)
+                            .translate(AppStrings.HOME_CREDITS),
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 8),
+                      MediaQuery.of(context).platformBrightness ==
+                              Brightness.light
+                          ? Image.asset("assets/images/codingale-light.png")
+                          : Image.asset("assets/images/codingale-dark.png"),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
-          subtitle: Text(
-            "2.0.1",
-            style: Theme.of(context).textTheme.caption,
-          ),
-        ),
-        ListTile(
-          title: Text(
-            AppLocalizations.of(context).translate(AppStrings.CREDITS_LN1),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.caption,
-          ),
-          subtitle: Text(
-            AppLocalizations.of(context).translate(AppStrings.CREDITS_LN2),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.caption,
-          ),
-        ),
+        )
       ],
     );
   }
+
+  final _url = 'https://codingale.dev';
+
+  void _launchURL() async => await canLaunch(_url)
+      ? await launch(_url)
+      : throw 'Could not launch $_url';
 }

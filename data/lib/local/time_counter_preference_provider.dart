@@ -1,4 +1,4 @@
-import 'package:dwi/features/time_counter/domain/domain.dart';
+import 'package:domain/domain.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String TITLE = "title";

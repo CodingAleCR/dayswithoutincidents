@@ -1,5 +1,5 @@
 import 'package:dwi/core/localization/app_localizations.dart';
-import 'package:dwi/features/time_counter/domain/domain.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,7 +58,6 @@ class _DefaultCounterState extends State<DefaultCounter> {
     String dayString = days != 1
         ? AppLocalizations.of(context).translate(AppStrings.DAYS)
         : AppLocalizations.of(context).translate(AppStrings.DAY);
-    String widgetString = "$days $dayString.";
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -66,35 +65,29 @@ class _DefaultCounterState extends State<DefaultCounter> {
         Text(
           counter.title,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline4,
-        ),
-        Container(
-          height: 32,
-        ),
-        AspectRatio(
-          aspectRatio: 1,
-          child: Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(
-                color: Theme.of(context).primaryColor,
-                width: 3,
+          style: Theme.of(context).textTheme.subtitle1.copyWith(
+                fontWeight: FontWeight.bold,
               ),
-            ),
-            child: Center(
-              child: Text(
-                widgetString,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            ),
-          ),
         ),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: ResetButton(),
-        )
+        SizedBox(
+          height: 8,
+        ),
+        Text(
+          days.toString(),
+          textAlign: TextAlign.center,
+          style: Theme.of(context)
+              .textTheme
+              .headline1
+              .copyWith(fontSize: 125, fontWeight: FontWeight.normal),
+        ),
+        SizedBox(height: 24),
+        Text(
+          dayString,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline5,
+        ),
+        SizedBox(height: 24),
+        ResetButton(),
       ],
     );
   }
@@ -110,9 +103,9 @@ class ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations labels = AppLocalizations.of(context);
-    return TextButton(
+    return OutlinedButton(
       child: Text(
-        labels.translate(AppStrings.BTN_RESET),
+        labels.translate(AppStrings.BTN_RESET).toUpperCase(),
       ),
       onPressed: () {
         BlocProvider.of<TimeCounterBloc>(context).add(ResetTimeCounter());
