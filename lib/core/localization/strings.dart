@@ -17,6 +17,6 @@ abstract class AppStrings {
   static const String VERSION = "version";
   static const String CREDITS_LN1 = "credits_ln1";
   static const String CREDITS_LN2 = "credits_ln2";
-  static const String HOME_CREDITS = "home_credits";
+  static const String CODE_CREDITS = "code_credits";
   static const String DESIGN_CREDITS = "design_credits";
 }

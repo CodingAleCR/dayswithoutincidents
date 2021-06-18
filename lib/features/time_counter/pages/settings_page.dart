@@ -233,7 +233,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           Text(
                             AppLocalizations.of(context)!
-                                .translate(AppStrings.HOME_CREDITS)!,
+                                .translate(AppStrings.CODE_CREDITS)!,
                             style: Theme.of(context)
                                 .textTheme
                                 .caption!
