@@ -1,6 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:data/data.dart';
-import 'package:dwi/features/time_counter/presentation/presentation.dart';
+import 'package:dwi/features/time_counter/time_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'package:domain/domain.dart';
 
 abstract class TimeCounterState extends Equatable {
@@ -20,14 +19,14 @@ class TimeCounterLoading extends TimeCounterState {
 
 class TimeCounterLoaded extends TimeCounterState {
   final TimeCounter counter;
-  const TimeCounterLoaded({@required this.counter});
+  const TimeCounterLoaded({required this.counter});
   @override
   List<Object> get props => [counter];
 }
 
 class TimeCounterError extends TimeCounterState {
   final String message;
-  const TimeCounterError({@required this.message});
+  const TimeCounterError({required this.message});
   @override
   List<Object> get props => [message];
 }

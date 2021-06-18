@@ -1,4 +1,4 @@
-import 'package:dwi/features/time_counter/presentation/pages/settings_page.dart';
+import 'package:dwi/features/time_counter/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dwi/core/localization/localization.dart';
@@ -29,8 +29,8 @@ class _HomePageState extends State<HomePage> {
             child: SafeArea(
               child: TextButton(
                 child: Text(
-                  AppLocalizations.of(context)
-                      .translate(AppStrings.LABEL_CUSTOMIZATION),
+                  AppLocalizations.of(context)!
+                      .translate(AppStrings.LABEL_CUSTOMIZATION)!,
                   style: TextStyle(color: Theme.of(context).accentColor),
                 ),
                 onPressed: () async {

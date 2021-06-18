@@ -1,25 +1,15 @@
 name: domain
-description: A new Flutter package project.
-version: 0.0.1
+description: Domain Package.
+version: 1.0.0
 author:
 homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
-
   # Value equality
-  equatable: ^2.0.0
-  # Metadata
-  meta: ^1.1.8
+  equatable: ^2.0.3
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-flutter:

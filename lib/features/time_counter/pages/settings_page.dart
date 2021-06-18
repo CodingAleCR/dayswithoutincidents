@@ -4,7 +4,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../core/localization/app_localizations.dart';
+import '../../../core/localization/app_localizations.dart';
 import '../bloc/bloc.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _titleInputDialog(TimeCounter counter) {
-    String newTitle;
+    String? newTitle;
     TextEditingController controller =
         TextEditingController(text: counter.title);
     showDialog<String>(
@@ -28,7 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (BuildContext bContext) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(bContext).translate(AppStrings.INPUT_TITLE),
+            AppLocalizations.of(bContext)!.translate(AppStrings.INPUT_TITLE)!,
           ),
           content: Row(
             children: <Widget>[
@@ -37,14 +37,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   controller: controller,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(bContext)
+                    labelText: AppLocalizations.of(bContext)!
                         .translate(AppStrings.PREFERENCE_TITLE),
-                    hintText: AppLocalizations.of(bContext)
+                    hintText: AppLocalizations.of(bContext)!
                         .translate(AppStrings.HINT_TITLE),
                   ),
                   onChanged: (value) {
                     if (value.isEmpty) {
-                      newTitle = AppLocalizations.of(bContext)
+                      newTitle = AppLocalizations.of(bContext)!
                           .translate(AppStrings.DAYS_WITHOUT_INCIDENTS);
                     } else {
                       newTitle = value;
@@ -69,7 +69,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ..add(
                       UpdateTimeCounter(
                         counter: TimeCounter(
-                          title: newTitle,
+                          title: newTitle!,
                           incident: counter.incident,
                         ),
                       ),
@@ -86,9 +86,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   _lastIncidentPicker(TimeCounter counter) async {
     DateTime today = DateTime.now();
-    DateTime selectedDate = await showDatePicker(
+    DateTime? selectedDate = await showDatePicker(
       context: context,
-      initialDate: counter.incident,
+      initialDate: counter.incident!,
       firstDate: DateTime(today.year - 1),
       lastDate: DateTime(today.year + 1),
     );
@@ -114,7 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.white,
         ),
         title: Text(
-          AppLocalizations.of(context).translate(AppStrings.TITLE_SETTINGS),
+          AppLocalizations.of(context)!.translate(AppStrings.TITLE_SETTINGS)!,
           style: TextStyle(
             color: Colors.white,
           ),
@@ -160,50 +160,51 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           children: <Widget>[
             Text(
-              AppLocalizations.of(context)
-                  .translate(AppStrings.LABEL_CUSTOMIZATION)
+              AppLocalizations.of(context)!
+                  .translate(AppStrings.LABEL_CUSTOMIZATION)!
                   .toUpperCase(),
-              style: Theme.of(context).textTheme.overline.copyWith(
+              style: Theme.of(context).textTheme.overline!.copyWith(
                     color: Theme.of(context).accentColor,
                   ),
             ),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)
-                    .translate(AppStrings.PREFERENCE_TITLE),
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.PREFERENCE_TITLE)!,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                AppLocalizations.of(context)
-                    .translate(AppStrings.SUMMARY_TITLE),
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.SUMMARY_TITLE)!,
                 style: Theme.of(context).textTheme.caption,
               ),
               onTap: () => _titleInputDialog(counter),
             ),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)
-                    .translate(AppStrings.PREFERENCE_DATE),
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.PREFERENCE_DATE)!,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                AppLocalizations.of(context).translate(AppStrings.SUMMARY_DAY),
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.SUMMARY_DAY)!,
                 style: Theme.of(context).textTheme.caption,
               ),
               onTap: () => _lastIncidentPicker(counter),
             ),
             Text(
-              AppLocalizations.of(context)
-                  .translate(AppStrings.LABEL_ABOUT)
+              AppLocalizations.of(context)!
+                  .translate(AppStrings.LABEL_ABOUT)!
                   .toUpperCase(),
-              style: Theme.of(context).textTheme.overline.copyWith(
+              style: Theme.of(context).textTheme.overline!.copyWith(
                     color: Theme.of(context).accentColor,
                   ),
             ),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)
-                    .translate(AppStrings.PREFERENCE_VERSION),
+                AppLocalizations.of(context)!
+                    .translate(AppStrings.PREFERENCE_VERSION)!,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
@@ -214,37 +215,67 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         ),
         Positioned(
-          bottom: 0,
+          bottom: 32,
           left: 0,
           right: 0,
           child: SafeArea(
             child: Center(
-              child: InkWell(
-                onTap: _launchURL,
-                borderRadius: BorderRadius.circular(8),
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  width: 232,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)
-                            .translate(AppStrings.HOME_CREDITS),
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption
-                            .copyWith(fontWeight: FontWeight.bold),
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () => _launchURL(_codingaleUrl),
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!
+                                .translate(AppStrings.HOME_CREDITS)!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(width: 4),
+                          MediaQuery.of(context).platformBrightness ==
+                                  Brightness.light
+                              ? Image.asset("assets/images/codingale-light.png")
+                              : Image.asset("assets/images/codingale-dark.png"),
+                        ],
                       ),
-                      SizedBox(height: 8),
-                      MediaQuery.of(context).platformBrightness ==
-                              Brightness.light
-                          ? Image.asset("assets/images/codingale-light.png")
-                          : Image.asset("assets/images/codingale-dark.png"),
-                    ],
+                    ),
                   ),
-                ),
+                  SizedBox(height: 4),
+                  InkWell(
+                    onTap: () => _launchURL(_perksncoUrl),
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!
+                                .translate(AppStrings.DESIGN_CREDITS)!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .caption!
+                                .copyWith(fontWeight: FontWeight.normal),
+                          ),
+                          SizedBox(width: 4),
+                          MediaQuery.of(context).platformBrightness ==
+                                  Brightness.light
+                              ? Image.asset("assets/images/perksnco-light.png")
+                              : Image.asset("assets/images/perksnco-dark.png"),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
@@ -253,9 +284,9 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  final _url = 'https://codingale.dev';
+  final _codingaleUrl = 'https://codingale.dev';
+  final _perksncoUrl = 'https://www.perksnco.design/';
 
-  void _launchURL() async => await canLaunch(_url)
-      ? await launch(_url)
-      : throw 'Could not launch $_url';
+  void _launchURL(String url) async =>
+      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
 }

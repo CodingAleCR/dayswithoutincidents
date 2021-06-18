@@ -54,10 +54,10 @@ class _DefaultCounterState extends State<DefaultCounter> {
   }
 
   Widget buildTimeCounterInfo(TimeCounter counter) {
-    final days = DateTime.now().difference(counter.incident).inDays;
+    final days = DateTime.now().difference(counter.incident!).inDays;
     String dayString = days != 1
-        ? AppLocalizations.of(context).translate(AppStrings.DAYS)
-        : AppLocalizations.of(context).translate(AppStrings.DAY);
+        ? AppLocalizations.of(context)!.translate(AppStrings.DAYS)!
+        : AppLocalizations.of(context)!.translate(AppStrings.DAY)!;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -65,26 +65,34 @@ class _DefaultCounterState extends State<DefaultCounter> {
         Text(
           counter.title,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.subtitle1.copyWith(
+          style: Theme.of(context).textTheme.subtitle1!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         SizedBox(
           height: 8,
         ),
-        Text(
-          days.toString(),
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .headline1
-              .copyWith(fontSize: 125, fontWeight: FontWeight.normal),
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: Text(
+            days.toString(),
+            key: ValueKey(days),
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .headline1!
+                .copyWith(fontSize: 125, fontWeight: FontWeight.normal),
+          ),
         ),
         SizedBox(height: 24),
-        Text(
-          dayString,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline5,
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: Text(
+            dayString,
+            key: ValueKey(dayString),
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline5,
+          ),
         ),
         SizedBox(height: 24),
         ResetButton(),
@@ -102,10 +110,10 @@ class _DefaultCounterState extends State<DefaultCounter> {
 class ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations labels = AppLocalizations.of(context);
+    final AppLocalizations labels = AppLocalizations.of(context)!;
     return OutlinedButton(
       child: Text(
-        labels.translate(AppStrings.BTN_RESET).toUpperCase(),
+        labels.translate(AppStrings.BTN_RESET)!.toUpperCase(),
       ),
       onPressed: () {
         BlocProvider.of<TimeCounterBloc>(context).add(ResetTimeCounter());

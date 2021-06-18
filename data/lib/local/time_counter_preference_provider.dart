@@ -9,8 +9,8 @@ class TimeCounterSharedPreferenceProvider {
   Future<TimeCounter> getCounter() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     if (_prefs.containsKey(TITLE) && _prefs.containsKey(LAST_INCIDENT)) {
-      String title = _prefs.getString(TITLE);
-      String lastIncidentString = _prefs.getString(LAST_INCIDENT);
+      String title = _prefs.getString(TITLE)!;
+      String lastIncidentString = _prefs.getString(LAST_INCIDENT)!;
       DateTime lastIncident = DateTime.parse(lastIncidentString);
 
       return TimeCounter(title: title, incident: lastIncident);
@@ -25,7 +25,7 @@ class TimeCounterSharedPreferenceProvider {
   Future<void> setCounter(TimeCounter counter) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     _prefs.setString(TITLE, counter.title);
-    _prefs.setString(LAST_INCIDENT, counter.incident.toIso8601String());
+    _prefs.setString(LAST_INCIDENT, counter.incident!.toIso8601String());
   }
 
   /// Resets the counter time to now.
@@ -39,7 +39,7 @@ class TimeCounterSharedPreferenceProvider {
   /// Deletes all counter information from key-value storage.
   Future<void> clear() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    _prefs.setString(TITLE, null);
-    _prefs.setString(LAST_INCIDENT, null);
+    _prefs.remove(TITLE);
+    _prefs.remove(LAST_INCIDENT);
   }
 }

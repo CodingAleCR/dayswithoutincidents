@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
-import 'package:meta/meta.dart';
 
 import './bloc.dart';
 
 class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
   final TimeCounterRepository repository;
 
-  TimeCounterBloc({@required this.repository}) : super(TimeCounterInitial());
+  TimeCounterBloc({required this.repository}) : super(TimeCounterInitial());
 
   @override
   Stream<TimeCounterState> mapEventToState(
@@ -41,7 +40,7 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
     try {
       yield TimeCounterLoading();
       DateTime today = DateTime.now();
-      if (event.counter.incident.isBefore(today)) {
+      if (event.counter.incident!.isBefore(today)) {
         await repository.setTimeCounter(event.counter);
       } else {
         yield TimeCounterError(

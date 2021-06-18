@@ -1,7 +1,7 @@
 {
   "app_name": "Days Without Incidents",
   "days_without_incidents": "Days Without Incidents",
-  "btn_reset": "Reset",
+  "btn_reset": "Restart",
   "day": "day",
   "days": "days",
   "title_activity_settings": "Settings",
@@ -16,5 +16,6 @@
   "preference_version": "Version",
   "credits_ln1": "Developed with Flutter",
   "credits_ln2": "by codingale.dev",
-  "home_credits": "Developed by"
+  "home_credits": "Created by",
+  "design_credits": "Designed by"
 }

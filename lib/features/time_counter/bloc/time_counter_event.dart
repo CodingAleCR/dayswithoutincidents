@@ -1,6 +1,5 @@
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 
 abstract class TimeCounterEvent extends Equatable {
   const TimeCounterEvent();
@@ -23,7 +22,7 @@ class GetTimeCounter extends TimeCounterEvent {
 class UpdateTimeCounter extends TimeCounterEvent {
   final TimeCounter counter;
 
-  const UpdateTimeCounter({@required this.counter});
+  const UpdateTimeCounter({required this.counter});
 
   @override
   List<Object> get props => [counter];

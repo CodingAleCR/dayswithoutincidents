@@ -1,12 +1,12 @@
 name: data
-description: A new Flutter package project.
-version: 0.0.1
+description: Data package
+version: 1.0.0
 author:
 homepage:
 publish_to: none
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -16,11 +16,9 @@ dependencies:
   domain:
     path: ../domain
   # Value equality
-  equatable: ^2.0.0
-  # Metadata
-  meta: ^1.1.8
+  equatable: ^2.0.3
   # Local cache
-  shared_preferences: ^2.0.4
+  shared_preferences: ^2.0.6
 
 dev_dependencies:
   flutter_test:
