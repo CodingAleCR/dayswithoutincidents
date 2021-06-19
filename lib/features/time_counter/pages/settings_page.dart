@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dwi/core/localization/localization.dart';
+import 'package:dwi/core/resources/resources.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,7 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (BuildContext bContext) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(bContext)!.translate(AppStrings.INPUT_TITLE)!,
+            AppLocalizations.of(bContext).translate(AppStrings.INPUT_TITLE),
           ),
           content: Row(
             children: <Widget>[
@@ -37,14 +38,14 @@ class _SettingsPageState extends State<SettingsPage> {
                   controller: controller,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(bContext)!
+                    labelText: AppLocalizations.of(bContext)
                         .translate(AppStrings.PREFERENCE_TITLE),
-                    hintText: AppLocalizations.of(bContext)!
+                    hintText: AppLocalizations.of(bContext)
                         .translate(AppStrings.HINT_TITLE),
                   ),
                   onChanged: (value) {
                     if (value.isEmpty) {
-                      newTitle = AppLocalizations.of(bContext)!
+                      newTitle = AppLocalizations.of(bContext)
                           .translate(AppStrings.DAYS_WITHOUT_INCIDENTS);
                     } else {
                       newTitle = value;
@@ -114,7 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.white,
         ),
         title: Text(
-          AppLocalizations.of(context)!.translate(AppStrings.TITLE_SETTINGS)!,
+          AppLocalizations.of(context).translate(AppStrings.TITLE_SETTINGS),
           style: TextStyle(
             color: Colors.white,
           ),
@@ -160,51 +161,40 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           children: <Widget>[
             Text(
-              AppLocalizations.of(context)!
-                  .translate(AppStrings.LABEL_CUSTOMIZATION)!
-                  .toUpperCase(),
-              style: Theme.of(context).textTheme.overline!.copyWith(
-                    color: Theme.of(context).accentColor,
-                  ),
-            ),
+                Resources.string(context, AppStrings.LABEL_CUSTOMIZATION)
+                    .toUpperCase(),
+                style: Theme.of(context).textTheme.overline!),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.PREFERENCE_TITLE)!,
+                Resources.string(context, AppStrings.PREFERENCE_TITLE),
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.SUMMARY_TITLE)!,
+                Resources.string(context, AppStrings.SUMMARY_TITLE),
                 style: Theme.of(context).textTheme.caption,
               ),
               onTap: () => _titleInputDialog(counter),
             ),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.PREFERENCE_DATE)!,
+                Resources.string(context, AppStrings.PREFERENCE_DATE),
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.SUMMARY_DAY)!,
+                AppLocalizations.of(context).translate(AppStrings.SUMMARY_DAY),
                 style: Theme.of(context).textTheme.caption,
               ),
               onTap: () => _lastIncidentPicker(counter),
             ),
             Text(
-              AppLocalizations.of(context)!
-                  .translate(AppStrings.LABEL_ABOUT)!
+              AppLocalizations.of(context)
+                  .translate(AppStrings.LABEL_ABOUT)
                   .toUpperCase(),
-              style: Theme.of(context).textTheme.overline!.copyWith(
-                    color: Theme.of(context).accentColor,
-                  ),
+              style: Theme.of(context).textTheme.overline!,
             ),
             ListTile(
               title: Text(
-                AppLocalizations.of(context)!
-                    .translate(AppStrings.PREFERENCE_VERSION)!,
+                Resources.string(context, AppStrings.PREFERENCE_VERSION),
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
@@ -227,23 +217,22 @@ class _SettingsPageState extends State<SettingsPage> {
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
                       padding: const EdgeInsets.all(8),
+                      height: 48,
+                      width: 250,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!
-                                .translate(AppStrings.CODE_CREDITS)!,
+                            Resources.string(context, AppStrings.CODE_CREDITS),
                             style: Theme.of(context)
                                 .textTheme
                                 .caption!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
                           SizedBox(width: 4),
-                          MediaQuery.of(context).platformBrightness ==
-                                  Brightness.light
-                              ? Image.asset("assets/images/codingale-light.png")
-                              : Image.asset("assets/images/codingale-dark.png"),
+                          Resources.asset(context, "codingale"),
                         ],
                       ),
                     ),
@@ -254,23 +243,23 @@ class _SettingsPageState extends State<SettingsPage> {
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
                       padding: const EdgeInsets.all(8),
+                      height: 48,
+                      width: 250,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            AppLocalizations.of(context)!
-                                .translate(AppStrings.DESIGN_CREDITS)!,
+                            AppLocalizations.of(context)
+                                .translate(AppStrings.DESIGN_CREDITS),
                             style: Theme.of(context)
                                 .textTheme
                                 .caption!
                                 .copyWith(fontWeight: FontWeight.normal),
                           ),
                           SizedBox(width: 4),
-                          MediaQuery.of(context).platformBrightness ==
-                                  Brightness.light
-                              ? Image.asset("assets/images/perksnco-light.png")
-                              : Image.asset("assets/images/perksnco-dark.png"),
+                          Resources.asset(context, "perksnco"),
                         ],
                       ),
                     ),

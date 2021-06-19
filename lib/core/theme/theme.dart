@@ -62,6 +62,11 @@ abstract class DWIThemes {
         shape: BeveledRectangleBorder(),
       ),
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: DWIColors.brandBlue,
+      ),
+    ),
   );
   static final dark = ThemeData(
     primarySwatch: DWIColors.cyanSwatch,
@@ -120,6 +125,11 @@ abstract class DWIThemes {
           width: 1.5,
         ),
         shape: BeveledRectangleBorder(),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        primary: DWIColors.brandCyan,
       ),
     ),
   );

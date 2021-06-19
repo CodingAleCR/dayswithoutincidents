@@ -1,5 +1,6 @@
 import 'package:dwi/core/localization/app_localizations.dart';
 import 'package:domain/domain.dart';
+import 'package:dwi/core/resources/resources.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,7 @@ class _DefaultCounterState extends State<DefaultCounter> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: <Widget>[
+      children: [
         Positioned(
           top: 16,
           bottom: 16,
@@ -36,12 +37,15 @@ class _DefaultCounterState extends State<DefaultCounter> {
                 },
                 child: BlocBuilder<TimeCounterBloc, TimeCounterState>(
                   builder: (context, state) {
-                    if (state is TimeCounterLoading) {
-                      return buildLoading();
-                    } else if (state is TimeCounterLoaded) {
-                      return buildTimeCounterInfo(state.counter);
-                    } else {
-                      return buildTimeCounterInfo(TimeCounter.empty());
+                    switch (state.runtimeType) {
+                      case TimeCounterLoading:
+                        return _Loading();
+                      case TimeCounterLoaded:
+                        return _Counter(
+                          counter: (state as TimeCounterLoaded).counter,
+                        );
+                      default:
+                        return _Counter(counter: TimeCounter.empty());
                     }
                   },
                 ),
@@ -52,12 +56,22 @@ class _DefaultCounterState extends State<DefaultCounter> {
       ],
     );
   }
+}
 
-  Widget buildTimeCounterInfo(TimeCounter counter) {
+class _Counter extends StatelessWidget {
+  final TimeCounter counter;
+
+  const _Counter({
+    Key? key,
+    required this.counter,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     final days = DateTime.now().difference(counter.incident!).inDays;
     String dayString = days != 1
-        ? AppLocalizations.of(context)!.translate(AppStrings.DAYS)!
-        : AppLocalizations.of(context)!.translate(AppStrings.DAY)!;
+        ? Resources.string(context, AppStrings.DAYS)
+        : Resources.string(context, AppStrings.DAY);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -95,25 +109,27 @@ class _DefaultCounterState extends State<DefaultCounter> {
           ),
         ),
         SizedBox(height: 24),
-        ResetButton(),
+        _ResetButton(),
       ],
     );
   }
+}
 
-  Widget buildLoading() {
+class _Loading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: CircularProgressIndicator(),
     );
   }
 }
 
-class ResetButton extends StatelessWidget {
+class _ResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations labels = AppLocalizations.of(context)!;
     return OutlinedButton(
       child: Text(
-        labels.translate(AppStrings.BTN_RESET)!.toUpperCase(),
+        Resources.string(context, AppStrings.BTN_RESET).toUpperCase(),
       ),
       onPressed: () {
         BlocProvider.of<TimeCounterBloc>(context).add(ResetTimeCounter());
