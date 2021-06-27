@@ -42,11 +42,11 @@ class DWIApplication extends StatelessWidget {
           return supportedLocales.first;
         }
       },
-      home: RepositoryProvider<TimeCounterRepository>(
-        create: (context) => TimeCounterRepositoryImpl(),
+      home: RepositoryProvider<TimeCounterService>(
+        create: (context) => TimeCounterServiceImpl(),
         child: BlocProvider<TimeCounterBloc>(
           create: (context) => TimeCounterBloc(
-            repository: RepositoryProvider.of<TimeCounterRepository>(context),
+            service: RepositoryProvider.of<TimeCounterService>(context),
           ),
           child: HomePage(),
         ),

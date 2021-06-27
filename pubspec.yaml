@@ -25,6 +25,8 @@ dependencies:
   equatable: ^2.0.3
   # Launcher for URLs
   url_launcher: ^6.0.6
+  # UUID
+  uuid: ^3.0.4
 
 dev_dependencies:
   flutter_test:

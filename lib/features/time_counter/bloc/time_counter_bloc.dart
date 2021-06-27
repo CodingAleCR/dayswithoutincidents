@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
+import 'package:uuid/uuid.dart';
 
 import './bloc.dart';
 
 class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
-  final TimeCounterRepository repository;
+  final TimeCounterService _service;
 
-  TimeCounterBloc({required this.repository}) : super(TimeCounterInitial());
+  TimeCounterBloc({required TimeCounterService service})
+      : _service = service,
+        super(TimeCounterInitial());
 
   @override
   Stream<TimeCounterState> mapEventToState(
@@ -26,7 +29,13 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
       GetTimeCounter event) async* {
     try {
       yield TimeCounterLoading();
-      TimeCounter current = await repository.getTimeCounter();
+      final allCounters = await _service.findAll();
+      late TimeCounter current;
+      if (allCounters.isEmpty) {
+        current = TimeCounter.empty();
+      } else {
+        current = allCounters.first;
+      }
       yield TimeCounterLoaded(counter: current);
     } catch (error) {
       yield TimeCounterError(
@@ -41,14 +50,14 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
       yield TimeCounterLoading();
       DateTime today = DateTime.now();
       if (event.counter.incident!.isBefore(today)) {
-        await repository.setTimeCounter(event.counter);
+        await _service.save(event.counter);
       } else {
         yield TimeCounterError(
           message: "Please select a date that is before today.",
         );
       }
 
-      TimeCounter current = await repository.getTimeCounter();
+      TimeCounter current = await _service.findById(Uuid());
       yield TimeCounterLoaded(counter: current);
     } catch (error) {
       yield TimeCounterError(
@@ -61,8 +70,8 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
       ResetTimeCounter event) async* {
     try {
       yield TimeCounterLoading();
-      await repository.resetTimeCounter();
-      TimeCounter current = await repository.getTimeCounter();
+      await _service.deleteById(Uuid());
+      TimeCounter current = TimeCounter.empty();
       yield TimeCounterLoaded(counter: current);
     } catch (error) {
       yield TimeCounterError(
