@@ -29,6 +29,11 @@ class AppLocalizations {
     return localizations;
   }
 
+  static String translate(BuildContext context, String key) {
+    final localizations = AppLocalizations.of(context);
+    return localizations.translateTo(key);
+  }
+
   late Map<String, String> _localizedStrings;
 
   // Static member to have a simple access to the delegate from the MaterialApp
@@ -49,7 +54,7 @@ class AppLocalizations {
   }
 
   // This method will be called from every widget which needs a localized text
-  String translate(String key) {
+  String translateTo(String key) {
     if (!_localizedStrings.containsKey(key)) {
       throw LocalizationException(
         "The key selected is not valid. Please check the [locale].json " +

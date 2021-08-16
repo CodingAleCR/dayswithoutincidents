@@ -9,6 +9,6 @@ abstract class Resources {
   }
 
   static String string(BuildContext context, String key) {
-    return AppLocalizations.of(context).translate(key);
+    return AppLocalizations.translate(context, key);
   }
 }

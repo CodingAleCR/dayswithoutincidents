@@ -22,6 +22,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
   @override
   TimeCounter toModel() {
     return TimeCounter(
+      id: uuid,
       title: title,
       incident: DateTime.parse(createdAt),
     );

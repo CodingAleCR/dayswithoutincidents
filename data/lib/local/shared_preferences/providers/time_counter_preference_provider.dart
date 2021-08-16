@@ -13,7 +13,11 @@ class TimeCounterSharedPreferenceProvider {
       String lastIncidentString = _prefs.getString(LAST_INCIDENT)!;
       DateTime lastIncident = DateTime.parse(lastIncidentString);
 
-      return TimeCounter(title: title, incident: lastIncident);
+      return TimeCounter(
+        id: "",
+        title: title,
+        incident: lastIncident,
+      );
     } else {
       final counter = TimeCounter.empty();
       await setCounter(counter);

@@ -6,9 +6,6 @@ class TimeCounterRepository extends Repository<TimeCounterEntity> {
   String tablename() => "time_counters";
 
   @override
-  TimeCounterEntity parseMap(Map<String, Object?> map) {
-    return TimeCounterEntity.fromDatabase(map);
-  }
+  TimeCounterEntity parseMap(Map<String, Object?> map) =>
+      TimeCounterEntity.fromDatabase(map);
 }
-
-List<String> list = [];

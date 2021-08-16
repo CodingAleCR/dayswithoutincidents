@@ -1,8 +1,10 @@
+import 'package:dwi/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/localization/app_localizations.dart';
@@ -29,7 +31,7 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (BuildContext bContext) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(bContext).translate(AppStrings.INPUT_TITLE),
+            Resources.string(bContext, AppStrings.INPUT_TITLE),
           ),
           content: Row(
             children: <Widget>[
@@ -38,15 +40,21 @@ class _SettingsPageState extends State<SettingsPage> {
                   controller: controller,
                   autofocus: true,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(bContext)
-                        .translate(AppStrings.PREFERENCE_TITLE),
-                    hintText: AppLocalizations.of(bContext)
-                        .translate(AppStrings.HINT_TITLE),
+                    labelText: Resources.string(
+                      bContext,
+                      AppStrings.PREFERENCE_TITLE,
+                    ),
+                    hintText: Resources.string(
+                      bContext,
+                      AppStrings.HINT_TITLE,
+                    ),
                   ),
                   onChanged: (value) {
                     if (value.isEmpty) {
-                      newTitle = AppLocalizations.of(bContext)
-                          .translate(AppStrings.DAYS_WITHOUT_INCIDENTS);
+                      newTitle = Resources.string(
+                        bContext,
+                        AppStrings.DAYS_WITHOUT_INCIDENTS,
+                      );
                     } else {
                       newTitle = value;
                     }
@@ -70,6 +78,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ..add(
                       UpdateTimeCounter(
                         counter: TimeCounter(
+                          id: counter.id,
                           title: newTitle!,
                           incident: counter.incident,
                         ),
@@ -99,6 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ..add(
           UpdateTimeCounter(
             counter: TimeCounter(
+              id: counter.id,
               title: counter.title,
               incident: selectedDate,
             ),
@@ -111,14 +121,8 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
         title: Text(
-          AppLocalizations.of(context).translate(AppStrings.TITLE_SETTINGS),
-          style: TextStyle(
-            color: Colors.white,
-          ),
+          Resources.string(context, AppStrings.TITLE_SETTINGS),
         ),
       ),
       body: BlocListener<TimeCounterBloc, TimeCounterState>(
@@ -181,15 +185,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               subtitle: Text(
-                AppLocalizations.of(context).translate(AppStrings.SUMMARY_DAY),
+                Resources.string(context, AppStrings.SUMMARY_DAY),
                 style: Theme.of(context).textTheme.caption,
               ),
               onTap: () => _lastIncidentPicker(counter),
             ),
             Text(
-              AppLocalizations.of(context)
-                  .translate(AppStrings.LABEL_ABOUT)
-                  .toUpperCase(),
+              Resources.string(context, AppStrings.LABEL_ABOUT).toUpperCase(),
               style: Theme.of(context).textTheme.overline!,
             ),
             ListTile(
@@ -197,10 +199,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 Resources.string(context, AppStrings.PREFERENCE_VERSION),
                 style: Theme.of(context).textTheme.subtitle2,
               ),
-              subtitle: Text(
-                "2.0.1",
-                style: Theme.of(context).textTheme.caption,
-              ),
+              subtitle: FutureBuilder<PackageInfo>(
+                  future: PackageInfo.fromPlatform(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData || snapshot.hasError) {
+                      return SizedBox();
+                    }
+                    final info = snapshot.data;
+
+                    return Text(
+                      info!.version,
+                      style: Theme.of(context).textTheme.caption,
+                    );
+                  }),
             ),
           ],
         ),
@@ -251,8 +262,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            AppLocalizations.of(context)
-                                .translate(AppStrings.DESIGN_CREDITS),
+                            Resources.string(
+                              context,
+                              AppStrings.DESIGN_CREDITS,
+                            ),
                             style: Theme.of(context)
                                 .textTheme
                                 .caption!

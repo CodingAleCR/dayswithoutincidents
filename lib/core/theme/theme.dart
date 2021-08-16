@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
@@ -5,11 +7,19 @@ import 'font.dart';
 
 abstract class DWIThemes {
   static final light = ThemeData(
-    primarySwatch: DWIColors.cyanSwatch,
+    primarySwatch: DWIColors.blueSwatch,
     brightness: Brightness.light,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: DWIFonts.APP_FONT,
     scaffoldBackgroundColor: DWIColors.brandWhite,
+    appBarTheme: AppBarTheme(
+      backwardsCompatibility: false,
+      brightness: Brightness.light,
+      backgroundColor: DWIColors.brandWhite,
+      elevation: 0,
+      centerTitle: false,
+      foregroundColor: DWIColors.brandBlue,
+    ),
     textTheme: TextTheme(
       headline1: TextStyle(
         color: DWIColors.brandBlue,
@@ -45,6 +55,8 @@ abstract class DWIThemes {
         color: DWIColors.brandBlue,
       ),
       subtitle2: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w800,
         color: DWIColors.brandBlue,
       ),
       button: TextStyle(
@@ -74,7 +86,13 @@ abstract class DWIThemes {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     fontFamily: DWIFonts.APP_FONT,
     scaffoldBackgroundColor: DWIColors.brandBlueTint1,
-    appBarTheme: AppBarTheme(brightness: Brightness.dark),
+    appBarTheme: AppBarTheme(
+      backwardsCompatibility: false,
+      brightness: Brightness.dark,
+      backgroundColor: DWIColors.brandBlueTint1,
+      elevation: 0,
+      centerTitle: false,
+    ),
     textTheme: TextTheme(
       headline1: TextStyle(
         color: DWIColors.brandWhite,
@@ -110,6 +128,8 @@ abstract class DWIThemes {
         color: DWIColors.brandWhite,
       ),
       subtitle2: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w800,
         color: DWIColors.brandWhite,
       ),
       button: TextStyle(
