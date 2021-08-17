@@ -8,7 +8,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
   final String createdAt;
 
   TimeCounterEntity.fromModel(TimeCounter model)
-      : uuid = Uuid().v4(),
+      : uuid = model.id,
         title = model.title,
         createdAt = model.incident!.toIso8601String(),
         super.fromModel(model);

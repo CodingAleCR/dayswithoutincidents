@@ -9,8 +9,8 @@ class TimeCounterServiceImpl extends TimeCounterService {
       : _repository = repository ?? TimeCounterRepository();
 
   @override
-  Future<void> deleteById(Uuid id) async {
-    await _repository.deleteById(id.v4());
+  Future<void> deleteById(UuidValue id) async {
+    await _repository.deleteById(id.uuid);
   }
 
   @override
@@ -20,14 +20,15 @@ class TimeCounterServiceImpl extends TimeCounterService {
   }
 
   @override
-  Future<TimeCounter> findById(Uuid id) async {
-    final entity = await _repository.findById(id.v4());
+  Future<TimeCounter> findById(UuidValue id) async {
+    final entity = await _repository.findById(id.uuid);
     return entity.toModel();
   }
 
   @override
   Future<TimeCounter> save(TimeCounter counter) async {
-    await _repository.save(TimeCounterEntity.fromModel(counter));
+    final entity = TimeCounterEntity.fromModel(counter);
+    await _repository.save(entity);
 
     return counter;
   }

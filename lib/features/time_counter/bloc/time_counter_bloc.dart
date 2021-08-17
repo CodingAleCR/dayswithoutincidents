@@ -7,6 +7,7 @@ import './bloc.dart';
 
 class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
   final TimeCounterService _service;
+  final uuid = Uuid();
 
   TimeCounterBloc({required TimeCounterService service})
       : _service = service,
@@ -57,7 +58,8 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
         );
       }
 
-      TimeCounter current = await _service.findById(Uuid());
+      TimeCounter current =
+          await _service.findById(UuidValue(event.counter.id));
       yield TimeCounterLoaded(counter: current);
     } catch (error) {
       yield TimeCounterError(
@@ -70,7 +72,7 @@ class TimeCounterBloc extends Bloc<TimeCounterEvent, TimeCounterState> {
       ResetTimeCounter event) async* {
     try {
       yield TimeCounterLoading();
-      await _service.deleteById(Uuid());
+      await _service.deleteById(UuidValue(event.uuid));
       TimeCounter current = TimeCounter.empty();
       yield TimeCounterLoaded(counter: current);
     } catch (error) {

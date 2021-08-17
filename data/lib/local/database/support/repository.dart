@@ -48,7 +48,7 @@ abstract class Repository<EntityClass extends Entity> {
     await db.insert(
       tablename(),
       entity.toDatabaseMap(),
-      conflictAlgorithm: ConflictAlgorithm.ignore,
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
