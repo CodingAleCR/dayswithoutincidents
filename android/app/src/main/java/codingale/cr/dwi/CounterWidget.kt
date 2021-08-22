@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.AsyncTask
+import android.util.Log
 import android.widget.RemoteViews
 import androidx.room.Room
 import codingale.cr.dwi.database.CounterEntity
@@ -18,6 +19,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import java.util.logging.Logger
 
 class CounterWidget : AppWidgetProvider() {
     companion object {
@@ -119,16 +121,17 @@ class CounterWidget : AppWidgetProvider() {
 
     private fun getCounter(context: Context): CounterEntity? = runBlocking {
         return@runBlocking withContext(Dispatchers.IO) {
-            val db = DWIDatabase.getDatabase(context.applicationContext)
+            val db = DWIDatabase.getDatabase(context)
             val dao = db.counterDao()
             val counters = dao.getAll()
+            Log.d("Counters ->>>>>", "Length ${counters.size}")
             return@withContext counters.firstOrNull()
         }
     }
 
     private fun updateCounter(context: Context, counter: CounterEntity) = runBlocking {
         return@runBlocking withContext(Dispatchers.IO) {
-            val db = DWIDatabase.getDatabase(context.applicationContext)
+            val db = DWIDatabase.getDatabase(context)
             val dao = db.counterDao()
             dao.update(counter)
         }

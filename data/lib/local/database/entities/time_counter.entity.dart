@@ -1,6 +1,5 @@
 import 'package:data/local/database/support/entity.dart';
 import 'package:domain/domain.dart';
-import 'package:uuid/uuid.dart';
 
 class TimeCounterEntity extends Entity<TimeCounter> {
   final String uuid;

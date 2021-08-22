@@ -28,7 +28,7 @@ class V1InitialDatabase extends Migration {
     await db.transaction((txn) async {
       await txn.execute("""
         CREATE TABLE time_counters (
-          ${TimeCounterEntity.ID} TEXT PRIMARY KEY,
+          ${TimeCounterEntity.ID} TEXT NOT NULL PRIMARY KEY,
           ${TimeCounterEntity.TITLE} TEXT,
           ${TimeCounterEntity.CREATED_AT} TEXT
         )
