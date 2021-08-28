@@ -22,6 +22,16 @@ abstract class DWIThemes {
 
   static int getThemeIdx(AppTheme theme) =>
       allThemes.indexWhere((dwiTheme) => dwiTheme.theme == theme);
+
+  static DWITheme nextTheme(AppTheme theme) {
+    final currentThemeIdx = DWIThemes.getThemeIdx(theme);
+
+    if (currentThemeIdx + 1 < DWIThemes.allThemes.length) {
+      return DWIThemes.allThemes[currentThemeIdx + 1];
+    } else {
+      return DWIThemes.allThemes[0];
+    }
+  }
 }
 
 abstract class DWITheme {

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
+import 'package:dwi/core/theme/theme.dart';
 import 'package:equatable/equatable.dart';
 
 part 'theme_chooser_state.dart';
@@ -22,5 +23,9 @@ class ThemeChooserCubit extends Cubit<ThemeChooserState> {
         theme: theme,
       ));
     } catch (e) {}
+  }
+
+  Future<void> nextTheme() async {
+    themeChanged(DWIThemes.nextTheme(state.theme).theme);
   }
 }

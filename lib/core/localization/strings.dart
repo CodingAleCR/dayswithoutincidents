@@ -19,6 +19,7 @@ abstract class AppStrings {
   static const String CREDITS_LN2 = "credits_ln2";
   static const String CODE_CREDITS = "code_credits";
   static const String DESIGN_CREDITS = "design_credits";
+  static const String THEME_CUSTOMIZATION = "theme_customization";
   static const String THEME_PLAIN_LIGHT = "theme_plain_light";
   static const String THEME_THE_DARKSIDE = "theme_The_darkside";
   static const String THEME_PASSION_RED = "theme_passion_red";
