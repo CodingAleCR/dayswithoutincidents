@@ -1,7 +1,6 @@
-import 'package:domain/domain.dart';
 import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
-import 'package:dwi/core/theme/theme.dart';
+
 import 'package:dwi/core/widgets/widgets.dart';
 import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
 import 'package:dwi/features/time_counter/pages/settings_page.dart';
