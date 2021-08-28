@@ -6,10 +6,11 @@ abstract class TimeCounterEvent extends Equatable {
 }
 
 class ResetTimeCounter extends TimeCounterEvent {
-  const ResetTimeCounter();
+  final String uuid;
+  const ResetTimeCounter({required this.uuid});
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [uuid];
 }
 
 class GetTimeCounter extends TimeCounterEvent {

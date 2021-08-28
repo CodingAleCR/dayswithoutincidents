@@ -19,4 +19,11 @@ abstract class AppStrings {
   static const String CREDITS_LN2 = "credits_ln2";
   static const String CODE_CREDITS = "code_credits";
   static const String DESIGN_CREDITS = "design_credits";
+  static const String THEME_CUSTOMIZATION = "theme_customization";
+  static const String THEME_PLAIN_LIGHT = "theme_plain_light";
+  static const String THEME_THE_DARKSIDE = "theme_The_darkside";
+  static const String THEME_PASSION_RED = "theme_passion_red";
+  static const String THEME_JUST_PURPLE = "theme_just_purple";
+  static const String THEME_GOLD_AMBER = "theme_gold_amber";
+  static const String THEME_ANOTHER_CYAN = "theme_Another_cyan";
 }

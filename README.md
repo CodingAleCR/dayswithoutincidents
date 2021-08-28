@@ -20,8 +20,8 @@ An app based in Flutter that allows you to count days since an incident.
 
 ## Coming soon
 
-- Cloud-based storage.
-- Account management.
 - Multiple counters.
+- Account management.
+- File-based storage.
 
 _And much more coming soon._

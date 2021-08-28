@@ -1,6 +1,7 @@
 import 'package:dwi/core/localization/app_localizations.dart';
 import 'package:domain/domain.dart';
 import 'package:dwi/core/resources/resources.dart';
+import 'package:dwi/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -92,10 +93,10 @@ class _Counter extends StatelessWidget {
             days.toString(),
             key: ValueKey(days),
             textAlign: TextAlign.center,
-            style: Theme.of(context)
-                .textTheme
-                .headline1!
-                .copyWith(fontSize: 125, fontWeight: FontWeight.normal),
+            style: Theme.of(context).textTheme.headline1?.copyWith(
+                  fontSize: 125,
+                  fontWeight: FontWeight.normal,
+                ),
           ),
         ),
         SizedBox(height: 24),
@@ -109,7 +110,9 @@ class _Counter extends StatelessWidget {
           ),
         ),
         SizedBox(height: 24),
-        _ResetButton(),
+        _ResetButton(
+          counterId: counter.id,
+        ),
       ],
     );
   }
@@ -125,6 +128,9 @@ class _Loading extends StatelessWidget {
 }
 
 class _ResetButton extends StatelessWidget {
+  final String counterId;
+
+  const _ResetButton({Key? key, required this.counterId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -132,7 +138,59 @@ class _ResetButton extends StatelessWidget {
         Resources.string(context, AppStrings.BTN_RESET).toUpperCase(),
       ),
       onPressed: () {
-        BlocProvider.of<TimeCounterBloc>(context).add(ResetTimeCounter());
+        BlocProvider.of<TimeCounterBloc>(context)
+            .add(ResetTimeCounter(uuid: counterId));
+      },
+    );
+  }
+}
+
+// ignore: unused_element
+class _EditCounterButton extends StatelessWidget {
+  const _EditCounterButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(Icons.edit),
+      tooltip: Resources.string(context, AppStrings.LABEL_CUSTOMIZATION),
+      onPressed: () async {
+        showModalBottomSheet<void>(
+          context: context,
+          backgroundColor: Colors.transparent,
+          builder: (BuildContext context) {
+            return Container(
+              padding: const EdgeInsets.symmetric(
+                vertical: 50,
+                horizontal: 16,
+              ),
+              height: MediaQuery.of(context).size.height / 2,
+              decoration: BoxDecoration(
+                color: DWIColors.brandWhite,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                  topRight: Radius.circular(50),
+                ),
+              ),
+              child: ListView(
+                children: <Widget>[
+                  Text(
+                    'Modal BottomSheet',
+                    style: TextStyle(
+                      color: DWIColors.brandBlue,
+                    ),
+                  ),
+                  ElevatedButton(
+                    child: const Text('Close'),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                ],
+              ),
+            );
+          },
+        );
       },
     );
   }

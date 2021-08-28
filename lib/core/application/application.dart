@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:data/data.dart';
+import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
 import 'package:dwi/features/time_counter/time_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,11 +13,27 @@ class DWIApplication extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => ThemeChooserCubit(context.read<ThemeService>()),
+      child: _AppView(),
+    );
+  }
+}
+
+class _AppView extends StatelessWidget {
+  const _AppView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.watch<ThemeChooserCubit>().state.theme;
+    final themeData = DWIThemes.getTheme(theme).themeData;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Days Without Incidents',
-      theme: DWIThemes.light,
-      darkTheme: DWIThemes.dark,
+      theme: themeData,
       supportedLocales: [
         const Locale('en'),
         const Locale('es'),
@@ -42,11 +59,11 @@ class DWIApplication extends StatelessWidget {
           return supportedLocales.first;
         }
       },
-      home: RepositoryProvider<TimeCounterRepository>(
-        create: (context) => TimeCounterRepositoryImpl(),
+      home: RepositoryProvider<TimeCounterService>(
+        create: (context) => TimeCounterServiceImpl(),
         child: BlocProvider<TimeCounterBloc>(
           create: (context) => TimeCounterBloc(
-            repository: RepositoryProvider.of<TimeCounterRepository>(context),
+            service: RepositoryProvider.of<TimeCounterService>(context),
           ),
           child: HomePage(),
         ),
