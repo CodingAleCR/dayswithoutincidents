@@ -145,6 +145,7 @@ class _ResetButton extends StatelessWidget {
   }
 }
 
+// ignore: unused_element
 class _EditCounterButton extends StatelessWidget {
   const _EditCounterButton({
     Key? key,

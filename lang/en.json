@@ -17,5 +17,11 @@
   "credits_ln1": "Developed with Flutter",
   "credits_ln2": "by codingale.dev",
   "code_credits": "Created by",
-  "design_credits": "Designed by"
+  "design_credits": "Designed by",
+  "theme_plain_light": "Plain Light",
+  "theme_the_darkside": "The Darkside",
+  "theme_passion_red": "Passion Red",
+  "theme_just_purple": "Just Purple",
+  "theme_gold_amber": "Gold Amber",
+  "theme_another_cyan": "Another Cyan"
 }

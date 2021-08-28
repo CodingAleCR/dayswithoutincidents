@@ -1,4 +1,3 @@
-import 'package:dwi/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
