@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CounterEntity::class], version = 1)
+@Database(entities = [CounterEntity::class], version = 2)
 abstract class DWIDatabase : RoomDatabase() {
     abstract fun counterDao(): CounterDAO
 

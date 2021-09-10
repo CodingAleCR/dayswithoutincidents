@@ -124,7 +124,6 @@ class CounterWidget : AppWidgetProvider() {
             val db = DWIDatabase.getDatabase(context)
             val dao = db.counterDao()
             val counters = dao.getAll()
-            Log.d("Counters ->>>>>", "Length ${counters.size}")
             return@withContext counters.firstOrNull()
         }
     }
