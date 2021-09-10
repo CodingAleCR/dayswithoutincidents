@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:domain/domain.dart';
 import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
-import 'package:domain/domain.dart';
+import 'package:dwi/features/time_counter/cubit/time_counter_cubit.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../../core/localization/app_localizations.dart';
-import '../bloc/bloc.dart';
+import 'package:wiredash/wiredash.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -15,52 +14,40 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    BlocProvider.of<TimeCounterBloc>(context)..add(GetTimeCounter());
-  }
-
-  _titleInputDialog(TimeCounter counter) {
+  Future<void> _titleInputDialog(TimeCounter counter) async {
     String? newTitle;
     TextEditingController controller =
         TextEditingController(text: counter.title);
-    showDialog<String>(
+    await showDialog<String>(
       context: context,
       builder: (BuildContext bContext) {
         return AlertDialog(
           title: Text(
             Resources.string(bContext, AppStrings.INPUT_TITLE),
           ),
-          content: Row(
-            children: <Widget>[
-              Expanded(
-                child: TextField(
-                  controller: controller,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: Resources.string(
-                      bContext,
-                      AppStrings.PREFERENCE_TITLE,
-                    ),
-                    hintText: Resources.string(
-                      bContext,
-                      AppStrings.HINT_TITLE,
-                    ),
-                  ),
-                  onChanged: (value) {
-                    if (value.isEmpty) {
-                      newTitle = Resources.string(
-                        bContext,
-                        AppStrings.DAYS_WITHOUT_INCIDENTS,
-                      );
-                    } else {
-                      newTitle = value;
-                    }
-                  },
-                ),
-              )
-            ],
+          content: TextField(
+            controller: controller,
+            autofocus: true,
+            decoration: InputDecoration(
+              labelText: Resources.string(
+                bContext,
+                AppStrings.PREFERENCE_TITLE,
+              ),
+              hintText: Resources.string(
+                bContext,
+                AppStrings.HINT_TITLE,
+              ),
+            ),
+            onChanged: (value) {
+              if (value.isEmpty) {
+                newTitle = Resources.string(
+                  bContext,
+                  AppStrings.DAYS_WITHOUT_INCIDENTS,
+                );
+              } else {
+                newTitle = value;
+              }
+            },
           ),
           actions: <Widget>[
             TextButton(
@@ -71,18 +58,12 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             TextButton(
               child: Text(MaterialLocalizations.of(bContext).okButtonLabel),
-              onPressed: () {
-                if (newTitle != null) {
-                  BlocProvider.of<TimeCounterBloc>(context)
-                    ..add(
-                      UpdateTimeCounter(
-                        counter: TimeCounter(
-                          id: counter.id,
-                          title: newTitle!,
-                          incident: counter.incident,
-                        ),
-                      ),
-                    );
+              onPressed: () async {
+                if (newTitle != null && newTitle!.isNotEmpty) {
+                  await context
+                      .read<TimeCounterCubit>()
+                      .titleChanged(newTitle!);
+
                   Navigator.of(bContext).pop(newTitle);
                 }
               },
@@ -93,26 +74,17 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _lastIncidentPicker(TimeCounter counter) async {
+  Future<void> _lastIncidentPicker(TimeCounter counter) async {
     DateTime today = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
       context: context,
-      initialDate: counter.incident!,
+      initialDate: counter.createdAt,
       firstDate: DateTime(today.year - 1),
       lastDate: DateTime(today.year + 1),
     );
 
     if (selectedDate != null) {
-      BlocProvider.of<TimeCounterBloc>(context)
-        ..add(
-          UpdateTimeCounter(
-            counter: TimeCounter(
-              id: counter.id,
-              title: counter.title,
-              incident: selectedDate,
-            ),
-          ),
-        );
+      await context.read<TimeCounterCubit>().dateChanged(selectedDate);
     }
   }
 
@@ -124,10 +96,9 @@ class _SettingsPageState extends State<SettingsPage> {
           Resources.string(context, AppStrings.TITLE_SETTINGS),
         ),
       ),
-      body: BlocListener<TimeCounterBloc, TimeCounterState>(
-        listenWhen: (prevState, state) => (prevState is TimeCounterLoading),
+      body: BlocConsumer<TimeCounterCubit, TimeCounterState>(
         listener: (context, state) {
-          if (state is TimeCounterError) {
+          if (state.status == OperationStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
@@ -136,17 +107,15 @@ class _SettingsPageState extends State<SettingsPage> {
             );
           }
         },
-        child: BlocBuilder<TimeCounterBloc, TimeCounterState>(
-          builder: (context, state) {
-            if (state is TimeCounterLoading) {
+        builder: (context, state) {
+          switch (state.status) {
+            case OperationStatus.loading:
               return buildLoading();
-            } else if (state is TimeCounterLoaded) {
+
+            default:
               return buildSettingsList(state.counter);
-            } else {
-              return buildSettingsList(TimeCounter.empty());
-            }
-          },
-        ),
+          }
+        },
       ),
     );
   }
@@ -192,6 +161,26 @@ class _SettingsPageState extends State<SettingsPage> {
             Text(
               Resources.string(context, AppStrings.LABEL_ABOUT).toUpperCase(),
               style: Theme.of(context).textTheme.overline!,
+            ),
+            ListTile(
+              title: Text(
+                Resources.string(context, AppStrings.SETTINGS_REPORT_BUG),
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              subtitle: Text(
+                Resources.string(
+                    context, AppStrings.SETTINGS_REPORT_BUG_DESCRIPTION),
+                style: Theme.of(context).textTheme.caption,
+              ),
+              onTap: () async {
+                final info = await PackageInfo.fromPlatform();
+
+                Wiredash.of(context)?.setBuildProperties(
+                  buildNumber: info.buildNumber,
+                  buildVersion: info.version,
+                );
+                Wiredash.of(context)?.show();
+              },
             ),
             ListTile(
               title: Text(

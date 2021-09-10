@@ -23,6 +23,8 @@ dependencies:
   sqflite: ^2.0.0+3
   # UUID
   uuid: ^3.0.4
+  # Monitoring
+  sentry_flutter: ^6.0.0
 
 dev_dependencies:
   flutter_test:

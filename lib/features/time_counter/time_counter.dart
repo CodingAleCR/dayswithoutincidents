@@ -1,2 +1,2 @@
-export 'bloc/bloc.dart';
+export 'cubit/time_counter_cubit.dart';
 export 'pages/pages.dart';

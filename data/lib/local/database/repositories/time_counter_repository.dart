@@ -3,7 +3,7 @@ import 'package:data/local/database/support/support.dart';
 
 class TimeCounterRepository extends Repository<TimeCounterEntity> {
   @override
-  String tablename() => "time_counters";
+  String tablename() => TimeCounterEntity.tablename;
 
   @override
   TimeCounterEntity parseMap(Map<String, Object?> map) =>

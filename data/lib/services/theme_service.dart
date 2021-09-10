@@ -11,7 +11,7 @@ class ThemeServiceImpl extends ThemeService {
       String theme = _prefs.getString(_theme)!;
       return AppThemeFromString.fromString(theme);
     } else {
-      return AppTheme.passionRed;
+      return AppTheme.anotherCyan;
     }
   }
 

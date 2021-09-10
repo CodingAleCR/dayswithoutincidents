@@ -9,7 +9,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
   TimeCounterEntity.fromModel(TimeCounter model)
       : uuid = model.id,
         title = model.title,
-        createdAt = model.incident!.toIso8601String(),
+        createdAt = model.createdAt.toIso8601String(),
         super.fromModel(model);
 
   TimeCounterEntity.fromDatabase(Map<String, dynamic> parsedJson)
@@ -23,7 +23,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
     return TimeCounter(
       id: uuid,
       title: title,
-      incident: DateTime.parse(createdAt),
+      createdAt: DateTime.parse(createdAt),
     );
   }
 
@@ -35,6 +35,8 @@ class TimeCounterEntity extends Entity<TimeCounter> {
       CREATED_AT: createdAt,
     };
   }
+
+  static String get tablename => "time_counters";
 
   static const String ID = "id";
   static const String TITLE = "title";

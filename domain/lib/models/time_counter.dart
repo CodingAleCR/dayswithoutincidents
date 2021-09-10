@@ -4,23 +4,39 @@ import 'package:uuid/uuid.dart';
 class TimeCounter extends Equatable {
   final String id;
   final String title;
-  final DateTime? incident;
+  final DateTime createdAt;
 
-  TimeCounter.generated({required this.title, this.incident})
-      : id = Uuid().v4();
+  TimeCounter.generated({
+    required this.title,
+    DateTime? createdAt,
+  })  : id = Uuid().v4(),
+        createdAt = createdAt ?? DateTime.now();
 
-  TimeCounter({required this.id, required this.title, this.incident});
+  TimeCounter({
+    required this.id,
+    required this.title,
+    required this.createdAt,
+  });
 
-  factory TimeCounter.empty() {
-    return TimeCounter(
-      id: Uuid().v4(),
-      title: DEFAULT_TITLE,
-      incident: DateTime.now(),
-    );
-  }
+  static TimeCounter get empty => TimeCounter(
+        id: Uuid().v4(),
+        title: DEFAULT_TITLE,
+        createdAt: DateTime.now(),
+      );
 
   @override
-  List<Object?> get props => [id, title, incident];
+  List<Object?> get props => [id, title, createdAt];
+
+  TimeCounter copyWith({
+    String? title,
+    DateTime? createdAt,
+  }) {
+    return TimeCounter(
+      id: this.id,
+      title: title ?? this.title,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
 
 const String DEFAULT_TITLE = "Days without incidents";

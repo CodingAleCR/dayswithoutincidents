@@ -16,10 +16,10 @@ class TimeCounterSharedPreferenceProvider {
       return TimeCounter(
         id: "",
         title: title,
-        incident: lastIncident,
+        createdAt: lastIncident,
       );
     } else {
-      final counter = TimeCounter.empty();
+      final counter = TimeCounter.empty;
       await setCounter(counter);
       return counter;
     }
@@ -29,7 +29,7 @@ class TimeCounterSharedPreferenceProvider {
   Future<void> setCounter(TimeCounter counter) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     _prefs.setString(TITLE, counter.title);
-    _prefs.setString(LAST_INCIDENT, counter.incident!.toIso8601String());
+    _prefs.setString(LAST_INCIDENT, counter.createdAt.toIso8601String());
   }
 
   /// Resets the counter time to now.

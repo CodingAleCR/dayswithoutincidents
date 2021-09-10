@@ -25,5 +25,8 @@ abstract class AppStrings {
   static const String THEME_PASSION_RED = "theme_passion_red";
   static const String THEME_JUST_PURPLE = "theme_just_purple";
   static const String THEME_GOLD_AMBER = "theme_gold_amber";
-  static const String THEME_ANOTHER_CYAN = "theme_Another_cyan";
+  static const String THEME_ANOTHER_CYAN = "theme_another_cyan";
+  static const String SETTINGS_REPORT_BUG = "settings_report_bug";
+  static const String SETTINGS_REPORT_BUG_DESCRIPTION =
+      "settings_report_bug_description";
 }

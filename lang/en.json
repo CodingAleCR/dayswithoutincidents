@@ -24,5 +24,7 @@
   "theme_passion_red": "Passion Red",
   "theme_just_purple": "Just Purple",
   "theme_gold_amber": "Gold Amber",
-  "theme_another_cyan": "Another Cyan"
+  "theme_another_cyan": "Another Cyan",
+  "settings_report_bug": "Report a bug",
+  "settings_report_bug_description": "Help us improve by reporting any issues."
 }

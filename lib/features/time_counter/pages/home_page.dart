@@ -1,13 +1,12 @@
 import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
-
 import 'package:dwi/core/widgets/widgets.dart';
 import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
+import 'package:dwi/features/time_counter/cubit/time_counter_cubit.dart';
 import 'package:dwi/features/time_counter/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/bloc.dart';
 import '../widgets/default_counter.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    BlocProvider.of<TimeCounterBloc>(context)..add(GetTimeCounter());
+    // BlocProvider.of<TimeCounterBloc>(context)..add(GetTimeCounter());
   }
 
   @override
@@ -56,13 +55,12 @@ class _CustomizeCounterButton extends StatelessWidget {
           MaterialPageRoute(
             builder: (routeContext) {
               return BlocProvider.value(
-                value: BlocProvider.of<TimeCounterBloc>(context),
+                value: BlocProvider.of<TimeCounterCubit>(context),
                 child: SettingsPage(),
               );
             },
           ),
         );
-        BlocProvider.of<TimeCounterBloc>(context)..add(GetTimeCounter());
       },
       icon: Icon(Icons.settings_outlined),
     );
