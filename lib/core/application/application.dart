@@ -4,6 +4,7 @@ import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:wiredash/wiredash.dart';
 
 import '../localization/localization.dart';
@@ -42,6 +43,7 @@ class __AppViewState extends State<_AppView> {
       navigatorKey: _navigatorKey,
       child: MaterialApp(
         navigatorKey: _navigatorKey,
+        navigatorObservers: [SentryNavigatorObserver()],
         debugShowCheckedModeBanner: false,
         title: 'Days Without Incidents',
         theme: themeData,

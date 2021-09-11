@@ -19,7 +19,9 @@ _onConfigure(Database db) async {
 _onUpgrade(Database db, int oldVersion, int newVersion) async {
   try {
     int pendingQty = newVersion - oldVersion;
-    List<int> pendingMigrations = List.generate(pendingQty, (i) => i + 1);
+    int startingVersion = oldVersion + 1;
+    List<int> pendingMigrations = List.generate(
+        pendingQty, (i) => i == 0 ? startingVersion : startingVersion + i);
 
     await Future.forEach<int>(pendingMigrations, (currentVersion) async {
       await migrations[currentVersion]?.up(db);
@@ -35,7 +37,8 @@ _onUpgrade(Database db, int oldVersion, int newVersion) async {
 _onDowngrade(Database db, int oldVersion, int newVersion) async {
   try {
     int pendingQty = newVersion - oldVersion;
-    List<int> pendingMigrations = List.generate(pendingQty, (i) => i + 1);
+    List<int> pendingMigrations =
+        List.generate(pendingQty, (i) => i == 0 ? newVersion : newVersion - i);
 
     await Future.forEach<int>(pendingMigrations, (currentVersion) async {
       await migrations[currentVersion]?.down(db);
