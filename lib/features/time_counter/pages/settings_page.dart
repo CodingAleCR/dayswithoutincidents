@@ -1,9 +1,6 @@
-import 'package:domain/domain.dart';
 import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
-import 'package:dwi/features/time_counter/cubit/time_counter_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wiredash/wiredash.dart';
@@ -14,80 +11,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  Future<void> _titleInputDialog(TimeCounter counter) async {
-    String? newTitle;
-    TextEditingController controller =
-        TextEditingController(text: counter.title);
-    await showDialog<String>(
-      context: context,
-      builder: (BuildContext bContext) {
-        return AlertDialog(
-          title: Text(
-            Resources.string(bContext, AppStrings.INPUT_TITLE),
-          ),
-          content: TextField(
-            controller: controller,
-            autofocus: true,
-            decoration: InputDecoration(
-              labelText: Resources.string(
-                bContext,
-                AppStrings.PREFERENCE_TITLE,
-              ),
-              hintText: Resources.string(
-                bContext,
-                AppStrings.HINT_TITLE,
-              ),
-            ),
-            onChanged: (value) {
-              if (value.isEmpty) {
-                newTitle = Resources.string(
-                  bContext,
-                  AppStrings.DAYS_WITHOUT_INCIDENTS,
-                );
-              } else {
-                newTitle = value;
-              }
-            },
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(MaterialLocalizations.of(bContext).cancelButtonLabel),
-              onPressed: () {
-                Navigator.of(bContext).pop(newTitle);
-              },
-            ),
-            TextButton(
-              child: Text(MaterialLocalizations.of(bContext).okButtonLabel),
-              onPressed: () async {
-                if (newTitle != null && newTitle!.isNotEmpty) {
-                  await context
-                      .read<TimeCounterCubit>()
-                      .titleChanged(newTitle!);
-
-                  Navigator.of(bContext).pop(newTitle);
-                }
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> _lastIncidentPicker(TimeCounter counter) async {
-    DateTime today = DateTime.now();
-    DateTime? selectedDate = await showDatePicker(
-      context: context,
-      initialDate: counter.createdAt,
-      firstDate: DateTime(today.year - 1),
-      lastDate: DateTime(today.year + 1),
-    );
-
-    if (selectedDate != null) {
-      await context.read<TimeCounterCubit>().dateChanged(selectedDate);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,27 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
           Resources.string(context, AppStrings.TITLE_SETTINGS),
         ),
       ),
-      body: BlocConsumer<TimeCounterCubit, TimeCounterState>(
-        listener: (context, state) {
-          if (state.status == OperationStatus.failure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
-        builder: (context, state) {
-          switch (state.status) {
-            case OperationStatus.loading:
-              return buildLoading();
-
-            default:
-              return buildSettingsList(state.counter);
-          }
-        },
-      ),
+      body: buildSettingsList(),
     );
   }
 
@@ -126,38 +29,38 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget buildSettingsList(TimeCounter counter) {
+  Widget buildSettingsList() {
     return Stack(
       children: [
         ListView(
           padding: EdgeInsets.only(top: 16, left: 16, right: 16),
           children: <Widget>[
-            Text(
-                Resources.string(context, AppStrings.LABEL_CUSTOMIZATION)
-                    .toUpperCase(),
-                style: Theme.of(context).textTheme.overline!),
-            ListTile(
-              title: Text(
-                Resources.string(context, AppStrings.PREFERENCE_TITLE),
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-              subtitle: Text(
-                Resources.string(context, AppStrings.SUMMARY_TITLE),
-                style: Theme.of(context).textTheme.caption,
-              ),
-              onTap: () => _titleInputDialog(counter),
-            ),
-            ListTile(
-              title: Text(
-                Resources.string(context, AppStrings.PREFERENCE_DATE),
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-              subtitle: Text(
-                Resources.string(context, AppStrings.SUMMARY_DAY),
-                style: Theme.of(context).textTheme.caption,
-              ),
-              onTap: () => _lastIncidentPicker(counter),
-            ),
+            // Text(
+            //     Resources.string(context, AppStrings.LABEL_CUSTOMIZATION)
+            //         .toUpperCase(),
+            //     style: Theme.of(context).textTheme.overline!),
+            // ListTile(
+            //   title: Text(
+            //     Resources.string(context, AppStrings.PREFERENCE_TITLE),
+            //     style: Theme.of(context).textTheme.subtitle2,
+            //   ),
+            //   subtitle: Text(
+            //     Resources.string(context, AppStrings.SUMMARY_TITLE),
+            //     style: Theme.of(context).textTheme.caption,
+            //   ),
+            //   onTap: () => _titleInputDialog(counter),
+            // ),
+            // ListTile(
+            //   title: Text(
+            //     Resources.string(context, AppStrings.PREFERENCE_DATE),
+            //     style: Theme.of(context).textTheme.subtitle2,
+            //   ),
+            //   subtitle: Text(
+            //     Resources.string(context, AppStrings.SUMMARY_DAY),
+            //     style: Theme.of(context).textTheme.caption,
+            //   ),
+            //   onTap: () => _lastIncidentPicker(counter),
+            // ),
             Text(
               Resources.string(context, AppStrings.LABEL_ABOUT).toUpperCase(),
               style: Theme.of(context).textTheme.overline!,

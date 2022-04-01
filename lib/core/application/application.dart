@@ -1,6 +1,7 @@
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:dwi/features/features.dart';
+import 'package:dwi/features/time_counter/cubit/counter_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -72,12 +73,23 @@ class __AppViewState extends State<_AppView> {
             return supportedLocales.first;
           }
         },
-        home: RepositoryProvider<TimeCounterService>(
-          create: (context) => TimeCounterServiceImpl(),
-          child: BlocProvider<TimeCounterCubit>(
-            create: (context) => TimeCounterCubit(
-              RepositoryProvider.of<TimeCounterService>(context),
+        home: MultiRepositoryProvider(
+          providers: [
+            RepositoryProvider<TimeCounterService>(
+              create: (context) => TimeCounterServiceImpl(),
             ),
+            RepositoryProvider<CounterRestartService>(
+              create: (context) => CounterRestartServiceImpl(),
+            ),
+          ],
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider<CounterListCubit>(
+                create: (context) => CounterListCubit(
+                  RepositoryProvider.of<TimeCounterService>(context),
+                ),
+              ),
+            ],
             child: HomePage(),
           ),
         ),

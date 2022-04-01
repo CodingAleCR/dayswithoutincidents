@@ -3,4 +3,5 @@ abstract class Entity<T> {
   Entity.fromDatabase(Map<String, dynamic> parsedJson);
   T toModel();
   Map<String, dynamic> toDatabaseMap();
+  String primaryKey();
 }

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,11 +8,11 @@ import 'font.dart';
 abstract class DWIThemes {
   static final allThemes = [
     PlainLightTheme(),
-    TheDarksideTheme(),
+    DarkSideTheme(),
     PassionRedTheme(),
     JustPurpleTheme(),
     GoldAmberTheme(),
-    AnotherCyanTheme(),
+    HappyCyanTheme(),
   ];
 
   static DWITheme getTheme(AppTheme theme) =>
@@ -59,12 +57,11 @@ class PlainLightTheme extends DWITheme {
         fontFamily: DWIFonts.APP_FONT,
         scaffoldBackgroundColor: DWIColors.brandWhite,
         appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
-          brightness: Brightness.light,
           backgroundColor: DWIColors.brandWhite,
           elevation: 0,
           centerTitle: false,
           foregroundColor: DWIColors.brandBlue,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -110,6 +107,7 @@ class PlainLightTheme extends DWITheme {
             color: DWIColors.brandBlue,
           ),
         ),
+        splashColor: DWIColors.brandBlue.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandBlue,
@@ -125,10 +123,18 @@ class PlainLightTheme extends DWITheme {
             primary: DWIColors.brandBlue,
           ),
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: DWIColors.brandBlue,
+            onPrimary: DWIColors.brandWhite,
+            shape: BeveledRectangleBorder(),
+          ),
+        ),
       );
 }
 
-class TheDarksideTheme extends DWITheme {
+class DarkSideTheme extends DWITheme {
   @override
   String get name => "The Darkside";
 
@@ -136,7 +142,7 @@ class TheDarksideTheme extends DWITheme {
   Color get color => DWIColors.brandBlueTint1;
 
   @override
-  AppTheme get theme => AppTheme.theDarkside;
+  AppTheme get theme => AppTheme.darkSide;
 
   @override
   ThemeData get themeData => ThemeData(
@@ -146,11 +152,10 @@ class TheDarksideTheme extends DWITheme {
         fontFamily: DWIFonts.APP_FONT,
         scaffoldBackgroundColor: DWIColors.brandBlueTint1,
         appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
-          brightness: Brightness.dark,
           backgroundColor: DWIColors.brandBlueTint1,
           elevation: 0,
           centerTitle: false,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -196,6 +201,7 @@ class TheDarksideTheme extends DWITheme {
             color: DWIColors.brandWhite,
           ),
         ),
+        splashColor: DWIColors.brandWhite.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandWhite,
@@ -209,6 +215,14 @@ class TheDarksideTheme extends DWITheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             primary: DWIColors.brandCyan,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: DWIColors.brandWhite,
+            onPrimary: DWIColors.brandBlue,
+            shape: BeveledRectangleBorder(),
           ),
         ),
       );
@@ -232,11 +246,10 @@ class PassionRedTheme extends DWITheme {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.APP_FONT,
         appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
-          brightness: Brightness.dark,
           backgroundColor: DWIColors.passionRed,
           elevation: 0,
           centerTitle: false,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -282,6 +295,7 @@ class PassionRedTheme extends DWITheme {
             color: DWIColors.brandWhite,
           ),
         ),
+        splashColor: DWIColors.brandWhite.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandWhite,
@@ -295,6 +309,14 @@ class PassionRedTheme extends DWITheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             primary: DWIColors.brandCyan,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: DWIColors.brandWhite,
+            onPrimary: DWIColors.passionRed,
+            shape: BeveledRectangleBorder(),
           ),
         ),
       );
@@ -318,12 +340,11 @@ class JustPurpleTheme extends DWITheme {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.APP_FONT,
         appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
-          brightness: Brightness.light,
           backgroundColor: DWIColors.justPurple,
           foregroundColor: DWIColors.brandWhite,
           elevation: 0,
           centerTitle: false,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -369,6 +390,7 @@ class JustPurpleTheme extends DWITheme {
             color: DWIColors.brandWhite,
           ),
         ),
+        splashColor: DWIColors.brandWhite.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandWhite,
@@ -381,7 +403,15 @@ class JustPurpleTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandCyan,
+            primary: DWIColors.brandWhite,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: DWIColors.brandWhite,
+            onPrimary: DWIColors.justPurple,
+            shape: BeveledRectangleBorder(),
           ),
         ),
       );
@@ -405,12 +435,11 @@ class GoldAmberTheme extends DWITheme {
         fontFamily: DWIFonts.APP_FONT,
         scaffoldBackgroundColor: DWIColors.goldAmber,
         appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
-          brightness: Brightness.light,
           backgroundColor: DWIColors.goldAmber,
           elevation: 0,
           centerTitle: false,
           foregroundColor: DWIColors.brandBlue,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -456,6 +485,7 @@ class GoldAmberTheme extends DWITheme {
             color: DWIColors.brandBlue,
           ),
         ),
+        splashColor: DWIColors.brandBlue.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandBlue,
@@ -471,10 +501,18 @@ class GoldAmberTheme extends DWITheme {
             primary: DWIColors.brandBlue,
           ),
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: DWIColors.brandBlue,
+            onPrimary: DWIColors.goldAmber,
+            shape: BeveledRectangleBorder(),
+          ),
+        ),
       );
 }
 
-class AnotherCyanTheme extends DWITheme {
+class HappyCyanTheme extends DWITheme {
   @override
   String get name => "Another Cyan";
 
@@ -482,7 +520,7 @@ class AnotherCyanTheme extends DWITheme {
   Color get color => DWIColors.brandCyan;
 
   @override
-  AppTheme get theme => AppTheme.anotherCyan;
+  AppTheme get theme => AppTheme.happyCyan;
 
   @override
   ThemeData get themeData => ThemeData(
@@ -492,12 +530,11 @@ class AnotherCyanTheme extends DWITheme {
         fontFamily: DWIFonts.APP_FONT,
         scaffoldBackgroundColor: DWIColors.brandCyan,
         appBarTheme: AppBarTheme(
-          backwardsCompatibility: false,
-          brightness: Brightness.light,
           backgroundColor: DWIColors.brandCyan,
           elevation: 0,
           centerTitle: false,
           foregroundColor: DWIColors.brandBlue,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
         textTheme: TextTheme(
           headline1: TextStyle(
@@ -543,6 +580,7 @@ class AnotherCyanTheme extends DWITheme {
             color: DWIColors.brandBlue,
           ),
         ),
+        splashColor: DWIColors.brandBlue.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandBlue,
@@ -556,6 +594,14 @@ class AnotherCyanTheme extends DWITheme {
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             primary: DWIColors.brandBlue,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            elevation: 0,
+            primary: DWIColors.brandBlue,
+            onPrimary: DWIColors.brandCyan,
+            shape: BeveledRectangleBorder(),
           ),
         ),
       );

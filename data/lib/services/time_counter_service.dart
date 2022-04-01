@@ -1,6 +1,5 @@
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
-import 'package:uuid/uuid.dart';
 
 class TimeCounterServiceImpl extends TimeCounterService {
   final TimeCounterRepository _repository;
@@ -9,8 +8,8 @@ class TimeCounterServiceImpl extends TimeCounterService {
       : _repository = repository ?? TimeCounterRepository();
 
   @override
-  Future<void> deleteById(UuidValue id) async {
-    await _repository.deleteById(id.uuid);
+  Future<void> deleteById(String uuid) async {
+    await _repository.deleteById(uuid);
   }
 
   @override
@@ -20,8 +19,8 @@ class TimeCounterServiceImpl extends TimeCounterService {
   }
 
   @override
-  Future<TimeCounter> findById(UuidValue id) async {
-    final entity = await _repository.findById(id.uuid);
+  Future<TimeCounter> findById(String uuid) async {
+    final entity = await _repository.findById(uuid);
     return entity.toModel();
   }
 

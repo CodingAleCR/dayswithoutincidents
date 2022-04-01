@@ -99,9 +99,7 @@ class _Counter extends StatelessWidget {
           ),
         ),
         SizedBox(height: 24),
-        _ResetButton(
-          counterId: counter.id,
-        ),
+        _ResetButton(),
       ],
     );
   }
@@ -117,16 +115,14 @@ class _Loading extends StatelessWidget {
 }
 
 class _ResetButton extends StatelessWidget {
-  final String counterId;
-
-  const _ResetButton({Key? key, required this.counterId}) : super(key: key);
+  const _ResetButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       child: Text(
         Resources.string(context, AppStrings.BTN_RESET).toUpperCase(),
       ),
-      onPressed: () => context.read<TimeCounterCubit>().resetCounter(),
+      onPressed: () => context.read<TimeCounterCubit>().restartCounter(),
     );
   }
 }

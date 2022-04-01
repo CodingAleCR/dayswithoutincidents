@@ -18,21 +18,26 @@ class TimeCounter extends Equatable {
     required this.createdAt,
   });
 
-  static TimeCounter get empty => TimeCounter(
+  static get empty => TimeCounter(
         id: Uuid().v4(),
         title: DEFAULT_TITLE,
         createdAt: DateTime.now(),
       );
 
   @override
-  List<Object?> get props => [id, title, createdAt];
+  List<Object?> get props => [
+        id,
+        title,
+        createdAt,
+      ];
 
   TimeCounter copyWith({
+    String? id,
     String? title,
     DateTime? createdAt,
   }) {
     return TimeCounter(
-      id: this.id,
+      id: id ?? this.id,
       title: title ?? this.title,
       createdAt: createdAt ?? this.createdAt,
     );

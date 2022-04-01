@@ -36,9 +36,9 @@ _onUpgrade(Database db, int oldVersion, int newVersion) async {
 
 _onDowngrade(Database db, int oldVersion, int newVersion) async {
   try {
-    int pendingQty = newVersion - oldVersion;
+    int pendingQty = oldVersion - newVersion;
     List<int> pendingMigrations =
-        List.generate(pendingQty, (i) => i == 0 ? newVersion : newVersion - i);
+        List.generate(pendingQty, (i) => i == 0 ? oldVersion : oldVersion - i);
 
     await Future.forEach<int>(pendingMigrations, (currentVersion) async {
       await migrations[currentVersion]?.down(db);

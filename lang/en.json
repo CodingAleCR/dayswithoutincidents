@@ -4,7 +4,7 @@
   "btn_reset": "Restart",
   "day": "day",
   "days": "days",
-  "title_activity_settings": "Settings",
+  "title_activity_settings": "About",
   "label_customization": "Customize",
   "preference_title": "Title",
   "summary_title": "The title to be shown by the app.",
@@ -20,11 +20,11 @@
   "design_credits": "Designed by",
   "theme_customization": "Switch Theme",
   "theme_plain_light": "Plain Light",
-  "theme_the_darkside": "The Darkside",
+  "theme_the_darkside": "Dark Side",
   "theme_passion_red": "Passion Red",
   "theme_just_purple": "Just Purple",
   "theme_gold_amber": "Gold Amber",
-  "theme_another_cyan": "Another Cyan",
+  "theme_another_cyan": "Happy Cyan",
   "settings_report_bug": "Report a bug",
   "settings_report_bug_description": "Help us improve by reporting any issues."
 }

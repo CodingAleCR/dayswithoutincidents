@@ -1,20 +1,18 @@
 import 'package:data/local/database/database.dart';
-import 'package:data/local/database/support/entity.dart';
-import 'package:data/local/database/support/error.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class Repository<EntityClass extends Entity> {
-  late Future<Database> _db;
+  late Future<Database> database;
 
   Repository() {
-    this._db = openDWIDatabase();
+    this.database = openDWIDatabase();
   }
 
   String tablename();
   EntityClass parseMap(Map<String, Object?> map);
 
   Future<List<EntityClass>> findAll() async {
-    final db = await _db;
+    final db = await database;
     final maps = await db.query(
       tablename(),
       columns: null,
@@ -24,7 +22,7 @@ abstract class Repository<EntityClass extends Entity> {
   }
 
   Future<EntityClass> findById(String uuid) async {
-    final db = await _db;
+    final db = await database;
 
     final maps = await db.query(
       tablename(),
@@ -43,17 +41,35 @@ abstract class Repository<EntityClass extends Entity> {
   }
 
   Future<void> save(EntityClass entity) async {
-    final db = await _db;
+    final db = await database;
 
-    await db.insert(
+    final existingEntity = await db.query(
+      tablename(),
+      columns: null,
+      where: "id = ?",
+      whereArgs: [entity.primaryKey()],
+    );
+
+    if (existingEntity.isEmpty) {
+      await db.insert(
+        tablename(),
+        entity.toDatabaseMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      return;
+    }
+
+    await db.update(
       tablename(),
       entity.toDatabaseMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      where: "id = ?",
+      whereArgs: [entity.primaryKey()],
     );
   }
 
   Future<bool> deleteById(String uuid) async {
-    final db = await _db;
+    final db = await database;
 
     int count = await db.delete(
       tablename(),
@@ -65,7 +81,7 @@ abstract class Repository<EntityClass extends Entity> {
   }
 
   Future close() async {
-    final db = await _db;
+    final db = await database;
     await db.close();
   }
 }

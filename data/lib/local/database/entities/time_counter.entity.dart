@@ -36,9 +36,13 @@ class TimeCounterEntity extends Entity<TimeCounter> {
     };
   }
 
+  @override
+  String primaryKey() => uuid;
+
   static String get tablename => "time_counters";
 
   static const String ID = "id";
   static const String TITLE = "title";
   static const String CREATED_AT = "created_at";
+  static const String THEME = "theme";
 }

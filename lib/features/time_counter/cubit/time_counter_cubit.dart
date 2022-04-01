@@ -2,32 +2,37 @@ import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:uuid/uuid.dart';
 
 part 'time_counter_state.dart';
 
 class TimeCounterCubit extends Cubit<TimeCounterState> {
-  TimeCounterCubit(this._service) : super(TimeCounterState()) {
-    _service.findAll().then(
-      (allCounters) {
-        late TimeCounter current;
-        if (allCounters.isEmpty) {
-          current = TimeCounter.empty;
-        } else {
-          current = allCounters.first;
-        }
-
-        emit(
-          state.copyWith(
-            status: OperationStatus.idle,
-            counter: current,
+  TimeCounterCubit(
+    TimeCounter counter,
+    this._service,
+    this._restartsService,
+  ) : super(
+          TimeCounterState(
+            counter: counter,
           ),
-        );
-      },
-    );
+        ) {
+    fetchCounter();
   }
 
   TimeCounterService _service;
+  CounterRestartService _restartsService;
+
+  Future<void> fetchCounter() async {
+    final counter = await _service.findById(state.counter.id);
+    final restarts = await _restartsService.findAllByCounter(counter);
+
+    emit(
+      state.copyWith(
+        status: OperationStatus.idle,
+        counter: counter,
+        restarts: restarts,
+      ),
+    );
+  }
 
   Future<void> titleChanged(String newTitle) async {
     try {
@@ -38,7 +43,6 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
         emit(
           state.copyWith(
             status: OperationStatus.failure,
-            message: "Title can't be empty.",
           ),
         );
 
@@ -53,7 +57,6 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       emit(state.copyWith(
         counter: current,
         status: OperationStatus.success,
-        message: "Your incident counter was updated.",
       ));
     } catch (exception, stackTrace) {
       await Sentry.captureException(
@@ -63,14 +66,12 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       emit(
         state.copyWith(
           status: OperationStatus.failure,
-          message: "There was a problem updating  the counter.",
         ),
       );
     } finally {
       emit(
         state.copyWith(
           status: OperationStatus.idle,
-          message: "",
         ),
       );
     }
@@ -86,7 +87,6 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
         emit(
           state.copyWith(
             status: OperationStatus.failure,
-            message: "Please select a date that is before today.",
           ),
         );
 
@@ -101,7 +101,6 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       emit(state.copyWith(
         counter: current,
         status: OperationStatus.success,
-        message: "Your incident counter was updated.",
       ));
     } catch (exception, stackTrace) {
       await Sentry.captureException(
@@ -111,36 +110,33 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       emit(
         state.copyWith(
           status: OperationStatus.failure,
-          message: "There was a problem updating  the counter.",
         ),
       );
     } finally {
       emit(
         state.copyWith(
           status: OperationStatus.idle,
-          message: "",
         ),
       );
     }
   }
 
-  Future<void> resetCounter() async {
+  Future<void> restartCounter() async {
     try {
       emit(state.copyWith(status: OperationStatus.loading));
 
-      // Delete previous counter.
-      await _service.deleteById(UuidValue(state.counter.id));
+      final restartDate = DateTime.now();
+      final restartItem = CounterRestart.generated(
+        counter: state.counter,
+        startedAt: state.counter.createdAt,
+        restartedAt: DateTime.now(),
+      );
+      final newRestart = await _restartsService.save(restartItem);
 
-      // Store new counter.
-      final newCounter = TimeCounter.empty;
-      final current = await _service.save(newCounter);
+      final updatedCounter = state.counter.copyWith(createdAt: restartDate);
+      await _service.save(updatedCounter);
 
-      // Emit success
-      emit(state.copyWith(
-        counter: current,
-        status: OperationStatus.success,
-        message: "Your incident counter was reset.",
-      ));
+      await fetchCounter();
     } catch (exception, stackTrace) {
       await Sentry.captureException(
         exception,
@@ -149,14 +145,12 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       emit(
         state.copyWith(
           status: OperationStatus.failure,
-          message: "There was a problem getting the counter.",
         ),
       );
     } finally {
       emit(
         state.copyWith(
           status: OperationStatus.idle,
-          message: "",
         ),
       );
     }

@@ -1,10 +1,10 @@
 enum AppTheme {
   plainLight,
-  theDarkside,
+  darkSide,
   passionRed,
   justPurple,
   goldAmber,
-  anotherCyan
+  happyCyan
 }
 
 extension AppThemeFromString on AppTheme {
@@ -13,8 +13,8 @@ extension AppThemeFromString on AppTheme {
       case "plain_light":
         return AppTheme.plainLight;
 
-      case "the_darkside":
-        return AppTheme.theDarkside;
+      case "dark_side":
+        return AppTheme.darkSide;
 
       case "passion_red":
         return AppTheme.passionRed;
@@ -25,8 +25,8 @@ extension AppThemeFromString on AppTheme {
       case "gold_amber":
         return AppTheme.goldAmber;
 
-      case "another_cyan":
-        return AppTheme.anotherCyan;
+      case "happy_cyan":
+        return AppTheme.happyCyan;
 
       default:
         return AppTheme.plainLight;
@@ -37,16 +37,33 @@ extension AppThemeFromString on AppTheme {
     switch (this) {
       case AppTheme.plainLight:
         return "plain_light";
-      case AppTheme.theDarkside:
-        return "the_darkside";
+      case AppTheme.darkSide:
+        return "dark_side";
       case AppTheme.passionRed:
         return "passion_red";
       case AppTheme.justPurple:
         return "just_purple";
       case AppTheme.goldAmber:
         return "gold_amber";
-      case AppTheme.anotherCyan:
-        return "another_cyan";
+      case AppTheme.happyCyan:
+        return "happy_cyan";
+    }
+  }
+
+  String get displayName {
+    switch (this) {
+      case AppTheme.plainLight:
+        return "Plain Light";
+      case AppTheme.darkSide:
+        return "Dark Side";
+      case AppTheme.passionRed:
+        return "Passion Red";
+      case AppTheme.justPurple:
+        return "Just Purple";
+      case AppTheme.goldAmber:
+        return "Gold Amber";
+      case AppTheme.happyCyan:
+        return "Happy Cyan";
     }
   }
 
@@ -54,7 +71,7 @@ extension AppThemeFromString on AppTheme {
   bool get isPlainLight => this == AppTheme.plainLight;
 
   /// Helper to determine if theme is the darkside.
-  bool get isTheDarkside => this == AppTheme.theDarkside;
+  bool get isTheDarkside => this == AppTheme.darkSide;
 
   /// Helper to determine if theme is passion red.
   bool get isPassionRed => this == AppTheme.passionRed;
@@ -66,5 +83,5 @@ extension AppThemeFromString on AppTheme {
   bool get isGoldAmber => this == AppTheme.goldAmber;
 
   /// Helper to determine if theme is another cyan.
-  bool get isAnotherCyan => this == AppTheme.anotherCyan;
+  bool get isAnotherCyan => this == AppTheme.happyCyan;
 }

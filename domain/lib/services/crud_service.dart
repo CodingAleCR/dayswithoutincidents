@@ -1,8 +1,6 @@
-import 'package:uuid/uuid.dart';
-
 abstract class CrudService<T> {
   Future<List<T>> findAll();
-  Future<T> findById(UuidValue id);
+  Future<T> findById(String uuid);
   Future<T> save(T model);
-  Future<void> deleteById(UuidValue id);
+  Future<void> deleteById(String uuid);
 }
