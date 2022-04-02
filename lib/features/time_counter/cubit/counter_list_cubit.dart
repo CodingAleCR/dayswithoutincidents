@@ -31,11 +31,7 @@ class CounterListCubit extends Cubit<CounterListState> {
   }
 
   Future<void> selectedCounterChanged(int selectedIdx) async {
-    emit(
-      state.copyWith(
-        selectedIdx: selectedIdx,
-      ),
-    );
+    await fetchCounters(selectedIdx: selectedIdx);
   }
 
   Future<void> addNewCounter() async {

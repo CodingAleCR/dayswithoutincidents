@@ -6,26 +6,18 @@ import 'package:equatable/equatable.dart';
 part 'theme_chooser_state.dart';
 
 class ThemeChooserCubit extends Cubit<ThemeChooserState> {
-  ThemeChooserCubit(this._themeService) : super(ThemeChooserState()) {
-    _themeService.getCurrentTheme().then(
-          (theme) => emit(state.copyWith(
-            theme: theme,
-          )),
-        );
-  }
-
-  final ThemeService _themeService;
+  ThemeChooserCubit() : super(ThemeChooserState());
 
   Future<void> themeChanged(AppTheme theme) async {
     try {
-      await _themeService.setTheme(theme);
+      // await _themeService.setTheme(theme);
       emit(state.copyWith(
         theme: theme,
       ));
     } catch (e) {}
   }
 
-  Future<void> nextTheme() async {
-    themeChanged(DWIThemes.nextTheme(state.theme).theme);
+  AppTheme nextTheme() {
+    return DWIThemes.nextTheme(state.theme).theme;
   }
 }

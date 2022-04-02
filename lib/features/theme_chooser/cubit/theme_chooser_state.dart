@@ -2,7 +2,7 @@ part of 'theme_chooser_cubit.dart';
 
 class ThemeChooserState extends Equatable {
   const ThemeChooserState({
-    this.theme = AppTheme.plainLight,
+    this.theme = AppTheme.happyCyan,
   });
 
   final AppTheme theme;

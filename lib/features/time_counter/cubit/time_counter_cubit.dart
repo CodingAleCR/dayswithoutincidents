@@ -121,6 +121,16 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
     }
   }
 
+  Future<void> themeChanged(AppTheme theme) async {
+    try {
+      final updatedCounter = state.counter.copyWith(theme: theme);
+
+      await _service.save(updatedCounter);
+
+      await fetchCounter();
+    } on Exception {}
+  }
+
   Future<void> restartCounter() async {
     try {
       emit(state.copyWith(status: OperationStatus.loading));
@@ -131,7 +141,7 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
         startedAt: state.counter.createdAt,
         restartedAt: DateTime.now(),
       );
-      final newRestart = await _restartsService.save(restartItem);
+      await _restartsService.save(restartItem);
 
       final updatedCounter = state.counter.copyWith(createdAt: restartDate);
       await _service.save(updatedCounter);

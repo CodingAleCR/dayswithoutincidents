@@ -1,7 +1,6 @@
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:dwi/features/features.dart';
-import 'package:dwi/features/time_counter/cubit/counter_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,7 +14,7 @@ class DWIApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ThemeChooserCubit(context.read<ThemeService>()),
+      create: (_) => ThemeChooserCubit(),
       child: _AppView(),
     );
   }

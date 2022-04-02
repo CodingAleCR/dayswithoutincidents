@@ -1,2 +1,2 @@
 const kDatabaseName = "dwi_local.db";
-const kDatabaseVersion = 2;
+const kDatabaseVersion = 3;

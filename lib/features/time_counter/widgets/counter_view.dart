@@ -133,105 +133,113 @@ class _Counter extends StatelessWidget {
     String dayString = days != 1
         ? Resources.string(context, AppStrings.DAYS)
         : Resources.string(context, AppStrings.DAY);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          child: InkWell(
-            key: ValueKey(counter.title),
-            borderRadius: BorderRadius.circular(8),
-            onTap: () => _titleInputDialog(context),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                counter.title.toUpperCase(),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+    return BlocListener<TimeCounterCubit, TimeCounterState>(
+      listenWhen: (previous, current) =>
+          previous.counter.theme != current.counter.theme,
+      listener: (context, state) {
+        context.read<ThemeChooserCubit>().themeChanged(state.counter.theme);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: InkWell(
+              key: ValueKey(counter.title),
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => _titleInputDialog(context),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  counter.title.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 8),
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          child: Text(
-            "${days.toString()} $dayString",
-            key: ValueKey(days),
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline1?.copyWith(
-                  fontSize: 42,
-                  fontWeight: FontWeight.bold,
-                ),
+          SizedBox(height: 8),
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: Text(
+              "${days.toString()} $dayString",
+              key: ValueKey(days),
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline1?.copyWith(
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
           ),
-        ),
-        SizedBox(height: 8),
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (isLongestStreakAlive) ...[
-                Icon(
-                  FeatherIcons.zap,
-                  size: 16,
+          SizedBox(height: 8),
+          AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isLongestStreakAlive) ...[
+                  Icon(
+                    FeatherIcons.zap,
+                    size: 16,
+                  ),
+                  SizedBox(width: 6)
+                ],
+                Text(
+                  "Current Streak",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .subtitle2
+                      ?.copyWith(fontWeight: FontWeight.w300, fontSize: 14),
                 ),
-                SizedBox(width: 6)
               ],
-              Text(
-                "Current Streak",
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2
-                    ?.copyWith(fontWeight: FontWeight.w300, fontSize: 14),
+            ),
+          ),
+          SizedBox(height: 24),
+          GridView(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 4 / 3,
+            ),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            children: [
+              StatsCard(
+                FeatherIcons.zap,
+                title: "Longest Streak",
+                stat: "${longestStreak.toString()} $longestStreakDayString",
+              ),
+              StatsCard(
+                Icons.cached_rounded,
+                title: "Times Restarted",
+                stat: restarts.toString(),
+              ),
+              StatsCard(
+                FeatherIcons.calendar,
+                onTap: () => _lastIncidentPicker(context),
+                title: "Last Restart",
+                stat: counter.createdAt.toFormattedString("dd MMM yyyy"),
+              ),
+              StatsCard(
+                Icons.palette_outlined,
+                onTap: () => context.read<TimeCounterCubit>().themeChanged(
+                    context.read<ThemeChooserCubit>().nextTheme()),
+                title: "Theme",
+                stat: themeName,
               ),
             ],
           ),
-        ),
-        SizedBox(height: 24),
-        GridView(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: 4 / 3,
+          SizedBox(height: 24),
+          _ResetButton(
+            counterId: counter.id,
           ),
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          children: [
-            StatsCard(
-              FeatherIcons.zap,
-              title: "Longest Streak",
-              stat: "${longestStreak.toString()} $longestStreakDayString",
-            ),
-            StatsCard(
-              Icons.cached_rounded,
-              title: "Times Restarted",
-              stat: restarts.toString(),
-            ),
-            StatsCard(
-              FeatherIcons.calendar,
-              onTap: () => _lastIncidentPicker(context),
-              title: "Last Restart",
-              stat: counter.createdAt.toFormattedString("dd MMM yyyy"),
-            ),
-            StatsCard(
-              Icons.palette_outlined,
-              onTap: () => context.read<ThemeChooserCubit>().nextTheme(),
-              title: "Theme",
-              stat: themeName,
-            ),
-          ],
-        ),
-        SizedBox(height: 24),
-        _ResetButton(
-          counterId: counter.id,
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

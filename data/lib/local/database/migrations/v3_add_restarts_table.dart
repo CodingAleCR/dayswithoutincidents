@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:data/local/database/entities/restart.entity.dart';
-import 'package:data/local/database/entities/time_counter.entity.dart';
-import 'package:data/local/database/support/migration.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:sqflite/sqflite.dart';
 
 /// Adds initial time_counters table to provide SQLite storage.
@@ -38,10 +37,13 @@ class V3AddRestartsTable extends Migration {
   }
 
   _addThemeColumn2CountersTable(Database db) async {
+    final themeService = ThemeServiceImpl();
+    final currentTheme = await themeService.getCurrentTheme();
+
     await db.transaction((txn) async {
       await txn.execute("""
         ALTER TABLE ${TimeCounterEntity.tablename} 
-          ADD COLUMN ${TimeCounterEntity.THEME} text;
+          ADD COLUMN ${TimeCounterEntity.THEME} text DEFAULT '${currentTheme.key()}';
       """);
     });
   }

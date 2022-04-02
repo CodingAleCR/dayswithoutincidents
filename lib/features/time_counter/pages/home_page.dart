@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/widgets/dwi_appbar.dart';
+import 'package:dwi/features/theme_chooser/theme_chooser.dart';
 import 'package:dwi/features/time_counter/cubit/counter_list_cubit.dart';
 import 'package:dwi/features/time_counter/widgets/counter_view.dart';
 import 'package:flutter/material.dart';
@@ -85,13 +86,14 @@ class _CounterListState extends State<_CounterList>
     return BlocListener<CounterListCubit, CounterListState>(
       listenWhen: (previous, current) =>
           previous.selectedIdx != current.selectedIdx,
-      listener: (context, state) {
+      listener: (ctx, state) {
         if (state.selectedIdx != selectedIdx) {
           pageController.animateToPage(
             state.selectedIdx,
             duration: const Duration(milliseconds: 150),
             curve: Curves.easeInOut,
           );
+          context.read<ThemeChooserCubit>().themeChanged(state.selected.theme);
         }
       },
       child: Column(

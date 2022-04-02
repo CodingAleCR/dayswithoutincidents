@@ -5,17 +5,20 @@ class TimeCounterEntity extends Entity<TimeCounter> {
   final String uuid;
   final String title;
   final String createdAt;
+  final String theme;
 
   TimeCounterEntity.fromModel(TimeCounter model)
       : uuid = model.id,
         title = model.title,
         createdAt = model.createdAt.toIso8601String(),
+        theme = model.theme.key(),
         super.fromModel(model);
 
   TimeCounterEntity.fromDatabase(Map<String, dynamic> parsedJson)
       : uuid = parsedJson[ID],
         title = parsedJson[TITLE],
         createdAt = parsedJson[CREATED_AT],
+        theme = parsedJson[THEME],
         super.fromDatabase(parsedJson);
 
   @override
@@ -24,6 +27,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
       id: uuid,
       title: title,
       createdAt: DateTime.parse(createdAt),
+      theme: AppThemeFromString.fromString(theme),
     );
   }
 
@@ -33,6 +37,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
       ID: uuid,
       TITLE: title,
       CREATED_AT: createdAt,
+      THEME: theme,
     };
   }
 
