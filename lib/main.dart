@@ -9,10 +9,14 @@ void main() async {
   await SentryFlutter.init(
     (options) {},
     appRunner: () => runApp(
-      RepositoryProvider<ThemeService>(
-        create: (context) => ThemeServiceImpl(),
-        child: DWIApplication(),
-      ),
+      MultiRepositoryProvider(providers: [
+        RepositoryProvider<TimeCounterService>(
+          create: (context) => TimeCounterServiceImpl(),
+        ),
+        RepositoryProvider<CounterRestartService>(
+          create: (context) => CounterRestartServiceImpl(),
+        ),
+      ], child: DWIApplication()),
     ),
   );
 }

@@ -13,6 +13,6 @@ interface CounterDAO {
     @Query("SELECT * FROM time_counters WHERE id = :counterId")
     suspend fun findById(counterId: String): CounterEntity
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     suspend fun update(counter: CounterEntity)
 }

@@ -5,7 +5,7 @@ class TimeCounterEntity extends Entity<TimeCounter> {
   final String uuid;
   final String title;
   final String createdAt;
-  final String theme;
+  final String? theme;
 
   TimeCounterEntity.fromModel(TimeCounter model)
       : uuid = model.id,

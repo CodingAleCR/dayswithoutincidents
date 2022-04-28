@@ -10,13 +10,7 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
     TimeCounter counter,
     this._service,
     this._restartsService,
-  ) : super(
-          TimeCounterState(
-            counter: counter,
-          ),
-        ) {
-    fetchCounter();
-  }
+  ) : super(TimeCounterState(counter: counter));
 
   TimeCounterService _service;
   CounterRestartService _restartsService;
@@ -128,7 +122,12 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       await _service.save(updatedCounter);
 
       await fetchCounter();
-    } on Exception {}
+    } on Exception catch (err, stacktrace) {
+      Sentry.captureException(
+        err,
+        stackTrace: stacktrace,
+      );
+    }
   }
 
   Future<void> restartCounter() async {

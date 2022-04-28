@@ -1,4 +1,3 @@
-import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,9 @@ class DWIApplication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ThemeChooserCubit(),
+      create: (_) => ThemeChooserCubit(
+        context.read<TimeCounterService>(),
+      )..fetchTheme(),
       child: _AppView(),
     );
   }
@@ -53,7 +54,7 @@ class __AppViewState extends State<_AppView> {
         ],
         localizationsDelegates: [
           AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
           GlobalWidgetsLocalizations.delegate,
         ],
         localeResolutionCallback: (locale, supportedLocales) {
@@ -72,25 +73,15 @@ class __AppViewState extends State<_AppView> {
             return supportedLocales.first;
           }
         },
-        home: MultiRepositoryProvider(
+        home: MultiBlocProvider(
           providers: [
-            RepositoryProvider<TimeCounterService>(
-              create: (context) => TimeCounterServiceImpl(),
-            ),
-            RepositoryProvider<CounterRestartService>(
-              create: (context) => CounterRestartServiceImpl(),
+            BlocProvider<CounterListCubit>(
+              create: (context) => CounterListCubit(
+                RepositoryProvider.of<TimeCounterService>(context),
+              )..fetchCounters(),
             ),
           ],
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<CounterListCubit>(
-                create: (context) => CounterListCubit(
-                  RepositoryProvider.of<TimeCounterService>(context),
-                ),
-              ),
-            ],
-            child: HomePage(),
-          ),
+          child: HomePage(),
         ),
       ),
     );
