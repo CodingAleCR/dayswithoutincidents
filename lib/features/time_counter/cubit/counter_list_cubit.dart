@@ -7,9 +7,7 @@ part 'counter_list_state.dart';
 class CounterListCubit extends Cubit<CounterListState> {
   CounterListCubit(
     this._service,
-  ) : super(CounterListState()) {
-    fetchCounters();
-  }
+  ) : super(CounterListState());
 
   TimeCounterService _service;
 
@@ -21,13 +19,15 @@ class CounterListCubit extends Cubit<CounterListState> {
       allCounters = [defaultTimeCounter];
     }
 
-    emit(
-      state.copyWith(
-        status: OperationStatus.idle,
-        counters: allCounters,
-        selectedIdx: selectedIdx,
-      ),
-    );
+    await Future.delayed(const Duration(milliseconds: 150), () {
+      emit(
+        state.copyWith(
+          status: OperationStatus.idle,
+          counters: allCounters,
+          selectedIdx: selectedIdx,
+        ),
+      );
+    });
   }
 
   Future<void> selectedCounterChanged(int selectedIdx) async {

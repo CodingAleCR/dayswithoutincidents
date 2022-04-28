@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:data/local/database/constants/constants.dart';
@@ -22,9 +23,10 @@ _onUpgrade(Database db, int oldVersion, int newVersion) async {
     int startingVersion = oldVersion + 1;
     List<int> pendingMigrations = List.generate(
         pendingQty, (i) => i == 0 ? startingVersion : startingVersion + i);
-
+    log('Migrating database from $oldVersion to $newVersion');
     await Future.forEach<int>(pendingMigrations, (currentVersion) async {
-      await migrations[currentVersion]?.up(db);
+      log('Applying up for migration $currentVersion');
+      return await migrations[currentVersion]?.up(db);
     });
   } catch (exception, stackTrace) {
     await Sentry.captureException(
@@ -39,9 +41,11 @@ _onDowngrade(Database db, int oldVersion, int newVersion) async {
     int pendingQty = oldVersion - newVersion;
     List<int> pendingMigrations =
         List.generate(pendingQty, (i) => i == 0 ? oldVersion : oldVersion - i);
+    log('Migrating database from $oldVersion to $newVersion');
 
     await Future.forEach<int>(pendingMigrations, (currentVersion) async {
-      await migrations[currentVersion]?.down(db);
+      log('Applying down for migration $currentVersion');
+      return await migrations[currentVersion]?.down(db);
     });
   } catch (exception, stackTrace) {
     await Sentry.captureException(

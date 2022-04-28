@@ -6,11 +6,23 @@ import 'package:equatable/equatable.dart';
 part 'theme_chooser_state.dart';
 
 class ThemeChooserCubit extends Cubit<ThemeChooserState> {
-  ThemeChooserCubit() : super(ThemeChooserState());
+  ThemeChooserCubit(this._service) : super(ThemeChooserState());
+
+  TimeCounterService _service;
+
+  Future<void> fetchTheme() async {
+    try {
+      final allCounters = await _service.findAll();
+      final firstCounter =
+          allCounters.isEmpty ? TimeCounter.empty : allCounters.first;
+      emit(state.copyWith(
+        theme: firstCounter.theme,
+      ));
+    } catch (e) {}
+  }
 
   Future<void> themeChanged(AppTheme theme) async {
     try {
-      // await _themeService.setTheme(theme);
       emit(state.copyWith(
         theme: theme,
       ));

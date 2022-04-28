@@ -30,7 +30,11 @@ class V2FixLocalDatabase extends Migration {
     // Just recreate first.
     await db.insert(
       TimeCounterEntity.tablename,
-      firstCounter.toDatabaseMap(),
+      {
+        TimeCounterEntity.ID: firstCounter.uuid,
+        TimeCounterEntity.TITLE: firstCounter.title,
+        TimeCounterEntity.CREATED_AT: firstCounter.createdAt,
+      },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

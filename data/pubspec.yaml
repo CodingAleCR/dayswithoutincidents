@@ -17,13 +17,13 @@ dependencies:
   # Value equality
   equatable: ^2.0.3
   # Local cache
-  shared_preferences: ^2.0.6
+  shared_preferences: ^2.0.13
   # Database
-  sqflite: ^2.0.0+3
+  sqflite: ^2.0.2
   # UUID
-  uuid: ^3.0.4
+  uuid: ^3.0.6
   # Monitoring
-  sentry_flutter: ^6.0.0
+  sentry_flutter: ^6.4.0
 
 dev_dependencies:
   flutter_test:

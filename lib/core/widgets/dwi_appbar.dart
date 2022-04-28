@@ -38,10 +38,7 @@ class _AboutButton extends StatelessWidget {
         await Navigator.of(context).push(
           MaterialPageRoute(
             builder: (routeContext) {
-              return BlocProvider.value(
-                value: BlocProvider.of<TimeCounterCubit>(context),
-                child: SettingsPage(),
-              );
+              return SettingsPage();
             },
           ),
         );

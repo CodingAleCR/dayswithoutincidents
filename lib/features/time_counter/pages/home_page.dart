@@ -11,7 +11,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DWIAppBar(),
-      body: SafeArea(child: _Body()),
+      body: SafeArea(
+        child: _Body(),
+      ),
     );
   }
 }
@@ -22,18 +24,27 @@ class _Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final status = context.watch<CounterListCubit>().state.status;
+    late final Widget child;
 
     switch (status) {
       case OperationStatus.idle:
       case OperationStatus.success:
-        return _CounterList();
+        child = _CounterList();
+        break;
 
       case OperationStatus.loading:
-        return _Loading();
+        child = _Loading();
+        break;
 
       case OperationStatus.failure:
-        return _Error();
+        child = _Error();
+        break;
     }
+
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 300),
+      child: child,
+    );
   }
 }
 

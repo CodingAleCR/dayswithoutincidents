@@ -27,7 +27,7 @@ class CounterView extends StatelessWidget {
             counter,
             RepositoryProvider.of<TimeCounterService>(context),
             RepositoryProvider.of<CounterRestartService>(context),
-          ),
+          )..fetchCounter(),
           child: _Counter(),
         ),
       ),
@@ -118,9 +118,8 @@ class _Counter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeName =
-        context.watch<ThemeChooserCubit>().state.theme.displayName;
     final counter = context.watch<TimeCounterCubit>().state.counter;
+    final themeName = counter.theme.displayName;
     final restarts = context.watch<TimeCounterCubit>().state.restarts.length;
     final longestStreak = context.watch<TimeCounterCubit>().state.longestStreak;
     final isLongestStreakAlive =

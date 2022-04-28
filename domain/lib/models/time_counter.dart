@@ -22,7 +22,7 @@ class TimeCounter extends Equatable {
     this.theme = AppTheme.happyCyan,
   });
 
-  static get empty => TimeCounter(
+  static TimeCounter get empty => TimeCounter(
         id: Uuid().v4(),
         title: DEFAULT_TITLE,
         createdAt: DateTime.now(),

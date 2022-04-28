@@ -8,7 +8,7 @@ enum AppTheme {
 }
 
 extension AppThemeFromString on AppTheme {
-  static AppTheme fromString(String value) {
+  static AppTheme fromString(String? value) {
     switch (value) {
       case "plain_light":
         return AppTheme.plainLight;
@@ -29,7 +29,7 @@ extension AppThemeFromString on AppTheme {
         return AppTheme.happyCyan;
 
       default:
-        return AppTheme.plainLight;
+        return AppTheme.happyCyan;
     }
   }
 
