@@ -7,41 +7,41 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
+  # Data layer
+  data:
+    path: packages/data
+  # Domain layer
+  domain:
+    path: packages/domain
+  # Value equality
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
+  # Bloc for state management
+  flutter_bloc: ^8.0.1
+  # Feather Icons package
+  flutter_feather_icons: ^2.0.0
 
   flutter_localizations:
     sdk: flutter
-
-  # Domain layer
-  domain:
-    path: domain
-  # Data layer
-  data:
-    path: data
-  # Feather Icons package
-  flutter_feather_icons: ^2.0.0
-  # Bloc for state management
-  flutter_bloc: ^8.0.1
-  # Value equality
-  equatable: ^2.0.3
-  # Launcher for URLs
-  url_launcher: ^6.0.20
-  # UUID
-  uuid: ^3.0.6
   # Build Information
   package_info_plus: ^1.4.2
   # Monitoring
   sentry_flutter: ^6.4.0
+  # Launcher for URLs
+  url_launcher: ^6.0.20
+  # UUID
+  uuid: ^3.0.6
   # Bug Reporting
   wiredash: ^0.7.0
 
 dev_dependencies:
+  bloc_test: ^9.0.3
+  flutter_launcher_icons: ^0.9.2
   flutter_test:
     sdk: flutter
   mockito: ^5.0.10
-  bloc_test: ^9.0.3
-  flutter_launcher_icons: ^0.9.2
+  very_good_analysis: ^2.4.0
 
 flutter_icons:
   image_path: 'assets/launcher/dwi-512x512-android.png'

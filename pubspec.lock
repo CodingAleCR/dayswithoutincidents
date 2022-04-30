@@ -151,7 +151,7 @@ packages:
   data:
     dependency: "direct main"
     description:
-      path: data
+      path: "packages/data"
       relative: true
     source: path
     version: "1.0.0"
@@ -165,7 +165,7 @@ packages:
   domain:
     dependency: "direct main"
     description:
-      path: domain
+      path: "packages/domain"
       relative: true
     source: path
     version: "1.0.0"
@@ -803,6 +803,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  very_good_analysis:
+    dependency: "direct dev"
+    description:
+      name: very_good_analysis
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.4.0"
   vm_service:
     dependency: transitive
     description:

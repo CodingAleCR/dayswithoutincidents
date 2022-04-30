@@ -1,3 +1,5 @@
+/// Custom available fonts for the DWI app.
 abstract class DWIFonts {
-  static const String APP_FONT = "Work Sans";
+  /// Base app font
+  static const String appFont = 'Work Sans';
 }

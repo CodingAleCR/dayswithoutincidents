@@ -6,10 +6,16 @@ import 'package:dwi/features/time_counter/widgets/counter_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// HomePage
 class HomePage extends StatelessWidget {
+  /// Home page widget.
+  ///
+  /// Opens up after loading the initial settings.
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: DWIAppBar(),
       body: SafeArea(
         child: _Body(),
@@ -29,15 +35,15 @@ class _Body extends StatelessWidget {
     switch (status) {
       case OperationStatus.idle:
       case OperationStatus.success:
-        child = _CounterList();
+        child = const _CounterList();
         break;
 
       case OperationStatus.loading:
-        child = _Loading();
+        child = const _Loading();
         break;
 
       case OperationStatus.failure:
-        child = _Error();
+        child = const _Error();
         break;
     }
 
@@ -53,7 +59,7 @@ class _Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: CircularProgressIndicator(),
     );
   }
@@ -64,7 +70,7 @@ class _Error extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Could not load your time counters.'),
     );
   }
@@ -114,9 +120,11 @@ class _CounterListState extends State<_CounterList>
             child: PageView(
               controller: pageController,
               children: counters
-                  .map((e) => CounterView(
-                        counter: e,
-                      ))
+                  .map(
+                    (e) => CounterView(
+                      counter: e,
+                    ),
+                  )
                   .toList(),
               onPageChanged: (selectedIdx) => context
                   .read<CounterListCubit>()

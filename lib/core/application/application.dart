@@ -1,4 +1,7 @@
 import 'package:domain/domain.dart';
+import 'package:dwi/core/env/environment.dart';
+import 'package:dwi/core/localization/localization.dart';
+import 'package:dwi/core/theme/theme.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,23 +9,26 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:wiredash/wiredash.dart';
 
-import '../localization/localization.dart';
-import '../theme/theme.dart';
-
+/// DWI Application widget.
 class DWIApplication extends StatelessWidget {
+  /// @macro
+  const DWIApplication({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => ThemeChooserCubit(
         context.read<TimeCounterService>(),
       )..fetchTheme(),
-      child: _AppView(),
+      child: const _AppView(),
     );
   }
 }
 
 class _AppView extends StatefulWidget {
-  _AppView({
+  const _AppView({
     Key? key,
   }) : super(key: key);
 
@@ -39,8 +45,8 @@ class __AppViewState extends State<_AppView> {
     final themeData = DWIThemes.getTheme(theme).themeData;
 
     return Wiredash(
-      projectId: 'dwi-kepsf3w',
-      secret: '4ehkp9jse3lgr3kqxr0ten7d9cgwbmem',
+      projectId: EnvironmentConfig.wiredashProjectId,
+      secret: EnvironmentConfig.wiredashSecret,
       navigatorKey: _navigatorKey,
       child: MaterialApp(
         navigatorKey: _navigatorKey,
@@ -48,30 +54,27 @@ class __AppViewState extends State<_AppView> {
         debugShowCheckedModeBanner: false,
         title: 'Days Without Incidents',
         theme: themeData,
-        supportedLocales: [
-          const Locale('en'),
-          const Locale('es'),
+        supportedLocales: const [
+          Locale('en'),
+          Locale('es'),
         ],
-        localizationsDelegates: [
+        localizationsDelegates: const [
           AppLocalizations.delegate,
           ...GlobalMaterialLocalizations.delegates,
           GlobalWidgetsLocalizations.delegate,
         ],
         localeResolutionCallback: (locale, supportedLocales) {
-          if (locale == null) {
-            // If the locale of the device is not defined, use the first one
-            // from the list (English, in this case).
-            return supportedLocales.first;
-          } else {
-            for (var supportedLocale in supportedLocales) {
+          if (locale != null) {
+            for (final supportedLocale in supportedLocales) {
               if (supportedLocale.languageCode == locale.languageCode) {
                 return supportedLocale;
               }
             }
-            // If the locale of the device is not supported, use the first one
-            // from the list (English, in this case).
-            return supportedLocales.first;
           }
+
+          // If the locale of the device is not supported, use the first one
+          // from the list (English, in this case).
+          return supportedLocales.first;
         },
         home: MultiBlocProvider(
           providers: [
@@ -81,7 +84,7 @@ class __AppViewState extends State<_AppView> {
               )..fetchCounters(),
             ),
           ],
-          child: HomePage(),
+          child: const HomePage(),
         ),
       ),
     );

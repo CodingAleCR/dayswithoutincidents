@@ -5,16 +5,21 @@ import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'time_counter_state.dart';
 
+/// TimeCounterCubit
 class TimeCounterCubit extends Cubit<TimeCounterState> {
+  /// Handles logic for a time counter.
+  ///
+  /// Resets or fetches information about it.
   TimeCounterCubit(
     TimeCounter counter,
     this._service,
     this._restartsService,
   ) : super(TimeCounterState(counter: counter));
 
-  TimeCounterService _service;
-  CounterRestartService _restartsService;
+  final TimeCounterService _service;
+  final CounterRestartService _restartsService;
 
+  /// Fetches information about the counter
   Future<void> fetchCounter() async {
     final counter = await _service.findById(state.counter.id);
     final restarts = await _restartsService.findAllByCounter(counter);
@@ -28,6 +33,7 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
     );
   }
 
+  /// Updates the title of a counter
   Future<void> titleChanged(String newTitle) async {
     try {
       emit(state.copyWith(status: OperationStatus.loading));
@@ -48,10 +54,12 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       final current = await _service.save(counter);
 
       // Emit success
-      emit(state.copyWith(
-        counter: current,
-        status: OperationStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          counter: current,
+          status: OperationStatus.success,
+        ),
+      );
     } catch (exception, stackTrace) {
       await Sentry.captureException(
         exception,
@@ -71,12 +79,13 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
     }
   }
 
+  /// Updates the date of a counter
   Future<void> dateChanged(DateTime newDate) async {
     try {
       emit(state.copyWith(status: OperationStatus.loading));
 
       // Validate new date.
-      DateTime today = DateTime.now();
+      final today = DateTime.now();
       if (!newDate.isBefore(today)) {
         emit(
           state.copyWith(
@@ -92,10 +101,12 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       final current = await _service.save(counter);
 
       // Emit success
-      emit(state.copyWith(
-        counter: current,
-        status: OperationStatus.success,
-      ));
+      emit(
+        state.copyWith(
+          counter: current,
+          status: OperationStatus.success,
+        ),
+      );
     } catch (exception, stackTrace) {
       await Sentry.captureException(
         exception,
@@ -115,6 +126,7 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
     }
   }
 
+  /// Updates the theme of a counter.
   Future<void> themeChanged(AppTheme theme) async {
     try {
       final updatedCounter = state.counter.copyWith(theme: theme);
@@ -123,13 +135,14 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
 
       await fetchCounter();
     } on Exception catch (err, stacktrace) {
-      Sentry.captureException(
+      await Sentry.captureException(
         err,
         stackTrace: stacktrace,
       );
     }
   }
 
+  /// Creates a new restart for the counter.
   Future<void> restartCounter() async {
     try {
       emit(state.copyWith(status: OperationStatus.loading));

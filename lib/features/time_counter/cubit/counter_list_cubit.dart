@@ -4,13 +4,17 @@ import 'package:equatable/equatable.dart';
 
 part 'counter_list_state.dart';
 
+/// CounterListCubit
 class CounterListCubit extends Cubit<CounterListState> {
+  /// Handles logic around the time counters list.
   CounterListCubit(
     this._service,
-  ) : super(CounterListState());
+  ) : super(const CounterListState());
 
-  TimeCounterService _service;
+  final TimeCounterService _service;
 
+  /// Fetches all the counters from storage, and updates the selected time
+  /// counter.
   Future<void> fetchCounters({int selectedIdx = 0}) async {
     var allCounters = await _service.findAll();
 
@@ -30,10 +34,13 @@ class CounterListCubit extends Cubit<CounterListState> {
     });
   }
 
+  /// Responds to user interactions that trigger a change in the current
+  /// selected counter.
   Future<void> selectedCounterChanged(int selectedIdx) async {
     await fetchCounters(selectedIdx: selectedIdx);
   }
 
+  /// Adds a new counter to the list and updates the list in state.
   Future<void> addNewCounter() async {
     try {
       await _service.save(TimeCounter.empty);
@@ -44,6 +51,8 @@ class CounterListCubit extends Cubit<CounterListState> {
     }
   }
 
+  /// Deletes the current selected counter and updates the selected index and
+  /// counter list.
   Future<void> deleteCurrentCounter() async {
     try {
       final nextIdx = state.selectedIdx - 1 == -1 ? 0 : state.selectedIdx - 1;

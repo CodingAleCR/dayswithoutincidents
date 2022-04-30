@@ -4,25 +4,30 @@ import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// DWIAppBar
 class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Custom app bar implementation for DWI.
+  ///
+  /// Contains actions for adding a new counter, deleting current counter
+  /// or opening the about informating page.
   const DWIAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
+      preferredSize: preferredSize,
       child: AppBar(
-        actions: [
+        actions: const [
           _AddCounterButton(),
           _DeleteCounterButton(),
           _AboutButton(),
         ],
       ),
-      preferredSize: preferredSize,
     );
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _AboutButton extends StatelessWidget {
@@ -33,17 +38,17 @@ class _AboutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      tooltip: Resources.string(context, AppStrings.TITLE_SETTINGS),
+      tooltip: Resources.string(context, AppStrings.titleSettings),
       onPressed: () async {
         await Navigator.of(context).push(
-          MaterialPageRoute(
+          MaterialPageRoute<void>(
             builder: (routeContext) {
-              return SettingsPage();
+              return const SettingsPage();
             },
           ),
         );
       },
-      icon: Icon(Icons.help_outline_rounded),
+      icon: const Icon(Icons.help_outline_rounded),
     );
   }
 }
@@ -56,10 +61,10 @@ class _AddCounterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      key: ValueKey("btn_add_counter"),
-      tooltip: "Add",
+      key: const ValueKey('btn_add_counter'),
+      tooltip: 'Add',
       onPressed: () => context.read<CounterListCubit>().addNewCounter(),
-      icon: Icon(Icons.add),
+      icon: const Icon(Icons.add),
     );
   }
 }
@@ -72,10 +77,10 @@ class _DeleteCounterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      key: ValueKey("btn_remove_counter"),
-      tooltip: "Delete",
+      key: const ValueKey('btn_remove_counter'),
+      tooltip: 'Delete',
       onPressed: () => context.read<CounterListCubit>().deleteCurrentCounter(),
-      icon: Icon(Icons.delete_outlined),
+      icon: const Icon(Icons.delete_outlined),
     );
   }
 }
