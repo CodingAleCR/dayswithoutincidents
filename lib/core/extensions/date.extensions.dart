@@ -1,7 +1,9 @@
 import 'package:intl/intl.dart';
 
+/// Convenience date extensions
 extension FormatDate on DateTime {
-  get months => [
+  /// Lists all the months in order.
+  List<int> get months => [
         DateTime.january,
         DateTime.february,
         DateTime.march,
@@ -16,12 +18,12 @@ extension FormatDate on DateTime {
         DateTime.december,
       ];
 
+  /// Determines if a DateTime is the same day as another DateTime
   bool isSameDay(DateTime other) {
-    return this.year == other.year &&
-        this.month == other.month &&
-        this.day == other.day;
+    return year == other.year && month == other.month && day == other.day;
   }
 
+  /// Prints the DateTime as a formatted string.
   String toFormattedString(String format) {
     return DateFormat(format).format(this);
   }

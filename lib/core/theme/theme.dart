@@ -1,11 +1,12 @@
 import 'package:domain/domain.dart';
+import 'package:dwi/core/theme/colors.dart';
+import 'package:dwi/core/theme/font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'colors.dart';
-import 'font.dart';
-
+/// Custom themes for DWI
 abstract class DWIThemes {
+  /// All available themes
   static final allThemes = [
     PlainLightTheme(),
     DarkSideTheme(),
@@ -15,12 +16,15 @@ abstract class DWIThemes {
     HappyCyanTheme(),
   ];
 
+  /// Gets a theme based on the given [theme] model
   static DWITheme getTheme(AppTheme theme) =>
       allThemes.firstWhere((dwiTheme) => dwiTheme.theme == theme);
 
+  /// Finds the index for a [theme]
   static int getThemeIdx(AppTheme theme) =>
       allThemes.indexWhere((dwiTheme) => dwiTheme.theme == theme);
 
+  /// Returns the next theme according to the given [theme]'s index.
   static DWITheme nextTheme(AppTheme theme) {
     final currentThemeIdx = DWIThemes.getThemeIdx(theme);
 
@@ -32,16 +36,25 @@ abstract class DWIThemes {
   }
 }
 
+/// Defines how all custom themes should behave
 abstract class DWITheme {
+  /// Proper name of the theme
   String get name;
+
+  /// Base color for the theme
   Color get color;
+
+  /// Model representation of the theme.
   AppTheme get theme;
+
+  /// Theme data provided for theming the MaterialApp
   ThemeData get themeData;
 }
 
+/// Theme definition for AppTheme.plainLight
 class PlainLightTheme extends DWITheme {
   @override
-  String get name => "Plain Light";
+  String get name => 'Plain Light';
 
   @override
   Color get color => DWIColors.brandWhite;
@@ -54,16 +67,16 @@ class PlainLightTheme extends DWITheme {
         primarySwatch: DWIColors.blueSwatch,
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: DWIFonts.APP_FONT,
+        fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: DWIColors.brandWhite,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: DWIColors.brandWhite,
           elevation: 0,
           centerTitle: false,
           foregroundColor: DWIColors.brandBlue,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
             color: DWIColors.brandBlue,
           ),
@@ -111,11 +124,11 @@ class PlainLightTheme extends DWITheme {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandBlue,
-            side: BorderSide(
+            side: const BorderSide(
               color: DWIColors.brandBlue,
               width: 1.5,
             ),
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -128,15 +141,16 @@ class PlainLightTheme extends DWITheme {
             elevation: 0,
             primary: DWIColors.brandBlue,
             onPrimary: DWIColors.brandWhite,
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
       );
 }
 
+/// Theme definition for AppTheme.darkSide
 class DarkSideTheme extends DWITheme {
   @override
-  String get name => "The Darkside";
+  String get name => 'The Darkside';
 
   @override
   Color get color => DWIColors.brandBlueTint1;
@@ -149,15 +163,15 @@ class DarkSideTheme extends DWITheme {
         primarySwatch: DWIColors.cyanSwatch,
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: DWIFonts.APP_FONT,
+        fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: DWIColors.brandBlueTint1,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: DWIColors.brandBlueTint1,
           elevation: 0,
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
             color: DWIColors.brandWhite,
           ),
@@ -205,11 +219,11 @@ class DarkSideTheme extends DWITheme {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandWhite,
-            side: BorderSide(
+            side: const BorderSide(
               color: DWIColors.brandWhite,
               width: 1.5,
             ),
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -222,15 +236,16 @@ class DarkSideTheme extends DWITheme {
             elevation: 0,
             primary: DWIColors.brandWhite,
             onPrimary: DWIColors.brandBlue,
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
       );
 }
 
+/// Theme definition for AppTheme.passionRed
 class PassionRedTheme extends DWITheme {
   @override
-  String get name => "Passion Red";
+  String get name => 'Passion Red';
 
   @override
   Color get color => DWIColors.passionRed;
@@ -244,14 +259,14 @@ class PassionRedTheme extends DWITheme {
         scaffoldBackgroundColor: DWIColors.passionRed,
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: DWIFonts.APP_FONT,
-        appBarTheme: AppBarTheme(
+        fontFamily: DWIFonts.appFont,
+        appBarTheme: const AppBarTheme(
           backgroundColor: DWIColors.passionRed,
           elevation: 0,
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
             color: DWIColors.brandWhite,
           ),
@@ -299,11 +314,11 @@ class PassionRedTheme extends DWITheme {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandWhite,
-            side: BorderSide(
+            side: const BorderSide(
               color: DWIColors.brandWhite,
               width: 1.5,
             ),
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -316,15 +331,16 @@ class PassionRedTheme extends DWITheme {
             elevation: 0,
             primary: DWIColors.brandWhite,
             onPrimary: DWIColors.passionRed,
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
       );
 }
 
+/// Theme definition for AppTheme.justPurple
 class JustPurpleTheme extends DWITheme {
   @override
-  String get name => "Just Purple";
+  String get name => 'Just Purple';
 
   @override
   Color get color => DWIColors.justPurple;
@@ -338,15 +354,15 @@ class JustPurpleTheme extends DWITheme {
         scaffoldBackgroundColor: DWIColors.justPurple,
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: DWIFonts.APP_FONT,
-        appBarTheme: AppBarTheme(
+        fontFamily: DWIFonts.appFont,
+        appBarTheme: const AppBarTheme(
           backgroundColor: DWIColors.justPurple,
           foregroundColor: DWIColors.brandWhite,
           elevation: 0,
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
             color: DWIColors.brandWhite,
           ),
@@ -394,11 +410,11 @@ class JustPurpleTheme extends DWITheme {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandWhite,
-            side: BorderSide(
+            side: const BorderSide(
               color: DWIColors.brandWhite,
               width: 1.5,
             ),
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -411,15 +427,16 @@ class JustPurpleTheme extends DWITheme {
             elevation: 0,
             primary: DWIColors.brandWhite,
             onPrimary: DWIColors.justPurple,
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
       );
 }
 
+/// Theme definition for AppTheme.goldAmber
 class GoldAmberTheme extends DWITheme {
   @override
-  String get name => "Gold Amber";
+  String get name => 'Gold Amber';
 
   @override
   Color get color => DWIColors.goldAmber;
@@ -432,16 +449,16 @@ class GoldAmberTheme extends DWITheme {
         primarySwatch: DWIColors.goldAmberSwatch,
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: DWIFonts.APP_FONT,
+        fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: DWIColors.goldAmber,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: DWIColors.goldAmber,
           elevation: 0,
           centerTitle: false,
           foregroundColor: DWIColors.brandBlue,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
             color: DWIColors.brandBlue,
           ),
@@ -489,11 +506,11 @@ class GoldAmberTheme extends DWITheme {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandBlue,
-            side: BorderSide(
+            side: const BorderSide(
               color: DWIColors.brandBlue,
               width: 1.5,
             ),
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -506,15 +523,16 @@ class GoldAmberTheme extends DWITheme {
             elevation: 0,
             primary: DWIColors.brandBlue,
             onPrimary: DWIColors.goldAmber,
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
       );
 }
 
+/// Theme definition for AppTheme.happyCyan
 class HappyCyanTheme extends DWITheme {
   @override
-  String get name => "Another Cyan";
+  String get name => 'Another Cyan';
 
   @override
   Color get color => DWIColors.brandCyan;
@@ -527,16 +545,16 @@ class HappyCyanTheme extends DWITheme {
         primarySwatch: DWIColors.cyanSwatch,
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: DWIFonts.APP_FONT,
+        fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: DWIColors.brandCyan,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: DWIColors.brandCyan,
           elevation: 0,
           centerTitle: false,
           foregroundColor: DWIColors.brandBlue,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline1: TextStyle(
             color: DWIColors.brandBlue,
           ),
@@ -584,11 +602,11 @@ class HappyCyanTheme extends DWITheme {
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             primary: DWIColors.brandBlue,
-            side: BorderSide(
+            side: const BorderSide(
               color: DWIColors.brandBlue,
               width: 1.5,
             ),
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
@@ -601,7 +619,7 @@ class HappyCyanTheme extends DWITheme {
             elevation: 0,
             primary: DWIColors.brandBlue,
             onPrimary: DWIColors.brandCyan,
-            shape: BeveledRectangleBorder(),
+            shape: const BeveledRectangleBorder(),
           ),
         ),
       );

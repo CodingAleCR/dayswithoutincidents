@@ -5,18 +5,21 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-void main() async {
+Future<void> main() async {
   await SentryFlutter.init(
     (options) {},
     appRunner: () => runApp(
-      MultiRepositoryProvider(providers: [
-        RepositoryProvider<TimeCounterService>(
-          create: (context) => TimeCounterServiceImpl(),
-        ),
-        RepositoryProvider<CounterRestartService>(
-          create: (context) => CounterRestartServiceImpl(),
-        ),
-      ], child: DWIApplication()),
+      MultiRepositoryProvider(
+        providers: [
+          RepositoryProvider<TimeCounterService>(
+            create: (context) => TimeCounterServiceImpl(),
+          ),
+          RepositoryProvider<CounterRestartService>(
+            create: (context) => CounterRestartServiceImpl(),
+          ),
+        ],
+        child: const DWIApplication(),
+      ),
     ),
   );
 }

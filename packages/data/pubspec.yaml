@@ -1,0 +1,31 @@
+name: data
+description: Data package
+version: 1.0.0
+homepage: null
+publish_to: none
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: '>=1.17.0'
+
+dependencies:
+  domain:
+    path: ../domain
+  # Value equality
+  equatable: ^2.0.3
+  flutter:
+    sdk: flutter
+  # Monitoring
+  sentry_flutter: ^6.4.0
+  # Local cache
+  shared_preferences: ^2.0.13
+  # Database
+  sqflite: ^2.0.2
+  # UUID
+  uuid: ^3.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^2.4.0
+flutter: null

@@ -1,32 +1,33 @@
+/// All localized strings for the app.
+// ignore_for_file: public_member_api_docs
+
 abstract class AppStrings {
-  static const String APP_NAME = "app_name";
-  static const String DAYS_WITHOUT_INCIDENTS = "days_without_incidents";
-  static const String BTN_RESET = "btn_reset";
-  static const String DAY = "day";
-  static const String DAYS = "days";
-  static const String TITLE_SETTINGS = "title_activity_settings";
-  static const String LABEL_CUSTOMIZATION = "label_customization";
-  static const String PREFERENCE_TITLE = "preference_title";
-  static const String SUMMARY_TITLE = "summary_title";
-  static const String INPUT_TITLE = "input_title";
-  static const String HINT_TITLE = "hint_title";
-  static const String PREFERENCE_DATE = "preference_day";
-  static const String SUMMARY_DAY = "summary_day";
-  static const String LABEL_ABOUT = "label_about";
-  static const String PREFERENCE_VERSION = "preference_version";
-  static const String VERSION = "version";
-  static const String CREDITS_LN1 = "credits_ln1";
-  static const String CREDITS_LN2 = "credits_ln2";
-  static const String CODE_CREDITS = "code_credits";
-  static const String DESIGN_CREDITS = "design_credits";
-  static const String THEME_CUSTOMIZATION = "theme_customization";
-  static const String THEME_PLAIN_LIGHT = "theme_plain_light";
-  static const String THEME_THE_DARKSIDE = "theme_The_darkside";
-  static const String THEME_PASSION_RED = "theme_passion_red";
-  static const String THEME_JUST_PURPLE = "theme_just_purple";
-  static const String THEME_GOLD_AMBER = "theme_gold_amber";
-  static const String THEME_ANOTHER_CYAN = "theme_another_cyan";
-  static const String SETTINGS_REPORT_BUG = "settings_report_bug";
-  static const String SETTINGS_REPORT_BUG_DESCRIPTION =
-      "settings_report_bug_description";
+  static const String appName = 'app_name';
+  static const String daysWithoutIncidents = 'days_without_incidents';
+  static const String btnReset = 'btn_reset';
+  static const String day = 'day';
+  static const String days = 'days';
+  static const String titleSettings = 'title_activity_settings';
+  static const String labelCustomization = 'label_customization';
+  static const String preferenceTitle = 'preference_title';
+  static const String summaryTitle = 'summary_title';
+  static const String inputTitle = 'input_title';
+  static const String hintTitle = 'hint_title';
+  static const String preferenceDate = 'preference_day';
+  static const String summaryDay = 'summary_day';
+  static const String labelAbout = 'label_about';
+  static const String preferenceVersion = 'preference_version';
+  static const String version = 'version';
+  static const String codeCredits = 'code_credits';
+  static const String designCredits = 'design_credits';
+  static const String themeCustomization = 'theme_customization';
+  static const String themePlainLight = 'theme_plain_light';
+  static const String themeDarkside = 'theme_darkside';
+  static const String themePassionRed = 'theme_passion_red';
+  static const String themeJustPurple = 'theme_just_purple';
+  static const String themeGoldAmber = 'theme_gold_amber';
+  static const String themeHappyCyan = 'theme_another_cyan';
+  static const String settingsReportBug = 'settings_report_bug';
+  static const String settingsReportBugDescription =
+      'settings_report_bug_description';
 }
