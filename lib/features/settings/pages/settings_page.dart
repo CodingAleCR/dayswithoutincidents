@@ -10,6 +10,11 @@ class SettingsPage extends StatefulWidget {
   /// Defines the settings page shown for customizing user preferences.
   const SettingsPage({Key? key}) : super(key: key);
 
+  /// Convenience route instatiaton.
+  static MaterialPageRoute<void> route() => MaterialPageRoute(
+        builder: (context) => const SettingsPage(),
+      );
+
   @override
   SettingsPageState createState() => SettingsPageState();
 }
@@ -26,57 +31,114 @@ class SettingsPageState extends State<SettingsPage> {
       ),
       body: Stack(
         children: [
-          ListView(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            children: <Widget>[
-              Text(
-                Resources.string(context, AppStrings.labelAbout).toUpperCase(),
-                style: Theme.of(context).textTheme.overline,
-              ),
-              ListTile(
-                title: Text(
-                  Resources.string(context, AppStrings.settingsReportBug),
-                  style: Theme.of(context).textTheme.subtitle2,
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Text(
+                  Resources.string(context, AppStrings.labelAbout)
+                      .toUpperCase(),
+                  style: Theme.of(context).textTheme.overline,
                 ),
-                subtitle: Text(
-                  Resources.string(
-                    context,
-                    AppStrings.settingsReportBugDescription,
+                ListTile(
+                  title: Text(
+                    Resources.string(context, AppStrings.settingsReportBug),
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
-                  style: Theme.of(context).textTheme.caption,
-                ),
-                onTap: () async {
-                  final wiredash = Wiredash.of(context);
-                  final info = await PackageInfo.fromPlatform();
+                  subtitle: Text(
+                    Resources.string(
+                      context,
+                      AppStrings.settingsReportBugDescription,
+                    ),
+                    style: Theme.of(context).textTheme.caption,
+                  ),
+                  onTap: () async {
+                    final wiredash = Wiredash.of(context);
+                    final info = await PackageInfo.fromPlatform();
 
-                  wiredash?.setBuildProperties(
-                    buildNumber: info.buildNumber,
-                    buildVersion: info.version,
-                  );
-                  wiredash?.show();
-                },
-              ),
-              ListTile(
-                title: Text(
-                  Resources.string(context, AppStrings.preferenceVersion),
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-                subtitle: FutureBuilder<PackageInfo>(
-                  future: PackageInfo.fromPlatform(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData || snapshot.hasError) {
-                      return const SizedBox();
-                    }
-                    final info = snapshot.data;
-
-                    return Text(
-                      info!.version,
-                      style: Theme.of(context).textTheme.caption,
+                    wiredash?.setBuildProperties(
+                      buildNumber: info.buildNumber,
+                      buildVersion: info.version,
                     );
+                    wiredash?.show();
                   },
                 ),
-              ),
-            ],
+                ListTile(
+                  title: Text(
+                    Resources.string(context, AppStrings.preferenceVersion),
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  subtitle: FutureBuilder<PackageInfo>(
+                    future: PackageInfo.fromPlatform(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData || snapshot.hasError) {
+                        return const SizedBox();
+                      }
+                      final info = snapshot.data;
+
+                      return Text(
+                        info!.version,
+                        style: Theme.of(context).textTheme.caption,
+                      );
+                    },
+                  ),
+                ),
+                const Spacer(),
+                InkWell(
+                  onTap: () => _launchURL(_codingaleUrl),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    height: 48,
+                    width: 250,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          Resources.string(context, AppStrings.codeCredits),
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption!
+                              .copyWith(fontWeight: FontWeight.normal),
+                        ),
+                        const SizedBox(width: 4),
+                        Resources.asset(context, 'codingale'),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+                InkWell(
+                  onTap: () => _launchURL(_perksncoUrl),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    height: 48,
+                    width: 250,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          Resources.string(
+                            context,
+                            AppStrings.designCredits,
+                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .caption!
+                              .copyWith(fontWeight: FontWeight.normal),
+                        ),
+                        const SizedBox(width: 4),
+                        Resources.asset(context, 'perksnco'),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
           Positioned(
             bottom: 32,
@@ -84,62 +146,7 @@ class SettingsPageState extends State<SettingsPage> {
             right: 0,
             child: SafeArea(
               child: Center(
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () => _launchURL(_codingaleUrl),
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        height: 48,
-                        width: 250,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              Resources.string(context, AppStrings.codeCredits),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .caption!
-                                  .copyWith(fontWeight: FontWeight.normal),
-                            ),
-                            const SizedBox(width: 4),
-                            Resources.asset(context, 'codingale'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    InkWell(
-                      onTap: () => _launchURL(_perksncoUrl),
-                      borderRadius: BorderRadius.circular(8),
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        height: 48,
-                        width: 250,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              Resources.string(
-                                context,
-                                AppStrings.designCredits,
-                              ),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .caption!
-                                  .copyWith(fontWeight: FontWeight.normal),
-                            ),
-                            const SizedBox(width: 4),
-                            Resources.asset(context, 'perksnco'),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                child: Column(),
               ),
             ),
           )
@@ -152,8 +159,8 @@ class SettingsPageState extends State<SettingsPage> {
   final _perksncoUrl = 'https://www.perksnco.design/';
 
   Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
     }
   }
 }

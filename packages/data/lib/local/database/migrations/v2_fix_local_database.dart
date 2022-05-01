@@ -14,7 +14,9 @@ class V2FixLocalDatabase extends Migration {
       TimeCounterEntity.tablename,
     );
 
-    var firstCounter = TimeCounterEntity.fromModel(TimeCounter.empty);
+    var firstCounter = TimeCounterEntity.fromModel(
+      TimeCounter.generated(title: kDefaultCounterTitle),
+    );
     // If more than 1, then select the first one.
     if (maps.length > 1) {
       firstCounter = TimeCounterEntity.fromDatabase(maps.first);

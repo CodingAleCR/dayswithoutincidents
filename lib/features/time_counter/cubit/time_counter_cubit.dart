@@ -21,131 +21,70 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
 
   /// Fetches information about the counter
   Future<void> fetchCounter() async {
-    final counter = await _service.findById(state.counter.id);
-    final restarts = await _restartsService.findAllByCounter(counter);
+    try {
+      final counter = await _service.findById(state.counter.id);
+      final restarts = await _restartsService.findAllByCounter(counter);
 
+      emit(
+        state.copyWith(
+          status: OperationStatus.idle,
+          counter: counter,
+          restarts: restarts,
+        ),
+      );
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(exception, stackTrace: stacktrace);
+    }
+  }
+
+  /// Saves the information about the counter
+  Future<void> saveCounter() async {
+    try {
+      emit(state.copyWith(status: OperationStatus.loading));
+      await _service.save(state.counter);
+      emit(state.copyWith(status: OperationStatus.success));
+    } catch (exception, stacktrace) {
+      await Sentry.captureException(exception, stackTrace: stacktrace);
+    } finally {
+      await fetchCounter();
+    }
+  }
+
+  /// Updates the title of a counter
+  void titleChanged(String newTitle) {
     emit(
       state.copyWith(
-        status: OperationStatus.idle,
-        counter: counter,
-        restarts: restarts,
+        counter: state.counter.copyWith(title: newTitle),
       ),
     );
   }
 
-  /// Updates the title of a counter
-  Future<void> titleChanged(String newTitle) async {
-    try {
-      emit(state.copyWith(status: OperationStatus.loading));
-
-      // Validate new date.
-      if (newTitle.isEmpty) {
-        emit(
-          state.copyWith(
-            status: OperationStatus.failure,
-          ),
-        );
-
-        return;
-      }
-
-      // Update date of the counter.
-      final counter = state.counter.copyWith(title: newTitle);
-      final current = await _service.save(counter);
-
-      // Emit success
-      emit(
-        state.copyWith(
-          counter: current,
-          status: OperationStatus.success,
-        ),
-      );
-    } catch (exception, stackTrace) {
-      await Sentry.captureException(
-        exception,
-        stackTrace: stackTrace,
-      );
-      emit(
-        state.copyWith(
-          status: OperationStatus.failure,
-        ),
-      );
-    } finally {
-      emit(
-        state.copyWith(
-          status: OperationStatus.idle,
-        ),
-      );
-    }
-  }
-
   /// Updates the date of a counter
-  Future<void> dateChanged(DateTime newDate) async {
-    try {
-      emit(state.copyWith(status: OperationStatus.loading));
+  void dateChanged(DateTime newDate) {
+    emit(
+      state.copyWith(
+        counter: state.counter.copyWith(createdAt: newDate),
+      ),
+    );
 
-      // Validate new date.
-      final today = DateTime.now();
-      if (!newDate.isBefore(today)) {
-        emit(
-          state.copyWith(
-            status: OperationStatus.failure,
-          ),
-        );
-
-        return;
-      }
-
-      // Update date of the counter.
-      final counter = state.counter.copyWith(createdAt: newDate);
-      final current = await _service.save(counter);
-
-      // Emit success
-      emit(
-        state.copyWith(
-          counter: current,
-          status: OperationStatus.success,
-        ),
-      );
-    } catch (exception, stackTrace) {
-      await Sentry.captureException(
-        exception,
-        stackTrace: stackTrace,
-      );
-      emit(
-        state.copyWith(
-          status: OperationStatus.failure,
-        ),
-      );
-    } finally {
-      emit(
-        state.copyWith(
-          status: OperationStatus.idle,
-        ),
-      );
-    }
+    saveCounter();
   }
 
   /// Updates the theme of a counter.
-  Future<void> themeChanged(AppTheme theme) async {
-    try {
-      final updatedCounter = state.counter.copyWith(theme: theme);
+  void themeChanged(AppTheme theme) {
+    emit(
+      state.copyWith(
+        counter: state.counter.copyWith(theme: theme),
+      ),
+    );
 
-      await _service.save(updatedCounter);
-
-      await fetchCounter();
-    } on Exception catch (err, stacktrace) {
-      await Sentry.captureException(
-        err,
-        stackTrace: stacktrace,
-      );
-    }
+    saveCounter();
   }
 
   /// Creates a new restart for the counter.
   Future<void> restartCounter() async {
     try {
-      emit(state.copyWith(status: OperationStatus.loading));
+      emit(state.copyWith(restartStatus: OperationStatus.loading));
 
       final restartDate = DateTime.now();
       final restartItem = CounterRestart.generated(
@@ -157,8 +96,7 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
 
       final updatedCounter = state.counter.copyWith(createdAt: restartDate);
       await _service.save(updatedCounter);
-
-      await fetchCounter();
+      emit(state.copyWith(restartStatus: OperationStatus.success));
     } catch (exception, stackTrace) {
       await Sentry.captureException(
         exception,
@@ -166,15 +104,11 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       );
       emit(
         state.copyWith(
-          status: OperationStatus.failure,
+          restartStatus: OperationStatus.failure,
         ),
       );
     } finally {
-      emit(
-        state.copyWith(
-          status: OperationStatus.idle,
-        ),
-      );
+      await fetchCounter();
     }
   }
 }

@@ -16,11 +16,12 @@ dependencies:
   flutter:
     sdk: flutter
   # Monitoring
-  sentry_flutter: ^6.4.0
+  rxdart: ^0.27.3
+  sentry_flutter: ^6.5.1
   # Local cache
   shared_preferences: ^2.0.13
   # Database
-  sqflite: ^2.0.2
+  sqflite: ^2.0.2+1
   # UUID
   uuid: ^3.0.6
 

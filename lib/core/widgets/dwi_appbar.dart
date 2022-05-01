@@ -76,10 +76,13 @@ class _DeleteCounterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final disabled = context.watch<CounterListCubit>().state.counters.isEmpty;
     return IconButton(
       key: const ValueKey('btn_remove_counter'),
       tooltip: 'Delete',
-      onPressed: () => context.read<CounterListCubit>().deleteCurrentCounter(),
+      onPressed: disabled
+          ? null
+          : () => context.read<CounterListCubit>().deleteCurrentCounter(),
       icon: const Icon(Icons.delete_outlined),
     );
   }

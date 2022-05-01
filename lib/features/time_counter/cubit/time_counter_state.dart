@@ -5,12 +5,16 @@ class TimeCounterState extends Equatable {
   /// Holds the information about the time counter.
   const TimeCounterState({
     this.status = OperationStatus.loading,
+    this.restartStatus = OperationStatus.idle,
     this.restarts = const [],
     TimeCounter? counter,
   }) : counter = counter ?? TimeCounter.empty;
 
   /// I/O action status
   final OperationStatus status;
+
+  /// Restart action status
+  final OperationStatus restartStatus;
 
   /// List of restarts tied to [counter]
   final List<CounterRestart> restarts;
@@ -22,13 +26,8 @@ class TimeCounterState extends Equatable {
   ///
   /// It is inferred from [restarts]
   int? get longestStreak {
-    final streaks = restarts
-        .map(
-          (counterRestart) => counterRestart.restartedAt!
-              .difference(counterRestart.startedAt!)
-              .inDays,
-        )
-        .toList();
+    final streaks =
+        restarts.map((counterRestart) => counterRestart.streak).toList();
 
     final currentStreak = DateTime.now().difference(counter.createdAt!).inDays;
     if (streaks.isEmpty) return currentStreak;
@@ -53,18 +52,21 @@ class TimeCounterState extends Equatable {
   @override
   List<Object> get props => [
         status,
-        counter,
+        restartStatus,
         restarts,
+        counter,
       ];
 
   /// Provides a cloned instance.
   TimeCounterState copyWith({
     OperationStatus? status,
+    OperationStatus? restartStatus,
     List<CounterRestart>? restarts,
     TimeCounter? counter,
   }) {
     return TimeCounterState(
       status: status ?? this.status,
+      restartStatus: restartStatus ?? this.restartStatus,
       restarts: restarts ?? this.restarts,
       counter: counter ?? this.counter,
     );

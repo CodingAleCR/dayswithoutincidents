@@ -36,6 +36,11 @@ class CounterRestart extends Equatable {
   /// Date at which the counter was restarted.
   final DateTime? restartedAt;
 
+  /// Amount of days passed from [startedAt] and [restartedAt]
+  int get streak => restartedAt != null && startedAt != null
+      ? restartedAt!.difference(startedAt!).inDays
+      : 0;
+
   /// Empty representation of a restart.
   static const CounterRestart empty = CounterRestart(
     id: '',

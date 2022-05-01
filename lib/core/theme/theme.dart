@@ -90,6 +90,7 @@ class PlainLightTheme extends DWITheme {
             color: DWIColors.brandBlue,
           ),
           headline5: TextStyle(
+            fontWeight: FontWeight.bold,
             color: DWIColors.brandBlue,
           ),
           headline6: TextStyle(
@@ -185,6 +186,7 @@ class DarkSideTheme extends DWITheme {
             color: DWIColors.brandWhite,
           ),
           headline5: TextStyle(
+            fontWeight: FontWeight.bold,
             color: DWIColors.brandWhite,
           ),
           headline6: TextStyle(
@@ -280,6 +282,7 @@ class PassionRedTheme extends DWITheme {
             color: DWIColors.brandWhite,
           ),
           headline5: TextStyle(
+            fontWeight: FontWeight.bold,
             color: DWIColors.brandWhite,
           ),
           headline6: TextStyle(
@@ -376,6 +379,7 @@ class JustPurpleTheme extends DWITheme {
             color: DWIColors.brandWhite,
           ),
           headline5: TextStyle(
+            fontWeight: FontWeight.bold,
             color: DWIColors.brandWhite,
           ),
           headline6: TextStyle(
@@ -472,6 +476,7 @@ class GoldAmberTheme extends DWITheme {
             color: DWIColors.brandBlue,
           ),
           headline5: TextStyle(
+            fontWeight: FontWeight.bold,
             color: DWIColors.brandBlue,
           ),
           headline6: TextStyle(
@@ -568,6 +573,7 @@ class HappyCyanTheme extends DWITheme {
             color: DWIColors.brandBlue,
           ),
           headline5: TextStyle(
+            fontWeight: FontWeight.bold,
             color: DWIColors.brandBlue,
           ),
           headline6: TextStyle(
