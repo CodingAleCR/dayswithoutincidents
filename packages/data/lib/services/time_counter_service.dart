@@ -1,5 +1,6 @@
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
+import 'package:rxdart/subjects.dart';
 
 /// Service that handles operations for time counters.
 class TimeCounterServiceImpl extends TimeCounterService {
@@ -8,9 +9,19 @@ class TimeCounterServiceImpl extends TimeCounterService {
       : _repository = repository ?? TimeCounterRepository();
 
   final TimeCounterRepository _repository;
+
+  final _countersStreamController =
+      BehaviorSubject<List<TimeCounter>>.seeded(const []);
+
+  @override
+  Stream<List<TimeCounter>> get allCounters =>
+      _countersStreamController.asBroadcastStream();
+
   @override
   Future<void> deleteById(String uuid) async {
     await _repository.deleteById(uuid);
+
+    _countersStreamController.add(await findAll());
   }
 
   @override
@@ -29,6 +40,9 @@ class TimeCounterServiceImpl extends TimeCounterService {
   Future<TimeCounter> save(TimeCounter model) async {
     final entity = TimeCounterEntity.fromModel(model);
     await _repository.save(entity);
+
+    /// Update list.
+    _countersStreamController.add(await findAll());
 
     return model;
   }

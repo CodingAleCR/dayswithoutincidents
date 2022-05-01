@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
@@ -9,41 +12,66 @@ class CounterListCubit extends Cubit<CounterListState> {
   /// Handles logic around the time counters list.
   CounterListCubit(
     this._service,
-  ) : super(const CounterListState());
+  ) : super(const CounterListState()) {
+    _suscription = _service.allCounters.listen(
+      (counters) => emit(
+        state.copyWith(
+          counters: counters,
+        ),
+      ),
+    );
+  }
 
   final TimeCounterService _service;
+
+  late StreamSubscription<List<TimeCounter>> _suscription;
+
+  @override
+  Future<void> close() async {
+    await _suscription.cancel();
+    await super.close();
+  }
 
   /// Fetches all the counters from storage, and updates the selected time
   /// counter.
   Future<void> fetchCounters({int selectedIdx = 0}) async {
-    var allCounters = await _service.findAll();
-
-    if (allCounters.isEmpty) {
-      final defaultTimeCounter = await _service.save(TimeCounter.empty);
-      allCounters = [defaultTimeCounter];
-    }
-
-    await Future.delayed(const Duration(milliseconds: 150), () {
+    try {
       emit(
         state.copyWith(
-          status: OperationStatus.idle,
+          status: OperationStatus.loading,
+        ),
+      );
+      final allCounters = await _service.findAll();
+
+      emit(
+        state.copyWith(
+          status: OperationStatus.success,
           counters: allCounters,
           selectedIdx: selectedIdx,
         ),
       );
-    });
+    } on Exception catch (e, s) {
+      emit(state.copyWith(status: OperationStatus.failure));
+
+      log(e.toString());
+      log(s.toString());
+    }
   }
 
   /// Responds to user interactions that trigger a change in the current
   /// selected counter.
   Future<void> selectedCounterChanged(int selectedIdx) async {
-    await fetchCounters(selectedIdx: selectedIdx);
+    emit(
+      state.copyWith(
+        selectedIdx: selectedIdx,
+      ),
+    );
   }
 
   /// Adds a new counter to the list and updates the list in state.
   Future<void> addNewCounter() async {
     try {
-      await _service.save(TimeCounter.empty);
+      await _service.save(TimeCounter.generated(title: kDefaultCounterTitle));
 
       await fetchCounters(selectedIdx: state.counters.length);
     } on Exception {

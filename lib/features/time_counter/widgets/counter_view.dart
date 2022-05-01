@@ -22,17 +22,15 @@ class CounterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return BlocProvider<TimeCounterCubit>(
+      create: (context) => TimeCounterCubit(
+        counter,
+        RepositoryProvider.of<TimeCounterService>(context),
+        RepositoryProvider.of<CounterRestartService>(context),
+      )..fetchCounter(),
       child: Container(
         padding: const EdgeInsets.all(20),
-        child: BlocProvider<TimeCounterCubit>(
-          create: (context) => TimeCounterCubit(
-            counter,
-            RepositoryProvider.of<TimeCounterService>(context),
-            RepositoryProvider.of<CounterRestartService>(context),
-          )..fetchCounter(),
-          child: const _Counter(),
-        ),
+        child: const _Counter(),
       ),
     );
   }
@@ -43,11 +41,10 @@ class _Counter extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Future<void> _titleInputDialog(BuildContext context) async {
+  void _titleInputDialog(BuildContext context) {
     final counter = context.read<TimeCounterCubit>().state.counter;
-    String? newTitle;
     final controller = TextEditingController(text: counter.title);
-    await showDialog<String>(
+    showDialog<void>(
       context: context,
       builder: (BuildContext bContext) {
         return AlertDialog(
@@ -67,36 +64,22 @@ class _Counter extends StatelessWidget {
                 AppStrings.hintTitle,
               ),
             ),
-            onChanged: (value) {
-              if (value.isEmpty) {
-                newTitle = Resources.string(
-                  bContext,
-                  AppStrings.daysWithoutIncidents,
-                );
-              } else {
-                newTitle = value;
-              }
-            },
+            onChanged: (newTitle) =>
+                context.read<TimeCounterCubit>().titleChanged(newTitle),
           ),
           actions: <Widget>[
             TextButton(
               child: Text(MaterialLocalizations.of(bContext).cancelButtonLabel),
-              onPressed: () {
-                Navigator.of(bContext).pop(newTitle);
-              },
+              onPressed: () => Navigator.of(bContext).pop(),
             ),
             TextButton(
               child: Text(MaterialLocalizations.of(bContext).okButtonLabel),
               onPressed: () async {
-                if (newTitle != null && newTitle!.isNotEmpty) {
-                  final navigator = Navigator.of(bContext);
+                final cubit = context.read<TimeCounterCubit>();
+                final navigator = Navigator.of(bContext);
 
-                  await context
-                      .read<TimeCounterCubit>()
-                      .titleChanged(newTitle!);
-
-                  navigator.pop(newTitle);
-                }
+                await cubit.saveCounter();
+                navigator.pop();
               },
             ),
           ],
@@ -112,12 +95,12 @@ class _Counter extends StatelessWidget {
     final selectedDate = await showDatePicker(
       context: context,
       initialDate: counter.createdAt!,
-      firstDate: DateTime(today.year - 80),
+      firstDate: DateTime(today.year - 100),
       lastDate: today,
     );
 
     if (selectedDate != null) {
-      await timeCounterCubit.dateChanged(selectedDate);
+      timeCounterCubit.dateChanged(selectedDate);
     }
   }
 

@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/env/environment.dart';
 import 'package:dwi/core/localization/localization.dart';
+import 'package:dwi/core/navigation/navigation.dart';
 import 'package:dwi/core/theme/theme.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +19,17 @@ class DWIApplication extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ThemeChooserCubit(
-        context.read<TimeCounterService>(),
-      )..fetchTheme(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => NavigationCubit(),
+        ),
+        BlocProvider(
+          create: (_) => ThemeChooserCubit(
+            context.read<TimeCounterService>(),
+          )..fetchTheme(),
+        ),
+      ],
       child: const _AppView(),
     );
   }
@@ -33,11 +41,14 @@ class _AppView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  __AppViewState createState() => __AppViewState();
+  _AppViewState createState() => _AppViewState();
 }
 
-class __AppViewState extends State<_AppView> {
+class _AppViewState extends State<_AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
+
+  /// Global navigator state to be used within the global app state.
+  NavigatorState? get _navigator => _navigatorKey.currentState;
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +87,27 @@ class __AppViewState extends State<_AppView> {
           // from the list (English, in this case).
           return supportedLocales.first;
         },
-        home: MultiBlocProvider(
-          providers: [
-            BlocProvider<CounterListCubit>(
-              create: (context) => CounterListCubit(
-                RepositoryProvider.of<TimeCounterService>(context),
-              )..fetchCounters(),
-            ),
-          ],
-          child: const HomePage(),
+        home: BlocListener<NavigationCubit, Pages>(
+          listener: (_, currentPage) {
+            switch (currentPage) {
+              case Pages.splash:
+                _navigator?.pushAndRemoveUntil<void>(
+                  SplashPage.route(),
+                  (_) => false,
+                );
+                break;
+              case Pages.counterList:
+                _navigator?.pushAndRemoveUntil<void>(
+                  CountersPage.route(),
+                  (_) => false,
+                );
+                break;
+              case Pages.settings:
+                _navigator?.push<void>(SettingsPage.route());
+                break;
+            }
+          },
+          child: const SplashPage(),
         ),
       ),
     );
