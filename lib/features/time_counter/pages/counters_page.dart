@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/widgets/dwi_appbar.dart';
+import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
 import 'package:dwi/features/time_counter/cubit/counter_list_cubit.dart';
 import 'package:dwi/features/time_counter/widgets/counter_list.dart';
 import 'package:dwi/features/time_counter/widgets/empty_counters.dart';
@@ -18,6 +19,7 @@ class CountersPage extends StatelessWidget {
         pageBuilder: (context, animation, secondaryAnimation) =>
             BlocProvider<CounterListCubit>(
           create: (provCtx) => CounterListCubit(
+            provCtx.read<ThemeChooserCubit>(),
             provCtx.read<TimeCounterService>(),
           )..fetchCounters(),
           child: const CountersPage(),
@@ -116,13 +118,22 @@ class _CounterListState extends State<_CounterList> {
       (CounterListCubit cubit) => cubit.state.selectedIdx,
     );
 
-    if (counters.isEmpty) {
-      return const EmptyCounters();
+    final currentTheme = context.read<ThemeChooserCubit>().state.theme;
+
+    if (selectedIdx != -1 && currentTheme != counters[selectedIdx].theme) {
+      context.read<ThemeChooserCubit>().themeChanged(
+            counters[selectedIdx].theme,
+          );
     }
 
-    return CounterList(
-      counters: counters,
-      currentIndex: selectedIdx,
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 150),
+      child: counters.isEmpty
+          ? const EmptyCounters()
+          : CounterList(
+              counters: counters,
+              currentIndex: selectedIdx,
+            ),
     );
   }
 }
