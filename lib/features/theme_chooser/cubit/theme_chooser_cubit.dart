@@ -49,7 +49,7 @@ class ThemeChooserCubit extends Cubit<ThemeChooserState> {
   }
 
   /// Returns the next available custom theme as the current one.
-  AppTheme nextTheme() {
-    return DWIThemes.nextTheme(state.theme).theme;
+  AppTheme nextTheme(AppTheme theme) {
+    return DWIThemes.nextTheme(theme).theme;
   }
 }

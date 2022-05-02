@@ -215,7 +215,9 @@ class _Counter extends StatelessWidget {
               StatsCard(
                 Icons.palette_outlined,
                 onTap: () => context.read<TimeCounterCubit>().themeChanged(
-                      context.read<ThemeChooserCubit>().nextTheme(),
+                      context
+                          .read<ThemeChooserCubit>()
+                          .nextTheme(counter.theme),
                     ),
                 title: 'Theme',
                 stat: themeName,
