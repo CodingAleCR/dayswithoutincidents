@@ -2,7 +2,6 @@ import 'package:domain/domain.dart';
 import 'package:dwi/core/extensions/date.extensions.dart';
 import 'package:dwi/core/localization/app_localizations.dart';
 import 'package:dwi/core/resources/resources.dart';
-import 'package:dwi/core/theme/colors.dart';
 import 'package:dwi/features/theme_chooser/theme_chooser.dart';
 import 'package:dwi/features/time_counter/time_counter.dart';
 import 'package:flutter/material.dart';
@@ -175,7 +174,10 @@ class _Counter extends StatelessWidget {
                   const SizedBox(width: 6)
                 ],
                 Text(
-                  'Current Streak',
+                  Resources.string(
+                    context,
+                    AppStrings.counterDetailCurrentStreak,
+                  ),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -198,18 +200,27 @@ class _Counter extends StatelessWidget {
             children: [
               StatsCard(
                 FeatherIcons.zap,
-                title: 'Longest Streak',
+                title: Resources.string(
+                  context,
+                  AppStrings.counterDetailLongestStreak,
+                ),
                 stat: '${longestStreak.toString()} $longestStreakDayString',
               ),
               StatsCard(
                 Icons.cached_rounded,
-                title: 'Times Restarted',
+                title: Resources.string(
+                  context,
+                  AppStrings.counterDetailTimesRestarted,
+                ),
                 stat: restarts.toString(),
               ),
               StatsCard(
                 FeatherIcons.calendar,
                 onTap: () => _lastIncidentPicker(context),
-                title: 'Last Restart',
+                title: Resources.string(
+                  context,
+                  AppStrings.counterDetailLastRestart,
+                ),
                 stat: counter.createdAt!.toFormattedString('dd MMM yyyy'),
               ),
               StatsCard(
@@ -219,7 +230,10 @@ class _Counter extends StatelessWidget {
                           .read<ThemeChooserCubit>()
                           .nextTheme(counter.theme),
                     ),
-                title: 'Theme',
+                title: Resources.string(
+                  context,
+                  AppStrings.counterDetailTheme,
+                ),
                 stat: themeName,
               ),
             ],
@@ -327,57 +341,6 @@ class _ResetButton extends StatelessWidget {
         Resources.string(context, AppStrings.btnReset).toUpperCase(),
       ),
       onPressed: () => context.read<TimeCounterCubit>().restartCounter(),
-    );
-  }
-}
-
-// ignore: unused_element
-class _EditCounterButton extends StatelessWidget {
-  const _EditCounterButton({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.edit),
-      tooltip: Resources.string(context, AppStrings.labelCustomization),
-      onPressed: () async {
-        await showModalBottomSheet<void>(
-          context: context,
-          backgroundColor: Colors.transparent,
-          builder: (BuildContext context) {
-            return Container(
-              padding: const EdgeInsets.symmetric(
-                vertical: 50,
-                horizontal: 16,
-              ),
-              height: MediaQuery.of(context).size.height / 2,
-              decoration: const BoxDecoration(
-                color: DWIColors.brandWhite,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(50),
-                  topRight: Radius.circular(50),
-                ),
-              ),
-              child: ListView(
-                children: <Widget>[
-                  const Text(
-                    'Modal BottomSheet',
-                    style: TextStyle(
-                      color: DWIColors.brandBlue,
-                    ),
-                  ),
-                  ElevatedButton(
-                    child: const Text('Close'),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                ],
-              ),
-            );
-          },
-        );
-      },
     );
   }
 }

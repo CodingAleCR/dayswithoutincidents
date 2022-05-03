@@ -39,15 +39,7 @@ class _AboutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       tooltip: Resources.string(context, AppStrings.titleSettings),
-      onPressed: () async {
-        await Navigator.of(context).push(
-          MaterialPageRoute<void>(
-            builder: (routeContext) {
-              return const SettingsPage();
-            },
-          ),
-        );
-      },
+      onPressed: () => Navigator.of(context).push(SettingsPage.route()),
       icon: const Icon(Icons.help_outline_rounded),
     );
   }
@@ -62,7 +54,7 @@ class _AddCounterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       key: const ValueKey('btn_add_counter'),
-      tooltip: 'Add',
+      tooltip: Resources.string(context, AppStrings.btnAdd),
       onPressed: () => context.read<CounterListCubit>().addNewCounter(),
       icon: const Icon(Icons.add),
     );
@@ -84,7 +76,7 @@ class _DeleteCounterButton extends StatelessWidget {
       child: ClipRect(
         child: IconButton(
           key: const ValueKey('btn_remove_counter'),
-          tooltip: 'Delete',
+          tooltip: Resources.string(context, AppStrings.btnDelete),
           onPressed: disabled
               ? null
               : () => context.read<CounterListCubit>().deleteCurrentCounter(),

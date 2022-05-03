@@ -1,4 +1,6 @@
 import 'package:domain/domain.dart';
+import 'package:dwi/core/localization/localization.dart';
+import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/core/widgets/dwi_appbar.dart';
 import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
 import 'package:dwi/features/time_counter/cubit/counter_list_cubit.dart';
@@ -93,8 +95,8 @@ class _Error extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Could not load your time counters.'),
+    return Center(
+      child: Text(Resources.string(context, AppStrings.countersError)),
     );
   }
 }
