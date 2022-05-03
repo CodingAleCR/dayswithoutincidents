@@ -1,1 +1,0 @@
-Un app simple, pequeña, que permite vigilar los días sin incidentes.

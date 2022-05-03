@@ -1,3 +1,4 @@
+import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/features/time_counter/time_counter.dart';
 import 'package:flutter/material.dart';
@@ -26,20 +27,20 @@ class EmptyCounters extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            'No incidents?',
+            Resources.string(context, AppStrings.noCountersTitle),
             style: Theme.of(context).textTheme.headline5,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
-          const Text(
-            'You are not tracking anything yet. Add a new counter!',
+          Text(
+            Resources.string(context, AppStrings.noCountersMessage),
             textAlign: TextAlign.center,
           ),
           const Spacer(),
           OutlinedButton.icon(
             icon: const Icon(Icons.add),
             label: Text(
-              'Add Counter'.toUpperCase(),
+              Resources.string(context, AppStrings.noCountersAction),
             ),
             onPressed: () => context.read<CounterListCubit>().addNewCounter(),
           ),

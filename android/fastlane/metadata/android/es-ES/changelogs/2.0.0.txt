@@ -1,3 +1,0 @@
-Cambios:
-* Ahora puedes seleccionar el día del último incidente en lugar de tener que reiniciar manualmente.
-* Renovamos por completo la interfaz, ahora es más atrayente y está lista para futuros cambios.

@@ -1,1 +1,0 @@
-Looking for a simple, no ads, easy to use app to keep track of incidents? Well, this is the one. DWI is a minimalistic application that lets you track days since the last time an incident ocurred.

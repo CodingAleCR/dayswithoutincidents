@@ -1,3 +1,0 @@
-Changelog:
-* Now you can select when was the last day of the incident instead of having to reset manually.
-* We renovated our complete UI to be more appealing and getting ready for future changes.

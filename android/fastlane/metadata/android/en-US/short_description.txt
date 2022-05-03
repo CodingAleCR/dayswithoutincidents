@@ -1,1 +1,0 @@
-A small, simple app to keep track of days without incidents.
