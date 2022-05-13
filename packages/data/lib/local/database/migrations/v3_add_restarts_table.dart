@@ -9,6 +9,7 @@ import 'package:sqflite/sqflite.dart';
 class V3AddRestartsTable extends Migration {
   @override
   FutureOr<void> up(Database db) async {
+    await _createWidgetsTable(db);
     await _createRestartsTable(db);
     await _addThemeColumn2CountersTable(db);
   }
@@ -17,6 +18,7 @@ class V3AddRestartsTable extends Migration {
   FutureOr<void> down(Database db) async {
     await _dropThemeColumn2CountersTable(db);
     await _dropRestartsTable(db);
+    await _dropWidgetsTable(db);
   }
 
   Future<void> _createRestartsTable(Database db) async {
@@ -29,6 +31,24 @@ class V3AddRestartsTable extends Migration {
           ${CounterRestartEntity.kStartedAt} TEXT NOT NULL,
           ${CounterRestartEntity.kRestartedAt} TEXT NOT NULL,
           FOREIGN KEY (${CounterRestartEntity.kCounterId})
+            REFERENCES ${TimeCounterEntity.tablename} (${TimeCounterEntity.kId}) 
+            ON UPDATE CASCADE 
+            ON DELETE CASCADE
+        )
+      ''',
+      );
+    });
+  }
+
+  Future<void> _createWidgetsTable(Database db) async {
+    await db.transaction((txn) async {
+      await txn.execute(
+        '''
+        CREATE TABLE ${CounterWidgetEntity.tablename} (
+          ${CounterWidgetEntity.kId} TEXT NOT NULL PRIMARY KEY,
+          ${CounterWidgetEntity.kCounterId} TEXT NOT NULL,
+          ${CounterWidgetEntity.kWidgetId} TEXT NOT NULL,
+          FOREIGN KEY (${CounterWidgetEntity.kCounterId})
             REFERENCES ${TimeCounterEntity.tablename} (${TimeCounterEntity.kId}) 
             ON UPDATE CASCADE 
             ON DELETE CASCADE
@@ -109,6 +129,16 @@ class V3AddRestartsTable extends Migration {
       await txn.execute(
         '''
         DROP TABLE IF EXISTS ${CounterRestartEntity.tablename}
+      ''',
+      );
+    });
+  }
+
+  Future<void> _dropWidgetsTable(Database db) async {
+    await db.transaction((txn) async {
+      await txn.execute(
+        '''
+        DROP TABLE IF EXISTS ${CounterWidgetEntity.tablename}
       ''',
       );
     });

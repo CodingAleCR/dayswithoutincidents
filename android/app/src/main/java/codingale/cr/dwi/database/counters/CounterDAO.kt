@@ -1,4 +1,4 @@
-package codingale.cr.dwi.database
+package codingale.cr.dwi.database.counters
 
 import androidx.room.Dao
 import androidx.room.OnConflictStrategy
@@ -11,8 +11,8 @@ interface CounterDAO {
     suspend fun getAll(): List<CounterEntity>
 
     @Query("SELECT * FROM time_counters WHERE id = :counterId")
-    suspend fun findById(counterId: String): CounterEntity
+    suspend fun findById(counterId: String): List<CounterEntity>
 
-    @Update(onConflict = OnConflictStrategy.IGNORE)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(counter: CounterEntity)
 }

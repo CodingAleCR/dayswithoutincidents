@@ -25,7 +25,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     // Ensures that you have `context` available for use.
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(const Duration(milliseconds: 500), () {
         context.read<NavigationCubit>().navigateTo(Pages.counterList);
       });

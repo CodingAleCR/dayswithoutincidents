@@ -15,4 +15,13 @@
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
     </style>
+
+    <!-- Theme for widget usage and support Material You-->
+    <style name="WidgetTextView">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MyWidgetTheme" parent="@android:style/Theme.DeviceDefault.Light">
+        <item name="android:textViewStyle">@style/WidgetTextView</item>
+    </style>
 </resources>
