@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_title">Días Sin Incidentes</string>
+    <string name="widget_description">Añade un widget de tu contador a la pantalla principal.</string>
     <string name="counter_description">Contador</string>
     <string name="reset_text">Reiniciar</string>
 

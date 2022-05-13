@@ -1,54 +1,55 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@android:id/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:padding="@dimen/widget_margin">
+    android:background="?android:attr/colorBackground"
+    android:padding="@dimen/widget_margin"
+    android:theme="@style/MyWidgetTheme">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:layout_toStartOf="@+id/button"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_centerVertical="true">
+        android:layout_weight="2"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/appwidget_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/counter_description"
             android:gravity="center"
-            android:textColor="#000"
-            android:textSize="14sp" />
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="14sp"
+            tools:text="@string/counter_description" />
+
         <TextView
             android:id="@+id/appwidget_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/counter_description"
             android:gravity="center"
-            android:textColor="#000"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="@string/counter_description" />
     </LinearLayout>
 
     <Button
         android:id="@+id/button"
         style="@android:style/Widget.DeviceDefault.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:fontFamily="sans-serif-black"
-        android:text="Reset"
-        android:textColor="@color/primary" />
+        android:text="@string/reset_text"
+        android:textColor="?android:attr/colorAccent" />
 
-</RelativeLayout>
+</LinearLayout>

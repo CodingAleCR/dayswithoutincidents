@@ -1,4 +1,4 @@
-package codingale.cr.dwi.database
+package codingale.cr.dwi.database.counters
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
