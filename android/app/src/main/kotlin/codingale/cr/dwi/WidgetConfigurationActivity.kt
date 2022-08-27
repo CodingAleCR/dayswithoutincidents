@@ -57,7 +57,7 @@ class WidgetConfigurationActivity : AppCompatActivity(), CustomAdapter.ClickList
             Log.d("TAG", "clicked: $position")
             val selectedCounter = counters[position]
             Log.d("TAG", "selected: $selectedCounter")
-            val currentWidget = DbUtil.getWidgetById(this, appWidgetId.toString())
+            val currentWidget = DbUtil.getWidgetByWidgetId(this, appWidgetId.toString())
 
             if (currentWidget == null) {
                 val newWidget =

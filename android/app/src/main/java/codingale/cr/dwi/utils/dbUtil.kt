@@ -57,11 +57,11 @@ object DbUtil {
         }
     }
 
-    internal fun getWidgetById(context: Context, widgetId: String): WidgetEntity? = runBlocking {
+    internal fun getWidgetByWidgetId(context: Context, widgetId: String): WidgetEntity? = runBlocking {
         return@runBlocking withContext(Dispatchers.IO) {
             val db = DWIDatabase.getDatabase(context)
             val dao = db.widgetDao()
-            val widgets = dao.findById(widgetId)
+            val widgets = dao.findByWidgetId(widgetId)
             return@withContext widgets.firstOrNull()
         }
     }
@@ -86,7 +86,7 @@ object DbUtil {
         return@runBlocking withContext(Dispatchers.IO) {
             val db = DWIDatabase.getDatabase(context)
             val dao = db.widgetDao()
-            val widget = dao.findById(widgetId).firstOrNull()
+            val widget = dao.findByWidgetId(widgetId).firstOrNull()
             if (widget != null) {
                 dao.delete(widget)
             }
