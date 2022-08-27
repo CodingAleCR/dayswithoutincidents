@@ -57,11 +57,11 @@ class SettingsPageState extends State<SettingsPage> {
                     final wiredash = Wiredash.of(context);
                     final info = await PackageInfo.fromPlatform();
 
-                    wiredash?.setBuildProperties(
+                    wiredash.setBuildProperties(
                       buildNumber: info.buildNumber,
                       buildVersion: info.version,
                     );
-                    wiredash?.show();
+                    wiredash.show();
                   },
                 ),
                 ListTile(

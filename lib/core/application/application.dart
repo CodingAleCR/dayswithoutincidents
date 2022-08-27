@@ -58,7 +58,6 @@ class _AppViewState extends State<_AppView> {
     return Wiredash(
       projectId: EnvironmentConfig.wiredashProjectId,
       secret: EnvironmentConfig.wiredashSecret,
-      navigatorKey: _navigatorKey,
       child: MaterialApp(
         navigatorKey: _navigatorKey,
         navigatorObservers: [SentryNavigatorObserver()],
