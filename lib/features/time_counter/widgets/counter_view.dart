@@ -275,12 +275,15 @@ class StatsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color =
+        Theme.of(context).textTheme.bodyText1?.color?.withOpacity(0.15) ??
+            Colors.black12;
+
     return InkWell(
-      splashColor:
-          Theme.of(context).textTheme.bodyText1?.color?.withOpacity(0.15),
+      splashColor: color,
       onTap: onTap,
-      child: Container(
-        color: Theme.of(context).textTheme.bodyText1?.color?.withOpacity(0.15),
+      child: ColoredBox(
+        color: color,
         child: Row(
           children: [
             Align(
