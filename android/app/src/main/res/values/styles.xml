@@ -4,13 +4,14 @@
         <!-- Show a splash screen on the activity. Automatically removed when
              Flutter draws its first frame -->
         <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
-
     <!-- Theme for widget usage and support Material You-->
     <style name="WidgetTextView">
         <item name="android:textColor">@color/black</item>
     </style>
-
     <style name="MyWidgetTheme" parent="@android:style/Theme.DeviceDefault.Light">
         <item name="android:textViewStyle">@style/WidgetTextView</item>
         <item name="backgroundRadius">@dimen/bg_radius</item>
