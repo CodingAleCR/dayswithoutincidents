@@ -41,7 +41,7 @@ class CounterWidget : AppWidgetProvider() {
                 val now = Date()
                 val formatter = SimpleDateFormat(ISO_FORMAT, Locale.US)
 
-                val widget = DbUtil.getWidgetById(context, appWidgetId.toString())
+                val widget = DbUtil.getWidgetByWidgetId(context, appWidgetId.toString())
                 val counter = if (widget != null) {
                     DbUtil.getCounterById(context, widget.counterId)
                 } else {
@@ -74,10 +74,7 @@ class CounterWidget : AppWidgetProvider() {
                 resetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
                 resetIntent.data = Uri.parse(resetIntent.toUri(Intent.URI_INTENT_SCHEME))
 
-                val pendingFlags: Int = when {
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.M -> PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                    else -> PendingIntent.FLAG_UPDATE_CURRENT
-                }
+                val pendingFlags: Int = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 val pendingIntent =
                     PendingIntent.getBroadcast(
                         context,
