@@ -104,6 +104,12 @@ class _AppViewState extends State<_AppView> {
               case Pages.settings:
                 _navigator?.push<void>(SettingsPage.route());
                 break;
+              case Pages.streakList:
+                // _navigator?.push<void>(StreaksPage.route());
+                break;
+              case Pages.restartsList:
+                // _navigator?.push<void>(StreaksPage.route());
+                break;
             }
           },
           child: const SplashPage(),

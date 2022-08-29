@@ -8,6 +8,12 @@ enum Pages {
   /// Counter List page
   counterList,
 
+  /// Streak List page
+  streakList,
+
+  /// Restarts List page
+  restartsList,
+
   /// Settings page
   settings,
 }
