@@ -44,6 +44,9 @@ abstract class DWITheme {
   /// Base color for the theme
   Color get color;
 
+  /// Base color for the theme
+  Color get textColor;
+
   /// Model representation of the theme.
   AppTheme get theme;
 
@@ -60,6 +63,9 @@ class PlainLightTheme extends DWITheme {
   Color get color => DWIColors.brandWhite;
 
   @override
+  Color get textColor => DWIColors.brandBlue;
+
+  @override
   AppTheme get theme => AppTheme.plainLight;
 
   @override
@@ -68,65 +74,65 @@ class PlainLightTheme extends DWITheme {
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
-        scaffoldBackgroundColor: DWIColors.brandWhite,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: DWIColors.brandWhite,
+        scaffoldBackgroundColor: color,
+        appBarTheme: AppBarTheme(
+          backgroundColor: color,
           elevation: 0,
           centerTitle: false,
-          foregroundColor: DWIColors.brandBlue,
+          foregroundColor: textColor,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline2: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline3: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline4: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline5: TextStyle(
             fontWeight: FontWeight.bold,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline6: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           caption: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           overline: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           bodyText1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           bodyText2: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           subtitle1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           subtitle2: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           button: TextStyle(
             fontSize: 18,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
         ),
-        splashColor: DWIColors.brandBlue.withOpacity(0.3),
+        splashColor: textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: DWIColors.brandBlue,
-            side: const BorderSide(
-              color: DWIColors.brandBlue,
+            primary: textColor,
+            side: BorderSide(
+              color: textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -134,14 +140,14 @@ class PlainLightTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandBlue,
+            primary: textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: DWIColors.brandBlue,
-            onPrimary: DWIColors.brandWhite,
+            primary: textColor,
+            onPrimary: color,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -157,6 +163,9 @@ class DarkSideTheme extends DWITheme {
   Color get color => DWIColors.brandBlueTint1;
 
   @override
+  Color get textColor => DWIColors.brandWhite;
+
+  @override
   AppTheme get theme => AppTheme.darkSide;
 
   @override
@@ -165,64 +174,64 @@ class DarkSideTheme extends DWITheme {
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
-        scaffoldBackgroundColor: DWIColors.brandBlueTint1,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: DWIColors.brandBlueTint1,
+        scaffoldBackgroundColor: color,
+        appBarTheme: AppBarTheme(
+          backgroundColor: color,
           elevation: 0,
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline2: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline3: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline4: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline5: TextStyle(
             fontWeight: FontWeight.bold,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline6: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           caption: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           overline: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           bodyText1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           bodyText2: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           subtitle1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           subtitle2: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           button: TextStyle(
             fontSize: 18,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
         ),
-        splashColor: DWIColors.brandWhite.withOpacity(0.3),
+        splashColor: textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: DWIColors.brandWhite,
-            side: const BorderSide(
-              color: DWIColors.brandWhite,
+            primary: textColor,
+            side: BorderSide(
+              color: textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -230,13 +239,13 @@ class DarkSideTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandCyan,
+            primary: textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: DWIColors.brandWhite,
+            primary: textColor,
             onPrimary: DWIColors.brandBlue,
             shape: const BeveledRectangleBorder(),
           ),
@@ -253,72 +262,75 @@ class PassionRedTheme extends DWITheme {
   Color get color => DWIColors.passionRed;
 
   @override
+  Color get textColor => DWIColors.brandWhite;
+
+  @override
   AppTheme get theme => AppTheme.passionRed;
 
   @override
   ThemeData get themeData => ThemeData(
         primarySwatch: DWIColors.passionRedSwatch,
-        scaffoldBackgroundColor: DWIColors.passionRed,
+        scaffoldBackgroundColor: color,
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: DWIColors.passionRed,
+        appBarTheme: AppBarTheme(
+          backgroundColor: color,
           elevation: 0,
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline2: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline3: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline4: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline5: TextStyle(
             fontWeight: FontWeight.bold,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline6: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           caption: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           overline: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           bodyText1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           bodyText2: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           subtitle1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           subtitle2: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           button: TextStyle(
             fontSize: 18,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
         ),
-        splashColor: DWIColors.brandWhite.withOpacity(0.3),
+        splashColor: textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: DWIColors.brandWhite,
-            side: const BorderSide(
-              color: DWIColors.brandWhite,
+            primary: textColor,
+            side: BorderSide(
+              color: textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -326,14 +338,14 @@ class PassionRedTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandCyan,
+            primary: color,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: DWIColors.brandWhite,
-            onPrimary: DWIColors.passionRed,
+            primary: textColor,
+            onPrimary: color,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -349,73 +361,76 @@ class JustPurpleTheme extends DWITheme {
   Color get color => DWIColors.justPurple;
 
   @override
+  Color get textColor => DWIColors.brandWhite;
+
+  @override
   AppTheme get theme => AppTheme.justPurple;
 
   @override
   ThemeData get themeData => ThemeData(
         primarySwatch: DWIColors.justPurpleSwatch,
-        scaffoldBackgroundColor: DWIColors.justPurple,
+        scaffoldBackgroundColor: color,
         brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: DWIColors.justPurple,
-          foregroundColor: DWIColors.brandWhite,
+        appBarTheme: AppBarTheme(
+          backgroundColor: color,
+          foregroundColor: textColor,
           elevation: 0,
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline2: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline3: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline4: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline5: TextStyle(
             fontWeight: FontWeight.bold,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           headline6: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           caption: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           overline: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           bodyText1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           bodyText2: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           subtitle1: TextStyle(
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           subtitle2: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
           button: TextStyle(
             fontSize: 18,
-            color: DWIColors.brandWhite,
+            color: textColor,
           ),
         ),
-        splashColor: DWIColors.brandWhite.withOpacity(0.3),
+        splashColor: textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: DWIColors.brandWhite,
-            side: const BorderSide(
-              color: DWIColors.brandWhite,
+            primary: textColor,
+            side: BorderSide(
+              color: textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -423,14 +438,14 @@ class JustPurpleTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandWhite,
+            primary: textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: DWIColors.brandWhite,
-            onPrimary: DWIColors.justPurple,
+            primary: textColor,
+            onPrimary: color,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -446,6 +461,9 @@ class GoldAmberTheme extends DWITheme {
   Color get color => DWIColors.goldAmber;
 
   @override
+  Color get textColor => DWIColors.brandBlue;
+
+  @override
   AppTheme get theme => AppTheme.goldAmber;
 
   @override
@@ -454,65 +472,65 @@ class GoldAmberTheme extends DWITheme {
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
-        scaffoldBackgroundColor: DWIColors.goldAmber,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: DWIColors.goldAmber,
+        scaffoldBackgroundColor: color,
+        appBarTheme: AppBarTheme(
+          backgroundColor: color,
           elevation: 0,
           centerTitle: false,
-          foregroundColor: DWIColors.brandBlue,
+          foregroundColor: textColor,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline2: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline3: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline4: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline5: TextStyle(
             fontWeight: FontWeight.bold,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline6: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           caption: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           overline: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           bodyText1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           bodyText2: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           subtitle1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           subtitle2: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           button: TextStyle(
             fontSize: 18,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
         ),
-        splashColor: DWIColors.brandBlue.withOpacity(0.3),
+        splashColor: textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: DWIColors.brandBlue,
-            side: const BorderSide(
-              color: DWIColors.brandBlue,
+            primary: textColor,
+            side: BorderSide(
+              color: textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -520,14 +538,14 @@ class GoldAmberTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandBlue,
+            primary: textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: DWIColors.brandBlue,
-            onPrimary: DWIColors.goldAmber,
+            primary: textColor,
+            onPrimary: color,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -543,6 +561,9 @@ class HappyCyanTheme extends DWITheme {
   Color get color => DWIColors.brandCyan;
 
   @override
+  Color get textColor => DWIColors.brandBlue;
+
+  @override
   AppTheme get theme => AppTheme.happyCyan;
 
   @override
@@ -551,65 +572,65 @@ class HappyCyanTheme extends DWITheme {
         brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
-        scaffoldBackgroundColor: DWIColors.brandCyan,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: DWIColors.brandCyan,
+        scaffoldBackgroundColor: color,
+        appBarTheme: AppBarTheme(
+          backgroundColor: color,
           elevation: 0,
           centerTitle: false,
-          foregroundColor: DWIColors.brandBlue,
+          foregroundColor: textColor,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline2: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline3: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline4: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline5: TextStyle(
             fontWeight: FontWeight.bold,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           headline6: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           caption: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           overline: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           bodyText1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           bodyText2: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           subtitle1: TextStyle(
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           subtitle2: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
           button: TextStyle(
             fontSize: 18,
-            color: DWIColors.brandBlue,
+            color: textColor,
           ),
         ),
-        splashColor: DWIColors.brandBlue.withOpacity(0.3),
+        splashColor: textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: DWIColors.brandBlue,
-            side: const BorderSide(
-              color: DWIColors.brandBlue,
+            primary: textColor,
+            side: BorderSide(
+              color: textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -617,14 +638,14 @@ class HappyCyanTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: DWIColors.brandBlue,
+            primary: textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: DWIColors.brandBlue,
-            onPrimary: DWIColors.brandCyan,
+            primary: textColor,
+            onPrimary: color,
             shape: const BeveledRectangleBorder(),
           ),
         ),
