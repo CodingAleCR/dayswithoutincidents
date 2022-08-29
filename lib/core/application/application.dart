@@ -64,6 +64,7 @@ class _AppViewState extends State<_AppView> {
         debugShowCheckedModeBanner: false,
         title: 'Days Without Incidents',
         theme: themeData,
+        // TODO(codingalecr): Migrate locales to ARB files.
         supportedLocales: const [
           Locale('en'),
           Locale('es'),
