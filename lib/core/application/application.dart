@@ -1,12 +1,11 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/env/environment.dart';
-import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/navigation/navigation.dart';
 import 'package:dwi/core/theme/theme.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:wiredash/wiredash.dart';
 
@@ -64,16 +63,8 @@ class _AppViewState extends State<_AppView> {
         debugShowCheckedModeBanner: false,
         title: 'Days Without Incidents',
         theme: themeData,
-        // TODO(codingalecr): Migrate locales to ARB files.
-        supportedLocales: const [
-          Locale('en'),
-          Locale('es'),
-        ],
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          ...GlobalMaterialLocalizations.delegates,
-          GlobalWidgetsLocalizations.delegate,
-        ],
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         localeResolutionCallback: (locale, supportedLocales) {
           if (locale != null) {
             for (final supportedLocale in supportedLocales) {
@@ -82,9 +73,6 @@ class _AppViewState extends State<_AppView> {
               }
             }
           }
-
-          // If the locale of the device is not supported, use the first one
-          // from the list (English, in this case).
           return supportedLocales.first;
         },
         home: BlocListener<NavigationCubit, Pages>(

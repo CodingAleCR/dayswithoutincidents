@@ -22,10 +22,10 @@ dependencies:
   flutter_bloc: ^8.1.1
   # Feather Icons package
   flutter_feather_icons: ^2.0.0
-
   flutter_localizations:
     sdk: flutter
   # Build Information
+  intl: ^0.17.0
   package_info_plus: ^1.4.3+1
   # Monitoring
   sentry_flutter: ^6.9.1
@@ -59,6 +59,7 @@ flutter_native_splash:
 
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/images/
     - lang/en.json

@@ -18,6 +18,15 @@ class StreaksState extends Equatable {
   /// List of restarts of [counter]
   final List<CounterRestart> restarts;
 
+  /// Top ten streaks ordered by streak amount.
+  List<CounterRestart> get topTenStreaks {
+    final sortedRestarts = [...restarts]..sort(
+        (a, b) => b.streak.compareTo(a.streak),
+      );
+
+    return sortedRestarts.take(10).toList();
+  }
+
   @override
   List<Object> get props => [
         counter,

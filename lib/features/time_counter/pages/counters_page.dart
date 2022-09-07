@@ -1,6 +1,4 @@
 import 'package:domain/domain.dart';
-import 'package:dwi/core/localization/localization.dart';
-import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/core/widgets/dwi_appbar.dart';
 import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
 import 'package:dwi/features/time_counter/cubit/counter_list_cubit.dart';
@@ -8,6 +6,7 @@ import 'package:dwi/features/time_counter/widgets/counter_list.dart';
 import 'package:dwi/features/time_counter/widgets/empty_counters.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// [CountersPage]
 class CountersPage extends StatelessWidget {
@@ -96,7 +95,7 @@ class _Error extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(Resources.string(context, AppStrings.countersError)),
+      child: Text(AppLocalizations.of(context)!.countersError),
     );
   }
 }

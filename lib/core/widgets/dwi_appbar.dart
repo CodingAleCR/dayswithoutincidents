@@ -1,8 +1,7 @@
-import 'package:dwi/core/localization/localization.dart';
-import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// DWIAppBar
 class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -38,7 +37,7 @@ class _AboutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      tooltip: Resources.string(context, AppStrings.titleSettings),
+      tooltip: AppLocalizations.of(context)!.titleActivitySettings,
       onPressed: () => Navigator.of(context).push(SettingsPage.route()),
       icon: const Icon(Icons.help_outline_rounded),
     );
@@ -54,7 +53,7 @@ class _AddCounterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       key: const ValueKey('btn_add_counter'),
-      tooltip: Resources.string(context, AppStrings.btnAdd),
+      tooltip: AppLocalizations.of(context)!.btnAdd,
       onPressed: () => context.read<CounterListCubit>().addNewCounter(),
       icon: const Icon(Icons.add),
     );
@@ -75,12 +74,12 @@ class _DeleteCounterButton extends StatelessWidget {
       width: disabled ? 0 : 48,
       child: ClipRect(
         child: IconButton(
-          key: const ValueKey('btn_remove_counter'),
-          tooltip: Resources.string(context, AppStrings.btnDelete),
           onPressed: disabled
               ? null
               : () => context.read<CounterListCubit>().deleteCurrentCounter(),
           icon: const Icon(Icons.delete_outlined),
+          key: const ValueKey('btn_remove_counter'),
+          tooltip: AppLocalizations.of(context)!.btnDelete,
         ),
       ),
     );

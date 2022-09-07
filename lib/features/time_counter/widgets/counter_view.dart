@@ -1,7 +1,5 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/extensions/date.extensions.dart';
-import 'package:dwi/core/localization/app_localizations.dart';
-import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/features/streaks_history/streaks_history.dart';
 import 'package:dwi/features/theme_chooser/theme_chooser.dart';
 import 'package:dwi/features/time_counter/time_counter.dart';
@@ -9,6 +7,7 @@ import 'package:dwi/features/time_counter/widgets/stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// CounterView
 class CounterView extends StatelessWidget {
@@ -50,20 +49,20 @@ class _Counter extends StatelessWidget {
       builder: (BuildContext bContext) {
         return AlertDialog(
           title: Text(
-            Resources.string(bContext, AppStrings.inputTitle),
+            AppLocalizations.of(bContext)!.inputTitle,
           ),
           content: TextField(
             controller: controller,
             autofocus: true,
             decoration: InputDecoration(
-              labelText: Resources.string(
+              labelText: AppLocalizations.of(
                 bContext,
-                AppStrings.preferenceTitle,
-              ),
-              hintText: Resources.string(
+              )!
+                  .preferenceTitle,
+              hintText: AppLocalizations.of(
                 bContext,
-                AppStrings.hintTitle,
-              ),
+              )!
+                  .hintTitle,
             ),
             onChanged: (newTitle) =>
                 context.read<TimeCounterCubit>().titleChanged(newTitle),
@@ -113,14 +112,8 @@ class _Counter extends StatelessWidget {
     final longestStreak = context.watch<TimeCounterCubit>().state.longestStreak;
     final isLongestStreakAlive =
         context.watch<TimeCounterCubit>().state.isLongestStreakAlive;
-    final longestStreakDayString = longestStreak != 1
-        ? Resources.string(context, AppStrings.days)
-        : Resources.string(context, AppStrings.day);
 
     final days = DateTime.now().difference(counter.createdAt!).inDays;
-    final dayString = days != 1
-        ? Resources.string(context, AppStrings.days)
-        : Resources.string(context, AppStrings.day);
     return BlocListener<TimeCounterCubit, TimeCounterState>(
       listenWhen: (previous, current) =>
           previous.counter.theme != current.counter.theme,
@@ -153,7 +146,7 @@ class _Counter extends StatelessWidget {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: Text(
-              '${days.toString()} $dayString',
+              AppLocalizations.of(context)!.dayCount(days),
               key: ValueKey(days),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline1?.copyWith(
@@ -176,10 +169,10 @@ class _Counter extends StatelessWidget {
                   const SizedBox(width: 6)
                 ],
                 Text(
-                  Resources.string(
+                  AppLocalizations.of(
                     context,
-                    AppStrings.counterDetailCurrentStreak,
-                  ),
+                  )!
+                      .counterDetailCurrentStreak,
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -205,27 +198,30 @@ class _Counter extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   StreaksPage.route(counter),
                 ),
-                title: Resources.string(
+                title: AppLocalizations.of(
                   context,
-                  AppStrings.counterDetailLongestStreak,
-                ),
-                stat: '${longestStreak.toString()} $longestStreakDayString',
+                )!
+                    .counterDetailLongestStreak,
+                stat: AppLocalizations.of(
+                  context,
+                )!
+                    .dayCount(longestStreak ?? 0),
               ),
               StatsCard(
                 Icons.cached_rounded,
-                title: Resources.string(
+                title: AppLocalizations.of(
                   context,
-                  AppStrings.counterDetailTimesRestarted,
-                ),
+                )!
+                    .counterDetailTimesRestarted,
                 stat: restarts.toString(),
               ),
               StatsCard(
                 FeatherIcons.calendar,
                 onTap: () => _lastIncidentPicker(context),
-                title: Resources.string(
+                title: AppLocalizations.of(
                   context,
-                  AppStrings.counterDetailLastRestart,
-                ),
+                )!
+                    .counterDetailLastRestart,
                 stat: counter.createdAt!.toFormattedString('dd MMM yyyy'),
               ),
               StatsCard(
@@ -235,10 +231,10 @@ class _Counter extends StatelessWidget {
                           .read<ThemeChooserCubit>()
                           .nextTheme(counter.theme),
                     ),
-                title: Resources.string(
+                title: AppLocalizations.of(
                   context,
-                  AppStrings.counterDetailTheme,
-                ),
+                )!
+                    .counterDetailTheme,
                 stat: themeName,
               ),
             ],
@@ -264,7 +260,7 @@ class _ResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       child: Text(
-        Resources.string(context, AppStrings.btnReset).toUpperCase(),
+        AppLocalizations.of(context)!.btnReset.toUpperCase(),
       ),
       onPressed: () => context.read<TimeCounterCubit>().restartCounter(),
     );

@@ -1,9 +1,8 @@
 import 'package:dwi/core/extensions/date.extensions.dart';
-import 'package:dwi/core/localization/localization.dart';
-import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/features/streaks_history/cubit/streaks_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Displays a list of streaks as tiles inside a [ListView]
 class StreaksList extends StatelessWidget {
@@ -14,7 +13,7 @@ class StreaksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final restarts = context.watch<StreaksCubit>().state.restarts;
+    final restarts = context.watch<StreaksCubit>().state.topTenStreaks;
 
     return ListView.separated(
       separatorBuilder: (context, index) => const Padding(
@@ -38,13 +37,10 @@ class StreaksList extends StatelessWidget {
         }
 
         final days = restart.streak;
-        final dayString = days != 1
-            ? Resources.string(context, AppStrings.days)
-            : Resources.string(context, AppStrings.day);
 
         return ListTile(
           title: Text(
-            '${days.toString()} $dayString',
+            AppLocalizations.of(context)!.dayCount(days),
             style: Theme.of(context).textTheme.bodyText1?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),

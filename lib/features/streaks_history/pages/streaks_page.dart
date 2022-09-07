@@ -55,18 +55,29 @@ class _Content extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
-          child: Text(
-            'Latest Streaks',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+          child: Row(
+            children: [
+              Text(
+                'Chart',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(
+                '(Latest Streaks)',
+                style: Theme.of(context).textTheme.caption,
+              ),
+            ],
           ),
         ),
         const StreaksChart(),
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            'Streaks',
+            'Top 10',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
