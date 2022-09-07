@@ -1,8 +1,8 @@
-import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
 import 'package:dwi/features/time_counter/time_counter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// [EmptyCounters]
 class EmptyCounters extends StatelessWidget {
@@ -27,20 +27,20 @@ class EmptyCounters extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            Resources.string(context, AppStrings.noCountersTitle),
+            AppLocalizations.of(context)!.countersEmptyStateTitle,
             style: Theme.of(context).textTheme.headline5,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           Text(
-            Resources.string(context, AppStrings.noCountersMessage),
+            AppLocalizations.of(context)!.countersEmptyStateMessage,
             textAlign: TextAlign.center,
           ),
           const Spacer(),
           OutlinedButton.icon(
             icon: const Icon(Icons.add),
             label: Text(
-              Resources.string(context, AppStrings.noCountersAction),
+              AppLocalizations.of(context)!.countersEmptyStateAction,
             ),
             onPressed: () => context.read<CounterListCubit>().addNewCounter(),
           ),

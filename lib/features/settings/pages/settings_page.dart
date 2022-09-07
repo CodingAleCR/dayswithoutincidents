@@ -1,6 +1,6 @@
-import 'package:dwi/core/localization/localization.dart';
 import 'package:dwi/core/resources/resources.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wiredash/wiredash.dart';
@@ -26,7 +26,7 @@ class SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          Resources.string(context, AppStrings.titleSettings),
+          AppLocalizations.of(context)!.titleActivitySettings,
         ),
       ),
       body: Stack(
@@ -37,20 +37,16 @@ class SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Text(
-                  Resources.string(context, AppStrings.labelAbout)
-                      .toUpperCase(),
+                  AppLocalizations.of(context)!.labelAbout.toUpperCase(),
                   style: Theme.of(context).textTheme.overline,
                 ),
                 ListTile(
                   title: Text(
-                    Resources.string(context, AppStrings.settingsReportBug),
+                    AppLocalizations.of(context)!.settingsReportBug,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   subtitle: Text(
-                    Resources.string(
-                      context,
-                      AppStrings.settingsReportBugDescription,
-                    ),
+                    AppLocalizations.of(context)!.settingsReportBugDescription,
                     style: Theme.of(context).textTheme.caption,
                   ),
                   onTap: () async {
@@ -66,7 +62,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
                 ListTile(
                   title: Text(
-                    Resources.string(context, AppStrings.preferenceVersion),
+                    AppLocalizations.of(context)!.preferenceVersion,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   subtitle: FutureBuilder<PackageInfo>(
@@ -97,7 +93,7 @@ class SettingsPageState extends State<SettingsPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          Resources.string(context, AppStrings.codeCredits),
+                          AppLocalizations.of(context)!.codeCredits,
                           style: Theme.of(context)
                               .textTheme
                               .caption!
@@ -122,10 +118,10 @@ class SettingsPageState extends State<SettingsPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          Resources.string(
+                          AppLocalizations.of(
                             context,
-                            AppStrings.designCredits,
-                          ),
+                          )!
+                              .designCredits,
                           style: Theme.of(context)
                               .textTheme
                               .caption!
