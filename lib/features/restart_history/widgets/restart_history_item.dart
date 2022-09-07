@@ -3,12 +3,18 @@ import 'package:dwi/core/extensions/date.extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+/// RestartHistoryItem
 class RestartHistoryItem extends StatelessWidget {
+  /// RestartHistoryItem
+  ///
+  /// Displays a restart item as a ListTile, with the streak count as title
+  /// and the date of start and restart as subtitle.
   const RestartHistoryItem({
     Key? key,
     required this.restart,
   }) : super(key: key);
 
+  /// Restart of a counter.
   final CounterRestart restart;
 
   @override

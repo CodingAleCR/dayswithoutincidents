@@ -30,7 +30,7 @@ class StreaksPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Streaks Stats'),
+        title: const Text('Streak Stats'),
         centerTitle: true,
       ),
       body: restarts.isNotEmpty
@@ -55,22 +55,11 @@ class _Content extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
-          child: Row(
-            children: [
-              Text(
-                'Chart',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              Text(
-                '(Latest Streaks)',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ],
+          child: Text(
+            'Latest Streaks',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
           ),
         ),
         const StreaksChart(),

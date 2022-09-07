@@ -24,14 +24,23 @@ abstract class DWIColors {
   /// Brand Blue Tint 3 #E1E5FA
   static const Color brandBlueTint3 = Color(0xffE1E5FA);
 
+  /// Brand Blue Tint 2 #32416A
+  static const Color rhino = Color(0xff32416A);
+
   /// Additional Theme Red Color #F05656
   static const Color passionRed = Color(0xffF05656);
+
+  /// Additional Theme Accent Color #FD6B6B
+  static const Color bittersweet = Color(0xffF05656);
 
   /// Additional Theme Gold Color #F0E156
   static const Color goldAmber = Color(0xffF0E156);
 
   /// Additional Theme Purple Color #6B00D7
   static const Color justPurple = Color(0xff6B00D7);
+
+  /// Additional Theme Purple accent #790BE8
+  static const Color electricViolet = Color(0xff6B00D7);
 
   /// Material Color swatch based on [brandCyan]
   static final MaterialColor cyanSwatch = FromColor.fromColor(brandCyan);
