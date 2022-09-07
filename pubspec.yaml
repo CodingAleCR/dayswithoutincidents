@@ -62,8 +62,6 @@ flutter:
   generate: true
   assets:
     - assets/images/
-    - lang/en.json
-    - lang/es.json
   fonts:
     - family: Work Sans
       fonts:

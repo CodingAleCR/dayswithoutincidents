@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 
@@ -27,7 +28,10 @@ class StreaksCubit extends Cubit<StreaksState> {
           status: OperationStatus.loading,
         ),
       );
-      final restarts = await _restartService.findAllByCounter(state.counter);
+      final restarts = await _restartService.findAllByCounter(
+        state.counter,
+        sortBy: '${CounterRestartEntity.kStartedAt} DESC',
+      );
       emit(
         state.copyWith(
           status: OperationStatus.success,
