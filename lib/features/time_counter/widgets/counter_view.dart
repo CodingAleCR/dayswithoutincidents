@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/extensions/date.extensions.dart';
+import 'package:dwi/core/utils/counter_utils.dart';
 import 'package:dwi/features/features.dart';
 import 'package:dwi/features/time_counter/widgets/stats_card.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +112,7 @@ class _Counter extends StatelessWidget {
     final isLongestStreakAlive =
         context.watch<TimeCounterCubit>().state.isLongestStreakAlive;
 
-    final days = DateTime.now().difference(counter.createdAt!).inDays;
+    final daysDiff = DateTime.now().difference(counter.createdAt!);
     return BlocListener<TimeCounterCubit, TimeCounterState>(
       listenWhen: (previous, current) =>
           previous.counter.theme != current.counter.theme,
@@ -144,8 +145,8 @@ class _Counter extends StatelessWidget {
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             child: Text(
-              AppLocalizations.of(context)!.dayCount(days),
-              key: ValueKey(days),
+              timeCounterHourCount(context, daysDiff),
+              key: ValueKey(daysDiff),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headline1?.copyWith(
                     fontSize: 42,
@@ -200,10 +201,7 @@ class _Counter extends StatelessWidget {
                   context,
                 )!
                     .counterDetailLongestStreak,
-                stat: AppLocalizations.of(
-                  context,
-                )!
-                    .dayCount(longestStreak ?? 0),
+                stat: timeCounterHourCount(context, longestStreak),
               ),
               StatsCard(
                 Icons.cached_rounded,

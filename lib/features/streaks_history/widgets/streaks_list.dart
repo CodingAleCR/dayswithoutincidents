@@ -1,8 +1,8 @@
 import 'package:dwi/core/extensions/date.extensions.dart';
+import 'package:dwi/core/utils/counter_utils.dart';
 import 'package:dwi/features/streaks_history/cubit/streaks_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Displays a list of streaks as tiles inside a [ListView]
 class StreaksList extends StatelessWidget {
@@ -26,21 +26,19 @@ class StreaksList extends StatelessWidget {
         final restartingDay =
             restart.restartedAt?.toFormattedString('MMM d, yyyy');
         var subtitle = '$startingDay '
-            'to $restartingDay';
+            '→ $restartingDay';
 
         if (restart.startedAt?.isSameDay(restart.restartedAt) == true) {
           final startingHour = restart.startedAt?.toFormattedString('jm');
           final restartingHour = restart.restartedAt?.toFormattedString('jm');
 
-          subtitle = 'From $startingDay at $startingHour '
-              'to $restartingHour';
+          subtitle = '$startingDay $startingHour '
+              '→ $restartingHour';
         }
-
-        final days = restart.streak;
 
         return ListTile(
           title: Text(
-            AppLocalizations.of(context)!.dayCount(days),
+            timeCounterCount(context, restart.streakDifference),
             style: Theme.of(context).textTheme.bodyText1?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
