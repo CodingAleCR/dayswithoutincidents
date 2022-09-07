@@ -1,8 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/extensions/date.extensions.dart';
-import 'package:dwi/features/streaks_history/streaks_history.dart';
-import 'package:dwi/features/theme_chooser/theme_chooser.dart';
-import 'package:dwi/features/time_counter/time_counter.dart';
+import 'package:dwi/features/features.dart';
 import 'package:dwi/features/time_counter/widgets/stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -209,6 +207,9 @@ class _Counter extends StatelessWidget {
               ),
               StatsCard(
                 Icons.cached_rounded,
+                onTap: () => Navigator.of(context).push(
+                  RestartHistoryPage.route(counter),
+                ),
                 title: AppLocalizations.of(
                   context,
                 )!
