@@ -1,3 +1,4 @@
+export 'restart_history/restart_history.dart';
 export 'settings/settings.dart';
 export 'splash/splash.dart';
 export 'streaks_history/streaks_history.dart';

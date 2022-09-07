@@ -35,7 +35,16 @@ class CounterRestartServiceImpl extends CounterRestartService {
   }
 
   @override
-  Future<List<CounterRestart>> findAllByCounter(TimeCounter counter) async {
+  Future<List<CounterRestart>> findAllByCounter(
+    TimeCounter counter, {
+    String? sortBy,
+  }) async {
+    if (sortBy != null) {
+      final countersEntities =
+          await _repository.findAllByCounterIdSortBy(counter.id, sortBy);
+      return countersEntities.map((entity) => entity.toModel()).toList();
+    }
+
     final countersEntities = await _repository.findAllByCounterId(counter.id);
     return countersEntities.map((entity) => entity.toModel()).toList();
   }

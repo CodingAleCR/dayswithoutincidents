@@ -25,4 +25,20 @@ class CounterRestartRepository
 
     return maps.map(parseMap).toList();
   }
+
+  /// Finds all restarts by counter ID.
+  Future<List<CounterRestartEntity>> findAllByCounterIdSortBy(
+    String counterUuid,
+    String sortBy,
+  ) async {
+    final db = await database;
+    final maps = await db.query(
+      CounterRestartEntity.tablename,
+      where: '${CounterRestartEntity.kCounterId} = ?',
+      whereArgs: [counterUuid],
+      orderBy: sortBy,
+    );
+
+    return maps.map(parseMap).toList();
+  }
 }
