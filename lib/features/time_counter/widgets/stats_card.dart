@@ -52,28 +52,31 @@ class StatsCard extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        fontSize: 11,
-                        fontWeight: FontWeight.normal,
-                      ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  stat,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        height: 1.16,
-                      ),
-                ),
-              ],
+            Flexible(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          fontSize: 11,
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Flexible(
+                    child: Text(
+                      stat,
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            height: 1.16,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

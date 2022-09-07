@@ -23,9 +23,7 @@ class RestartHistoryList extends StatelessWidget {
       itemBuilder: (context, index) => RestartHistoryItem(
         restart: restarts[index],
       ),
-      physics: const NeverScrollableScrollPhysics(),
       itemCount: restarts.length,
-      shrinkWrap: true,
     );
   }
 }

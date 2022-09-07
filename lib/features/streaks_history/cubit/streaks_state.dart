@@ -21,7 +21,7 @@ class StreaksState extends Equatable {
   /// Top ten streaks ordered by streak amount.
   List<CounterRestart> get topTenStreaks {
     final sortedRestarts = [...restarts]..sort(
-        (a, b) => b.streak.compareTo(a.streak),
+        (a, b) => b.streakDifference.compareTo(a.streakDifference),
       );
 
     return sortedRestarts.take(10).toList();

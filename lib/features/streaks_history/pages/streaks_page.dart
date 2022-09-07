@@ -4,6 +4,7 @@ import 'package:dwi/features/streaks_history/cubit/streaks_cubit.dart';
 import 'package:dwi/features/streaks_history/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Streaks page, displays a chart with different streaks
 /// and a list of streaks.
@@ -30,15 +31,14 @@ class StreaksPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Streak Stats'),
+        title: Text(AppLocalizations.of(context)!.streaksPageTitle),
         centerTitle: true,
       ),
       body: restarts.isNotEmpty
           ? const _Content()
-          : const ListEmptyState(
-              title: 'No streaks yet',
-              subtitle: 'You have not restarted this counter so there are no '
-                  'streaks yet.',
+          : ListEmptyState(
+              title: AppLocalizations.of(context)!.streaksEmptyTitle,
+              subtitle: AppLocalizations.of(context)!.streaksEmptyMsg,
             ),
     );
   }
@@ -56,7 +56,7 @@ class _Content extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            'Latest Streaks',
+            AppLocalizations.of(context)!.streaksChartTitle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -66,7 +66,7 @@ class _Content extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            'Top 10',
+            AppLocalizations.of(context)!.streaksTopListTitle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),

@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/extensions/date.extensions.dart';
+import 'package:dwi/core/utils/counter_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// RestartHistoryItem
 class RestartHistoryItem extends StatelessWidget {
@@ -22,21 +22,19 @@ class RestartHistoryItem extends StatelessWidget {
     final startingDay = restart.startedAt?.toFormattedString('MMM d, yyyy');
     final restartingDay = restart.restartedAt?.toFormattedString('MMM d, yyyy');
     var subtitle = '$startingDay '
-        '-> $restartingDay';
+        '→ $restartingDay';
 
     if (restart.startedAt?.isSameDay(restart.restartedAt) == true) {
       final startingHour = restart.startedAt?.toFormattedString('jm');
       final restartingHour = restart.restartedAt?.toFormattedString('jm');
 
       subtitle = '$startingDay. $startingHour '
-          '-> $restartingHour';
+          '→ $restartingHour';
     }
-
-    final days = restart.streak;
 
     return ListTile(
       title: Text(
-        AppLocalizations.of(context)!.dayCount(days),
+        timeCounterCount(context, restart.streakDifference),
         style: Theme.of(context).textTheme.bodyText1?.copyWith(
               fontWeight: FontWeight.w600,
             ),

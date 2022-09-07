@@ -4,6 +4,7 @@ import 'package:dwi/features/restart_history/cubit/restarts_cubit.dart';
 import 'package:dwi/features/restart_history/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// RestartHistory page, displays a chart with different streaks
 /// and a list of streaks.
@@ -30,17 +31,16 @@ class RestartHistoryPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('History'),
+        title: Text(AppLocalizations.of(context)!.restartsPageTitle),
         centerTitle: true,
       ),
       body: restarts.isNotEmpty
           ? RestartHistoryList(
               restarts: restarts,
             )
-          : const ListEmptyState(
-              title: 'No restarts yet',
-              subtitle: 'You have not restarted this counter so there are no '
-                  'logs yet.',
+          : ListEmptyState(
+              title: AppLocalizations.of(context)!.restartsEmptyTitle,
+              subtitle: AppLocalizations.of(context)!.restartsEmptyMsg,
             ),
     );
   }
