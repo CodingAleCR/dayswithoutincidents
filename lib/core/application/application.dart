@@ -63,8 +63,8 @@ class _AppViewState extends State<_AppView> {
         debugShowCheckedModeBanner: false,
         title: 'Days Without Incidents',
         theme: themeData,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: S.localizationsDelegates,
+        supportedLocales: S.supportedLocales,
         localeResolutionCallback: (locale, supportedLocales) {
           if (locale != null) {
             for (final supportedLocale in supportedLocales) {

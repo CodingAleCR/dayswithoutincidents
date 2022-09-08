@@ -31,7 +31,7 @@ class RestartHistoryPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.restartsPageTitle),
+        title: Text(S.of(context).restartsPageTitle),
         centerTitle: true,
       ),
       body: restarts.isNotEmpty
@@ -39,8 +39,8 @@ class RestartHistoryPage extends StatelessWidget {
               restarts: restarts,
             )
           : ListEmptyState(
-              title: AppLocalizations.of(context)!.restartsEmptyTitle,
-              subtitle: AppLocalizations.of(context)!.restartsEmptyMsg,
+              title: S.of(context).restartsEmptyTitle,
+              subtitle: S.of(context).restartsEmptyMsg,
             ),
     );
   }

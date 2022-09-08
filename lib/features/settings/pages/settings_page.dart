@@ -26,7 +26,7 @@ class SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          AppLocalizations.of(context)!.titleActivitySettings,
+          S.of(context).titleActivitySettings,
         ),
       ),
       body: Stack(
@@ -37,16 +37,16 @@ class SettingsPageState extends State<SettingsPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Text(
-                  AppLocalizations.of(context)!.labelAbout.toUpperCase(),
+                  S.of(context).labelAbout.toUpperCase(),
                   style: Theme.of(context).textTheme.overline,
                 ),
                 ListTile(
                   title: Text(
-                    AppLocalizations.of(context)!.settingsReportBug,
+                    S.of(context).settingsReportBug,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   subtitle: Text(
-                    AppLocalizations.of(context)!.settingsReportBugDescription,
+                    S.of(context).settingsReportBugDescription,
                     style: Theme.of(context).textTheme.caption,
                   ),
                   onTap: () async {
@@ -62,7 +62,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
                 ListTile(
                   title: Text(
-                    AppLocalizations.of(context)!.preferenceVersion,
+                    S.of(context).preferenceVersion,
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                   subtitle: FutureBuilder<PackageInfo>(
@@ -93,7 +93,7 @@ class SettingsPageState extends State<SettingsPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          AppLocalizations.of(context)!.codeCredits,
+                          S.of(context).codeCredits,
                           style: Theme.of(context)
                               .textTheme
                               .caption!
@@ -118,9 +118,10 @@ class SettingsPageState extends State<SettingsPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          AppLocalizations.of(
-                            context,
-                          )!
+                          S
+                              .of(
+                                context,
+                              )
                               .designCredits,
                           style: Theme.of(context)
                               .textTheme

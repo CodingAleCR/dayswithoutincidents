@@ -81,8 +81,7 @@ class StreaksChart extends StatelessWidget {
                       fontSize: 14,
                     );
                     return LineTooltipItem(
-                      AppLocalizations.of(context)!
-                          .dayCount(touchedSpot.y.toInt()),
+                      S.of(context).dayCount(touchedSpot.y.toInt()),
                       textStyle,
                     );
                   }).toList();
