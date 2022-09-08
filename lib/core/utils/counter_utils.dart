@@ -7,19 +7,19 @@ String timeCounterCount(
   Duration duration,
 ) {
   if (duration.inDays > 0) {
-    return AppLocalizations.of(context)!.dayCount(duration.inDays);
+    return S.of(context).dayCount(duration.inDays);
   } else if (duration.inHours > 0) {
-    return AppLocalizations.of(context)!.hourCount(
-      duration.inHours,
-    );
+    return S.of(context).hourCount(
+          duration.inHours,
+        );
   } else if (duration.inMinutes > 0) {
-    return AppLocalizations.of(context)!.minuteCount(
-      duration.inMinutes,
-    );
+    return S.of(context).minuteCount(
+          duration.inMinutes,
+        );
   } else {
-    return AppLocalizations.of(context)!.minuteCount(
-      0,
-    );
+    return S.of(context).minuteCount(
+          0,
+        );
   }
 }
 
@@ -29,14 +29,14 @@ String timeCounterHourCount(
   Duration duration,
 ) {
   if (duration.inDays > 0) {
-    return AppLocalizations.of(context)!.dayCount(duration.inDays);
+    return S.of(context).dayCount(duration.inDays);
   } else if (duration.inHours > 0) {
-    return AppLocalizations.of(context)!.hourCount(
-      duration.inHours,
-    );
+    return S.of(context).hourCount(
+          duration.inHours,
+        );
   } else {
-    return AppLocalizations.of(context)!.hourCount(
-      0,
-    );
+    return S.of(context).hourCount(
+          0,
+        );
   }
 }

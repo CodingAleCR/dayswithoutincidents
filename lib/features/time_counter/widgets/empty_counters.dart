@@ -27,20 +27,20 @@ class EmptyCounters extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           Text(
-            AppLocalizations.of(context)!.countersEmptyStateTitle,
+            S.of(context).countersEmptyStateTitle,
             style: Theme.of(context).textTheme.headline5,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           Text(
-            AppLocalizations.of(context)!.countersEmptyStateMessage,
+            S.of(context).countersEmptyStateMessage,
             textAlign: TextAlign.center,
           ),
           const Spacer(),
           OutlinedButton.icon(
             icon: const Icon(Icons.add),
             label: Text(
-              AppLocalizations.of(context)!.countersEmptyStateAction,
+              S.of(context).countersEmptyStateAction,
             ),
             onPressed: () => context.read<CounterListCubit>().addNewCounter(),
           ),

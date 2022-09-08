@@ -48,19 +48,21 @@ class _Counter extends StatelessWidget {
       builder: (BuildContext bContext) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(bContext)!.inputTitle,
+            S.of(bContext).inputTitle,
           ),
           content: TextField(
             controller: controller,
             autofocus: true,
             decoration: InputDecoration(
-              labelText: AppLocalizations.of(
-                bContext,
-              )!
+              labelText: S
+                  .of(
+                    bContext,
+                  )
                   .preferenceTitle,
-              hintText: AppLocalizations.of(
-                bContext,
-              )!
+              hintText: S
+                  .of(
+                    bContext,
+                  )
                   .hintTitle,
             ),
             onChanged: (newTitle) =>
@@ -168,9 +170,10 @@ class _Counter extends StatelessWidget {
                   const SizedBox(width: 6)
                 ],
                 Text(
-                  AppLocalizations.of(
-                    context,
-                  )!
+                  S
+                      .of(
+                        context,
+                      )
                       .counterDetailCurrentStreak,
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
@@ -197,9 +200,10 @@ class _Counter extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   StreaksPage.route(counter),
                 ),
-                title: AppLocalizations.of(
-                  context,
-                )!
+                title: S
+                    .of(
+                      context,
+                    )
                     .counterDetailLongestStreak,
                 stat: timeCounterHourCount(context, longestStreak),
               ),
@@ -208,18 +212,20 @@ class _Counter extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   RestartHistoryPage.route(counter),
                 ),
-                title: AppLocalizations.of(
-                  context,
-                )!
+                title: S
+                    .of(
+                      context,
+                    )
                     .counterDetailTimesRestarted,
                 stat: restarts.toString(),
               ),
               StatsCard(
                 FeatherIcons.calendar,
                 onTap: () => _lastIncidentPicker(context),
-                title: AppLocalizations.of(
-                  context,
-                )!
+                title: S
+                    .of(
+                      context,
+                    )
                     .counterDetailLastRestart,
                 stat: counter.createdAt!.toFormattedString('dd MMM yyyy'),
               ),
@@ -230,9 +236,10 @@ class _Counter extends StatelessWidget {
                           .read<ThemeChooserCubit>()
                           .nextTheme(counter.theme),
                     ),
-                title: AppLocalizations.of(
-                  context,
-                )!
+                title: S
+                    .of(
+                      context,
+                    )
                     .counterDetailTheme,
                 stat: themeName,
               ),
@@ -259,7 +266,7 @@ class _ResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       child: Text(
-        AppLocalizations.of(context)!.btnReset.toUpperCase(),
+        S.of(context).btnReset.toUpperCase(),
       ),
       onPressed: () => context.read<TimeCounterCubit>().restartCounter(),
     );

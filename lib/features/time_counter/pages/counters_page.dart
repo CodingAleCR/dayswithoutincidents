@@ -95,7 +95,7 @@ class _Error extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(AppLocalizations.of(context)!.countersError),
+      child: Text(S.of(context).countersError),
     );
   }
 }

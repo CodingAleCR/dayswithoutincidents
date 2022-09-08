@@ -37,7 +37,7 @@ class _AboutButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      tooltip: AppLocalizations.of(context)!.titleActivitySettings,
+      tooltip: S.of(context).titleActivitySettings,
       onPressed: () => Navigator.of(context).push(SettingsPage.route()),
       icon: const Icon(Icons.help_outline_rounded),
     );
@@ -53,7 +53,7 @@ class _AddCounterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       key: const ValueKey('btn_add_counter'),
-      tooltip: AppLocalizations.of(context)!.btnAdd,
+      tooltip: S.of(context).btnAdd,
       onPressed: () => context.read<CounterListCubit>().addNewCounter(),
       icon: const Icon(Icons.add),
     );
@@ -79,7 +79,7 @@ class _DeleteCounterButton extends StatelessWidget {
               : () => context.read<CounterListCubit>().deleteCurrentCounter(),
           icon: const Icon(Icons.delete_outlined),
           key: const ValueKey('btn_remove_counter'),
-          tooltip: AppLocalizations.of(context)!.btnDelete,
+          tooltip: S.of(context).btnDelete,
         ),
       ),
     );

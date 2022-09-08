@@ -31,14 +31,14 @@ class StreaksPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.streaksPageTitle),
+        title: Text(S.of(context).streaksPageTitle),
         centerTitle: true,
       ),
       body: restarts.isNotEmpty
           ? const _Content()
           : ListEmptyState(
-              title: AppLocalizations.of(context)!.streaksEmptyTitle,
-              subtitle: AppLocalizations.of(context)!.streaksEmptyMsg,
+              title: S.of(context).streaksEmptyTitle,
+              subtitle: S.of(context).streaksEmptyMsg,
             ),
     );
   }
@@ -56,7 +56,7 @@ class _Content extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            AppLocalizations.of(context)!.streaksChartTitle,
+            S.of(context).streaksChartTitle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -66,7 +66,7 @@ class _Content extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            AppLocalizations.of(context)!.streaksTopListTitle,
+            S.of(context).streaksTopListTitle,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
