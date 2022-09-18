@@ -35,11 +35,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: DWIThemes.getTheme(AppTheme.plainLight).themeData,
+      data: DWIThemes.getTheme(AppTheme.happyCyan).themeData,
       child: Scaffold(
         body: Center(
           child: Image.asset(
-            'assets/images/2.0x/codingale-light.png',
+            'assets/launcher/dwi-foreground.png',
+            width: 150,
           ),
         ),
       ),
