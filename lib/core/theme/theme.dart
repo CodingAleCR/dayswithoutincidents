@@ -178,7 +178,7 @@ class PlainLightTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -188,14 +188,14 @@ class PlainLightTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: brandedTheme.textColor,
-            onPrimary: brandedTheme.primaryColor,
+            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.primaryColor,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -281,7 +281,7 @@ class DarkSideTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -291,14 +291,14 @@ class DarkSideTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: brandedTheme.textColor,
-            onPrimary: DWIColors.brandBlue,
+            backgroundColor: brandedTheme.textColor,
+            foregroundColor: DWIColors.brandBlue,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -384,7 +384,7 @@ class PassionRedTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -394,14 +394,14 @@ class PassionRedTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: brandedTheme.primaryColor,
+            backgroundColor: brandedTheme.primaryColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: brandedTheme.textColor,
-            onPrimary: brandedTheme.primaryColor,
+            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.primaryColor,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -488,7 +488,7 @@ class JustPurpleTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -498,14 +498,14 @@ class JustPurpleTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: brandedTheme.textColor,
-            onPrimary: brandedTheme.primaryColor,
+            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.primaryColor,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -592,7 +592,7 @@ class GoldAmberTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -602,14 +602,14 @@ class GoldAmberTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: brandedTheme.textColor,
-            onPrimary: brandedTheme.primaryColor,
+            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.primaryColor,
             shape: const BeveledRectangleBorder(),
           ),
         ),
@@ -696,7 +696,7 @@ class HappyCyanTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -706,14 +706,14 @@ class HappyCyanTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            primary: brandedTheme.textColor,
+            backgroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            primary: brandedTheme.textColor,
-            onPrimary: brandedTheme.primaryColor,
+            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.primaryColor,
             shape: const BeveledRectangleBorder(),
           ),
         ),
