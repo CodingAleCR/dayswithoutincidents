@@ -178,7 +178,7 @@ class PlainLightTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -188,7 +188,7 @@ class PlainLightTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -281,7 +281,7 @@ class DarkSideTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -291,7 +291,7 @@ class DarkSideTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -384,7 +384,7 @@ class PassionRedTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -394,7 +394,7 @@ class PassionRedTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: brandedTheme.primaryColor,
+            foregroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -488,7 +488,7 @@ class JustPurpleTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -498,7 +498,7 @@ class JustPurpleTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -592,7 +592,7 @@ class GoldAmberTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -602,7 +602,7 @@ class GoldAmberTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -696,7 +696,7 @@ class HappyCyanTheme extends DWITheme {
         splashColor: brandedTheme.textColor?.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
             side: BorderSide(
               color: brandedTheme.textColor!,
               width: 1.5,
@@ -706,7 +706,7 @@ class HappyCyanTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            backgroundColor: brandedTheme.textColor,
+            foregroundColor: brandedTheme.textColor,
           ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
