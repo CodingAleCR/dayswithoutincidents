@@ -7,33 +7,24 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  # Data layer
   data:
     path: packages/data
-  # Domain layer
   domain:
     path: packages/domain
-  # Value equality
   equatable: ^2.0.5
   fl_chart: ^0.55.1
   flutter:
     sdk: flutter
-  # Bloc for state management
   flutter_bloc: ^8.1.1
-  # Feather Icons package
   flutter_feather_icons: ^2.0.0
   flutter_localizations:
     sdk: flutter
-  # Build Information
   intl: ^0.17.0
   package_info_plus: ^1.4.3+1
-  # Monitoring
   sentry_flutter: ^6.9.1
-  # Launcher for URLs
+  upgrader: ^4.8.0
   url_launcher: ^6.1.5
-  # UUID
   uuid: ^3.0.6
-  # Bug Reporting
   wiredash: ^1.5.0
 
 dev_dependencies:
@@ -47,7 +38,7 @@ dev_dependencies:
 
 flutter_icons:
   image_path: 'assets/launcher/dwi-512x512-android.png'
-  android: true # can specify file name here e.g. "ic_launcher"
+  android: true
   ios: true
   adaptive_icon_background: '#56F0D4'
   adaptive_icon_foreground: 'assets/launcher/dwi-foreground.png'

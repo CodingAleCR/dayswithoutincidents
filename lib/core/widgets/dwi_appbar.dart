@@ -1,7 +1,9 @@
+import 'package:dwi/core/widgets/upgrader_button.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upgrader/upgrader.dart';
 
 /// DWIAppBar
 class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,6 +19,7 @@ class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
       preferredSize: preferredSize,
       child: AppBar(
         actions: const [
+          _UpdateButton(),
           _AddCounterButton(),
           _DeleteCounterButton(),
           _AboutButton(),
@@ -81,6 +84,23 @@ class _DeleteCounterButton extends StatelessWidget {
           key: const ValueKey('btn_remove_counter'),
           tooltip: S.of(context).btnDelete,
         ),
+      ),
+    );
+  }
+}
+
+class _UpdateButton extends StatelessWidget {
+  const _UpdateButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return UpgraderButton(
+      upgrader: Upgrader(
+        shouldPopScope: () => true,
+        showReleaseNotes: false,
+        showIgnore: false,
       ),
     );
   }
