@@ -1,4 +1,4 @@
-import 'package:dwi/core/widgets/upgrader_button.dart';
+import 'package:dwi/core/widgets/widgets.dart';
 import 'package:dwi/features/features.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,13 +96,21 @@ class _UpdateButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UpgraderButton(
+    return UpgradeWidget(
       upgrader: Upgrader(
         //! This is a bit of a hack to allow the alert dialog to be shown
         //! repeatedly.
         durationUntilAlertAgain: const Duration(milliseconds: 500),
         showReleaseNotes: false,
         showIgnore: false,
+      ),
+      builder: (context, upgrader) => CircleAvatar(
+        child: IconButton(
+          onPressed: () {
+            upgrader.checkVersion(context: context);
+          },
+          icon: const Icon(Icons.upload),
+        ),
       ),
     );
   }
