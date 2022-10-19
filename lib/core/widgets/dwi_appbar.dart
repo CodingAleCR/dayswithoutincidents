@@ -98,7 +98,9 @@ class _UpdateButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return UpgraderButton(
       upgrader: Upgrader(
-        shouldPopScope: () => true,
+        //! This is a bit of a hack to allow the alert dialog to be shown
+        //! repeatedly.
+        durationUntilAlertAgain: const Duration(milliseconds: 500),
         showReleaseNotes: false,
         showIgnore: false,
       ),
