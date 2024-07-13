@@ -1,5 +1,10 @@
+import 'package:domain/domain.dart';
 import 'package:dwi/core/resources/resources.dart';
+import 'package:dwi/features/settings/cubit/preferences_cubit.dart';
+import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
+import 'package:environment/environment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,11 +13,17 @@ import 'package:wiredash/wiredash.dart';
 /// SettingsPage
 class SettingsPage extends StatefulWidget {
   /// Defines the settings page shown for customizing user preferences.
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({super.key});
 
   /// Convenience route instatiaton.
   static MaterialPageRoute<void> route() => MaterialPageRoute(
-        builder: (context) => const SettingsPage(),
+        builder: (_) => BlocProvider(
+          create: (c) => PreferencesCubit(
+            c.read<PreferencesService>(),
+            c.read<TimeCounterService>(),
+          )..fetchPreferences(),
+          child: const SettingsPage(),
+        ),
       );
 
   @override
@@ -23,6 +34,9 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    final preferredMode = context.watch<PreferencesCubit>().state.preferredMode;
+    final theme = context.watch<PreferencesCubit>().state.theme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -36,34 +50,94 @@ class SettingsPageState extends State<SettingsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                if (EnvironmentConfig.ffCustomViewsEnabled) ...[
+                  Text(
+                    S.of(context).labelCustomization.toUpperCase(),
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Layout',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    subtitle: Text(
+                      preferredMode.isCarousel
+                          ? 'Show a single counter at a time. '
+                              'Swipe left or right to change the focused '
+                              'counter.'
+                          : 'Display all counters at once in a list. Scroll '
+                              'up or down to navigate between counters.',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    trailing: Text(
+                      preferredMode.isList ? 'List' : 'Carousel',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    onTap: () {
+                      context
+                          .read<PreferencesCubit>()
+                          .togglePreferredDisplayMode();
+                      context.read<ThemeChooserCubit>().fetchTheme();
+                    },
+                  ),
+                  if (preferredMode.isList) ...[
+                    const SizedBox(height: 16),
+                    ListTile(
+                      title: Text(
+                        'List Theme',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      subtitle: Text(
+                        'Choose between a wide range of available themes'
+                        ' designed by Perks&Co',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      trailing: Text(
+                        theme.displayName,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      onTap: preferredMode.isList
+                          ? () => context.read<PreferencesCubit>().toggleTheme()
+                          : null,
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                ],
                 Text(
                   S.of(context).labelAbout.toUpperCase(),
-                  style: Theme.of(context).textTheme.overline,
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
                 ListTile(
                   title: Text(
                     S.of(context).settingsReportBug,
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   subtitle: Text(
                     S.of(context).settingsReportBugDescription,
-                    style: Theme.of(context).textTheme.caption,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   onTap: () async {
-                    final wiredash = Wiredash.of(context);
-                    final info = await PackageInfo.fromPlatform();
+                    Wiredash.of(context).show();
+                    // final wiredash = Wiredash.of(context);
+                    // final info = await PackageInfo.fromPlatform();
 
-                    wiredash.setBuildProperties(
-                      buildNumber: info.buildNumber,
-                      buildVersion: info.version,
-                    );
-                    wiredash.show();
+                    // wiredash.setBuildProperties(
+                    //   buildNumber: info.buildNumber,
+                    //   buildVersion: info.version,
+                    // );
+                    // wiredash.show();
                   },
                 ),
                 ListTile(
                   title: Text(
                     S.of(context).preferenceVersion,
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                   subtitle: FutureBuilder<PackageInfo>(
                     future: PackageInfo.fromPlatform(),
@@ -75,7 +149,7 @@ class SettingsPageState extends State<SettingsPage> {
 
                       return Text(
                         info!.version,
-                        style: Theme.of(context).textTheme.caption,
+                        style: Theme.of(context).textTheme.bodySmall,
                       );
                     },
                   ),
@@ -96,7 +170,7 @@ class SettingsPageState extends State<SettingsPage> {
                           S.of(context).codeCredits,
                           style: Theme.of(context)
                               .textTheme
-                              .caption!
+                              .bodySmall!
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
                         const SizedBox(width: 4),
@@ -125,7 +199,7 @@ class SettingsPageState extends State<SettingsPage> {
                               .designCredits,
                           style: Theme.of(context)
                               .textTheme
-                              .caption!
+                              .bodySmall!
                               .copyWith(fontWeight: FontWeight.normal),
                         ),
                         const SizedBox(width: 4),
@@ -133,11 +207,11 @@ class SettingsPageState extends State<SettingsPage> {
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
-          Positioned(
+          const Positioned(
             bottom: 32,
             left: 0,
             right: 0,
@@ -146,7 +220,7 @@ class SettingsPageState extends State<SettingsPage> {
                 child: Column(),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

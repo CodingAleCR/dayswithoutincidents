@@ -17,6 +17,9 @@ Future<void> main() async {
           RepositoryProvider<CounterRestartService>(
             create: (context) => CounterRestartServiceImpl(),
           ),
+          RepositoryProvider<PreferencesService>(
+            create: (context) => PreferencesServiceImpl(),
+          ),
         ],
         child: const DWIApplication(),
       ),

@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'counter_list_state.dart';
 
@@ -14,6 +14,7 @@ class CounterListCubit extends Cubit<CounterListState> {
   CounterListCubit(
     this._themeChooserCubit,
     this._service,
+    this._preferenceService,
   ) : super(const CounterListState()) {
     _suscription = _service.allCounters.listen(
       (counters) => emit(
@@ -25,6 +26,7 @@ class CounterListCubit extends Cubit<CounterListState> {
   }
 
   final ThemeChooserCubit _themeChooserCubit;
+  final PreferencesService _preferenceService;
   final TimeCounterService _service;
   late StreamSubscription<List<TimeCounter>> _suscription;
 
@@ -32,6 +34,24 @@ class CounterListCubit extends Cubit<CounterListState> {
   Future<void> close() async {
     await _suscription.cancel();
     await super.close();
+  }
+
+  /// Reloads the display mode stored for the app.
+  Future<void> reloadDisplayMode() async {
+    try {
+      final preferredMode = await _preferenceService.findDisplayMode();
+
+      emit(
+        state.copyWith(
+          preferredMode: preferredMode,
+        ),
+      );
+    } on Exception catch (e, s) {
+      emit(state.copyWith(status: OperationStatus.failure));
+
+      log(e.toString());
+      log(s.toString());
+    }
   }
 
   /// Fetches all the counters from storage, and updates the selected time
@@ -43,6 +63,7 @@ class CounterListCubit extends Cubit<CounterListState> {
           status: OperationStatus.loading,
         ),
       );
+      final preferredMode = await _preferenceService.findDisplayMode();
       final allCounters = await _service.findAll();
 
       emit(
@@ -50,6 +71,7 @@ class CounterListCubit extends Cubit<CounterListState> {
           status: OperationStatus.success,
           counters: allCounters,
           selectedIdx: selectedIdx,
+          preferredMode: preferredMode,
         ),
       );
     } on Exception catch (e, s) {

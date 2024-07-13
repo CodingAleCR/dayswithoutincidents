@@ -11,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class StreaksPage extends StatelessWidget {
   /// Streaks page, displays a chart with different streaks
   /// and a list of streaks.
-  const StreaksPage({Key? key}) : super(key: key);
+  const StreaksPage({super.key});
 
   /// Convenience route instatiaton.
   static MaterialPageRoute<void> route(TimeCounter counter) =>
@@ -45,9 +45,7 @@ class StreaksPage extends StatelessWidget {
 }
 
 class _Content extends StatelessWidget {
-  const _Content({
-    Key? key,
-  }) : super(key: key);
+  const _Content();
 
   @override
   Widget build(BuildContext context) {

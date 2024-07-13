@@ -4,20 +4,20 @@ import 'package:domain/domain.dart';
 /// A time counter. Counts how many time has passed since it was created.
 class TimeCounterEntity extends Entity<TimeCounter> {
   /// Creates Entity from model
-  TimeCounterEntity.fromModel(TimeCounter model)
+  TimeCounterEntity.fromModel(super.model)
       : uuid = model.id,
         title = model.title,
         createdAt = model.createdAt?.toIso8601String() ?? '',
         theme = model.theme.key(),
-        super.fromModel(model);
+        super.fromModel();
 
   /// Creates entity from database map.
-  TimeCounterEntity.fromDatabase(Map<String, dynamic> parsedJson)
+  TimeCounterEntity.fromDatabase(super.parsedJson)
       : uuid = parsedJson[kId] as String,
         title = parsedJson[kTitle] as String,
         createdAt = parsedJson[kCreatedAt] as String,
         theme = parsedJson[kTheme] as String,
-        super.fromDatabase(parsedJson);
+        super.fromDatabase();
 
   /// Unique identifier for the counter.
   final String uuid;

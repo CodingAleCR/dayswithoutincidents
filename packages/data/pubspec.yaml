@@ -5,28 +5,28 @@ homepage: null
 publish_to: none
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=1.17.0'
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: '>=3.0.0 <4.0.0'
 
 dependencies:
   domain:
     path: ../domain
   # Value equality
-  equatable: ^2.0.3
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   # Monitoring
-  rxdart: ^0.27.3
-  sentry_flutter: ^6.5.1
+  rxdart: ^0.28.0
+  sentry_flutter: ^7.20.2
   # Local cache
-  shared_preferences: ^2.0.13
+  shared_preferences: ^2.2.2
   # Database
-  sqflite: ^2.0.2+1
+  sqflite: ^2.3.0
   # UUID
-  uuid: ^3.0.6
+  uuid: ^4.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  very_good_analysis: ^2.4.0
+  very_good_analysis: ^5.1.0
 flutter: null

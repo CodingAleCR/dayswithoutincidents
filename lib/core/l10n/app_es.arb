@@ -1,4 +1,5 @@
 {
+  "@@locale": "es",
   "dayCount": "{count, plural, =0{0 días} =1{1 día} other{{count} días}}",
   "@dayCount": {
     "description": "Contador de días dentro del widget.",
@@ -29,7 +30,7 @@
   "appName": "Días Sin Incidentes",
   "daysWithoutIncidents": "Días Sin Incidentes",
   "btnReset": "Reiniciar",
-  "titleActivitySettings": "Acerca De",
+  "titleActivitySettings": "Configuración",
   "labelCustomization": "Personalizar",
   "preferenceTitle": "Título",
   "summaryTitle": "El título que se muestra en el app.",
@@ -60,7 +61,8 @@
   "counterDetailLastRestart": "Último Reinicio",
   "counterDetailTheme": "Tema",
   "btnAdd": "Nuevo Contador",
-  "btnDelete": "Borrar Contador",
+  "btnEdit": "EDITAR",
+  "btnDelete": "Borrar",
   "restartsPageTitle": "Historial",
   "restartsEmptyTitle": "Sin reinicios todavía",
   "restartsEmptyMsg": "No has reiniciado este contador todavía, así que el historial está vacío.",
@@ -68,5 +70,17 @@
   "streaksChartTitle": "Últimas Rachas",
   "streaksTopListTitle": "Rachas Más Largas",
   "streaksEmptyTitle": "Sin rachas todavía",
-  "streaksEmptyMsg": "No has reiniciado este contador, por eso no hay rachas todavía."
+  "streaksEmptyMsg": "No has reiniciado este contador, por eso no hay rachas todavía.",
+  "addRestartBtn": "Agregar",
+  "listViewTitle": "Tus Contadores",
+  "counterFormTitle": "Editar",
+  "counterFormSubtitle": "¡Prepárate!",
+  "counterFormNameField": "Título",
+  "counterFormNameFieldHint": "D´ias Sin Incidentes",
+  "counterFormLastRestartField": "Último Reinicio",
+  "counterFormSubmitBtn": "GUARDAR CAMBIOS",
+  "restartDialogTitle": "¿Quieres reiniciar este contador?",
+  "restartDialogContentLn1": "¿Estás seguro de que quieres reiniciar ",
+  "restartDialogContentLn2": "? Perderás la racha de ",
+  "restartDialogContentLn3": " y comenzarás una nueva."
 }

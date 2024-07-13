@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'streaks_state.dart';
 

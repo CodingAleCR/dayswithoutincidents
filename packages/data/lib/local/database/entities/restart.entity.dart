@@ -7,20 +7,20 @@ import 'package:domain/domain.dart';
 /// and stored locally.
 class CounterRestartEntity extends Entity<CounterRestart> {
   /// Creates Entity from model
-  CounterRestartEntity.fromModel(CounterRestart model)
+  CounterRestartEntity.fromModel(super.model)
       : uuid = model.id,
         counterId = model.counter.id,
         startedAt = model.startedAt?.toIso8601String() ?? '',
         restartedAt = model.restartedAt?.toIso8601String() ?? '',
-        super.fromModel(model);
+        super.fromModel();
 
   /// Creates entity from database map.
-  CounterRestartEntity.fromDatabase(Map<String, dynamic> parsedJson)
+  CounterRestartEntity.fromDatabase(super.parsedJson)
       : uuid = parsedJson[kId] as String,
         counterId = parsedJson[kCounterId] as String,
         startedAt = parsedJson[kStartedAt] as String,
         restartedAt = parsedJson[kRestartedAt] as String,
-        super.fromDatabase(parsedJson);
+        super.fromDatabase();
 
   /// Unique identifier for the restart.
   final String uuid;

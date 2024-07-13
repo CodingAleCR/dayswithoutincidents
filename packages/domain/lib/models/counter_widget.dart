@@ -14,8 +14,8 @@ class CounterWidget extends Equatable {
 
   /// Constructor
   CounterWidget.generated({
-    TimeCounter? counter,
     required this.widgetId,
+    TimeCounter? counter,
   })  : id = const Uuid().v4(),
         counter = counter ?? TimeCounter.empty;
 
@@ -28,7 +28,6 @@ class CounterWidget extends Equatable {
   /// ID tied to the widget.
   final String widgetId;
 
-
   /// Empty representation of a restart.
   static const CounterWidget empty = CounterWidget(
     id: '',
@@ -38,10 +37,10 @@ class CounterWidget extends Equatable {
 
   @override
   List<Object?> get props => [
-    id,
-    counter,
-    widgetId,
-  ];
+        id,
+        counter,
+        widgetId,
+      ];
 
   /// Provides a copied instance.
   CounterWidget copyWith({

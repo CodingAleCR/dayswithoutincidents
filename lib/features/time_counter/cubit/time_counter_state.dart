@@ -22,6 +22,13 @@ class TimeCounterState extends Equatable {
   /// Counter to be displayed
   final TimeCounter counter;
 
+  /// Current streak of [counter].
+  ///
+  /// It is inferred from [restarts]
+  Duration get currentStreak {
+    return DateTime.now().difference(counter.createdAt!);
+  }
+
   /// Longest streak of [counter].
   ///
   /// It is inferred from [restarts]

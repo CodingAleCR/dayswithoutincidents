@@ -1,6 +1,6 @@
-/// Base Entity
 // ignore_for_file: avoid_unused_constructor_parameters
 
+/// Base Entity
 abstract class Entity<Model> {
   /// Creates an entity from a model
   Entity.fromModel(Model model);

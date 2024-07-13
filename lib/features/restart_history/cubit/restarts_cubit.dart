@@ -1,7 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 part 'restarts_state.dart';
 
@@ -38,6 +39,37 @@ class RestartsCubit extends Cubit<RestartsState> {
           restarts: restarts,
         ),
       );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          status: OperationStatus.failure,
+        ),
+      );
+    }
+  }
+
+  /// Fetches all the restarts for the counter in state.
+  Future<void> addRestart({
+    required DateTime from,
+    required DateTime to,
+  }) async {
+    try {
+      emit(
+        state.copyWith(
+          status: OperationStatus.loading,
+        ),
+      );
+
+      final restart = CounterRestart(
+        id: const Uuid().v4(),
+        counter: state.counter,
+        startedAt: from,
+        restartedAt: to,
+      );
+
+      await _restartService.save(restart);
+
+      await fetchRestarts();
     } catch (e) {
       emit(
         state.copyWith(

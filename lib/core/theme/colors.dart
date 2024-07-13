@@ -31,7 +31,7 @@ abstract class DWIColors {
   static const Color passionRed = Color(0xffF05656);
 
   /// Additional Theme Accent Color #FD6B6B
-  static const Color bittersweet = Color(0xffF05656);
+  static const Color bittersweet = Color(0xffFD6B6B);
 
   /// Additional Theme Gold Color #F0E156
   static const Color goldAmber = Color(0xffF0E156);
@@ -40,7 +40,7 @@ abstract class DWIColors {
   static const Color justPurple = Color(0xff6B00D7);
 
   /// Additional Theme Purple accent #790BE8
-  static const Color electricViolet = Color(0xff6B00D7);
+  static const Color electricViolet = Color(0xff790BE8);
 
   /// Material Color swatch based on [brandCyan]
   static final MaterialColor cyanSwatch = FromColor.fromColor(brandCyan);

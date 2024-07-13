@@ -1,7 +1,11 @@
 import 'package:domain/domain.dart';
 import 'package:dwi/core/extensions/date.extensions.dart';
+import 'package:dwi/core/theme/theme.dart';
 import 'package:dwi/core/utils/counter_utils.dart';
+import 'package:dwi/core/utils/date_picker_utils.dart';
 import 'package:dwi/features/features.dart';
+import 'package:dwi/features/time_counter/widgets/edit_button.dart';
+import 'package:dwi/features/time_counter/widgets/restart_button.dart';
 import 'package:dwi/features/time_counter/widgets/stats_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,9 +16,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CounterView extends StatelessWidget {
   /// Displays a counter's information
   const CounterView({
-    Key? key,
     required this.counter,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// Counter to be displayed
   final TimeCounter counter;
@@ -36,78 +40,12 @@ class CounterView extends StatelessWidget {
 }
 
 class _Counter extends StatelessWidget {
-  const _Counter({
-    Key? key,
-  }) : super(key: key);
-
-  void _titleInputDialog(BuildContext context) {
-    final counter = context.read<TimeCounterCubit>().state.counter;
-    final controller = TextEditingController(text: counter.title);
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext bContext) {
-        return AlertDialog(
-          title: Text(
-            S.of(bContext).inputTitle,
-          ),
-          content: TextField(
-            controller: controller,
-            autofocus: true,
-            decoration: InputDecoration(
-              labelText: S
-                  .of(
-                    bContext,
-                  )
-                  .preferenceTitle,
-              hintText: S
-                  .of(
-                    bContext,
-                  )
-                  .hintTitle,
-            ),
-            onChanged: (newTitle) =>
-                context.read<TimeCounterCubit>().titleChanged(newTitle),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text(MaterialLocalizations.of(bContext).cancelButtonLabel),
-              onPressed: () => Navigator.of(bContext).pop(),
-            ),
-            TextButton(
-              child: Text(MaterialLocalizations.of(bContext).okButtonLabel),
-              onPressed: () async {
-                final cubit = context.read<TimeCounterCubit>();
-                final navigator = Navigator.of(bContext);
-
-                await cubit.saveCounter();
-                navigator.pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> _lastIncidentPicker(BuildContext context) async {
-    final timeCounterCubit = context.read<TimeCounterCubit>();
-    final counter = timeCounterCubit.state.counter;
-    final today = DateTime.now();
-    final selectedDate = await showDatePicker(
-      context: context,
-      initialDate: counter.createdAt!,
-      firstDate: DateTime(today.year - 100),
-      lastDate: today,
-    );
-
-    if (selectedDate != null) {
-      timeCounterCubit.dateChanged(selectedDate);
-    }
-  }
+  const _Counter();
 
   @override
   Widget build(BuildContext context) {
     final counter = context.watch<TimeCounterCubit>().state.counter;
+    final counterTheme = DWIThemes.getTheme(counter.theme).brandedTheme;
     final themeName = counter.theme.displayName;
     final restarts = context.watch<TimeCounterCubit>().state.restarts.length;
     final longestStreak = context.watch<TimeCounterCubit>().state.longestStreak;
@@ -127,19 +65,14 @@ class _Counter extends StatelessWidget {
         children: <Widget>[
           AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
-            child: InkWell(
-              key: ValueKey(counter.title),
-              borderRadius: BorderRadius.circular(8),
-              onTap: () => _titleInputDialog(context),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  counter.title.toUpperCase(),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                counter.title.toUpperCase(),
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ),
@@ -150,7 +83,7 @@ class _Counter extends StatelessWidget {
               timeCounterHourCount(context, daysDiff),
               key: ValueKey(daysDiff),
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline1?.copyWith(
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
                     fontSize: 42,
                     fontWeight: FontWeight.bold,
                   ),
@@ -167,18 +100,14 @@ class _Counter extends StatelessWidget {
                     FeatherIcons.zap,
                     size: 16,
                   ),
-                  const SizedBox(width: 6)
+                  const SizedBox(width: 6),
                 ],
                 Text(
-                  S
-                      .of(
-                        context,
-                      )
-                      .counterDetailCurrentStreak,
+                  S.of(context).counterDetailCurrentStreak,
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
-                      .subtitle2
+                      .titleSmall
                       ?.copyWith(fontWeight: FontWeight.w300, fontSize: 14),
                 ),
               ],
@@ -200,34 +129,39 @@ class _Counter extends StatelessWidget {
                 onTap: () => Navigator.of(context).push(
                   StreaksPage.route(counter),
                 ),
-                title: S
-                    .of(
-                      context,
-                    )
-                    .counterDetailLongestStreak,
+                title: S.of(context).counterDetailLongestStreak,
                 stat: timeCounterHourCount(context, longestStreak),
+                color: counterTheme.accentColor,
               ),
               StatsCard(
                 Icons.cached_rounded,
                 onTap: () => Navigator.of(context).push(
                   RestartHistoryPage.route(counter),
                 ),
-                title: S
-                    .of(
-                      context,
-                    )
-                    .counterDetailTimesRestarted,
+                title: S.of(context).counterDetailTimesRestarted,
                 stat: restarts.toString(),
+                color: counterTheme.accentColor,
               ),
               StatsCard(
                 FeatherIcons.calendar,
-                onTap: () => _lastIncidentPicker(context),
+                onTap: () async {
+                  final updatedRestart = await showDateTimePicker(
+                    context,
+                    initialDate: DateTime.now(),
+                    currentDate: counter.createdAt!,
+                  );
+
+                  if (updatedRestart == null || !context.mounted) return;
+
+                  context.read<TimeCounterCubit>().dateChanged(updatedRestart);
+                },
                 title: S
                     .of(
                       context,
                     )
                     .counterDetailLastRestart,
                 stat: counter.createdAt!.toFormattedString('dd MMM yyyy'),
+                color: counterTheme.accentColor,
               ),
               StatsCard(
                 Icons.palette_outlined,
@@ -242,33 +176,21 @@ class _Counter extends StatelessWidget {
                     )
                     .counterDetailTheme,
                 stat: themeName,
+                color: counterTheme.accentColor,
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          _ResetButton(
-            counterId: counter.id,
+          const SizedBox(height: 2),
+          const Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(child: EditButton()),
+              SizedBox(width: 8),
+              Expanded(child: ResetButton()),
+            ],
           ),
         ],
       ),
-    );
-  }
-}
-
-class _ResetButton extends StatelessWidget {
-  const _ResetButton({
-    Key? key,
-    required this.counterId,
-  }) : super(key: key);
-
-  final String counterId;
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      child: Text(
-        S.of(context).btnReset.toUpperCase(),
-      ),
-      onPressed: () => context.read<TimeCounterCubit>().restartCounter(),
     );
   }
 }

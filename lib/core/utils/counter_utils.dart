@@ -1,3 +1,5 @@
+import 'package:duration/duration.dart';
+import 'package:dwi/core/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -29,14 +31,28 @@ String timeCounterHourCount(
   Duration duration,
 ) {
   if (duration.inDays > 0) {
-    return S.of(context).dayCount(duration.inDays);
-  } else if (duration.inHours > 0) {
-    return S.of(context).hourCount(
-          duration.inHours,
-        );
-  } else {
-    return S.of(context).hourCount(
-          0,
-        );
+    return prettyDuration(
+      duration,
+      tersity: DurationTersity.day,
+      upperTersity: DurationTersity.day,
+      delimiter: ', ',
+      locale: context.durationLocale,
+    );
   }
+
+  if (duration.inHours > 0) {
+    return prettyDuration(
+      duration,
+      tersity: DurationTersity.hour,
+      delimiter: ', ',
+      locale: context.durationLocale,
+    );
+  }
+
+  return prettyDuration(
+    duration,
+    tersity: DurationTersity.minute,
+    delimiter: ', ',
+    locale: context.durationLocale,
+  );
 }

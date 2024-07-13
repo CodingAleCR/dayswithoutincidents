@@ -11,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RestartHistoryPage extends StatelessWidget {
   /// RestartHistory page, displays a chart with different streaks
   /// and a list of streaks.
-  const RestartHistoryPage({Key? key}) : super(key: key);
+  const RestartHistoryPage({super.key});
 
   /// Convenience route instatiaton.
   static MaterialPageRoute<void> route(TimeCounter counter) =>
@@ -33,6 +33,25 @@ class RestartHistoryPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(S.of(context).restartsPageTitle),
         centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () async {
+              final range = await showDateRangePicker(
+                context: context,
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+              );
+
+              if (range == null || !context.mounted) return;
+
+              await context.read<RestartsCubit>().addRestart(
+                    from: range.start,
+                    to: range.end,
+                  );
+            },
+            child: Text(S.of(context).addRestartBtn),
+          ),
+        ],
       ),
       body: restarts.isNotEmpty
           ? RestartHistoryList(

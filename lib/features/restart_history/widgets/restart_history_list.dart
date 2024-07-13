@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 class RestartHistoryList extends StatelessWidget {
   /// Displays a list of restarts as tiles inside a [ListView]
   const RestartHistoryList({
-    Key? key,
     required this.restarts,
-  }) : super(key: key);
+    super.key,
+  });
 
   /// List of restarts to be used
   final List<CounterRestart> restarts;

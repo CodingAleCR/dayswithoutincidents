@@ -1,8 +1,9 @@
 import 'package:domain/domain.dart';
-import 'package:dwi/core/env/environment.dart';
 import 'package:dwi/core/navigation/navigation.dart';
+import 'package:dwi/core/theme/colors.dart';
 import 'package:dwi/core/theme/theme.dart';
 import 'package:dwi/features/features.dart';
+import 'package:environment/environment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -13,8 +14,8 @@ import 'package:wiredash/wiredash.dart';
 class DWIApplication extends StatelessWidget {
   /// @macro
   const DWIApplication({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class DWIApplication extends StatelessWidget {
         BlocProvider(
           create: (_) => ThemeChooserCubit(
             context.read<TimeCounterService>(),
+            context.read<PreferencesService>(),
           )..fetchTheme(),
         ),
       ],
@@ -35,9 +37,7 @@ class DWIApplication extends StatelessWidget {
 }
 
 class _AppView extends StatefulWidget {
-  const _AppView({
-    Key? key,
-  }) : super(key: key);
+  const _AppView();
 
   @override
   _AppViewState createState() => _AppViewState();
@@ -57,6 +57,10 @@ class _AppViewState extends State<_AppView> {
     return Wiredash(
       projectId: EnvironmentConfig.wiredashProjectId,
       secret: EnvironmentConfig.wiredashSecret,
+      theme: WiredashThemeData.fromColor(
+        primaryColor: DWIColors.brandCyan,
+        brightness: Brightness.light,
+      ),
       child: MaterialApp(
         navigatorKey: _navigatorKey,
         navigatorObservers: [SentryNavigatorObserver()],
@@ -83,16 +87,13 @@ class _AppViewState extends State<_AppView> {
                   SplashPage.route(),
                   (_) => false,
                 );
-                break;
               case Pages.counterList:
                 _navigator?.pushAndRemoveUntil<void>(
                   CountersPage.route(),
                   (_) => false,
                 );
-                break;
               case Pages.settings:
                 _navigator?.push<void>(SettingsPage.route());
-                break;
               case Pages.streakList:
                 // _navigator?.push<void>(StreaksPage.route());
                 break;

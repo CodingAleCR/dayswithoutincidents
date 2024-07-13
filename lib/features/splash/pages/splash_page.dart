@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SplashPage extends StatefulWidget {
   /// A splash page that randomly displays the logo of the design firm and
   /// software development firm for a couple of seconds.
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({super.key});
 
   /// Convenience route instatiaton.
   static MaterialPageRoute<void> route() => MaterialPageRoute(

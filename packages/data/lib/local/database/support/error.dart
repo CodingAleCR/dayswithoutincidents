@@ -15,7 +15,7 @@ class DatabaseException implements Exception {
 /// Thrown when an entity is not found
 class EntityNotFoundException extends DatabaseException {
   /// constructor
-  EntityNotFoundException(String cause) : super(cause);
+  EntityNotFoundException(super.cause);
 
   @override
   String toString() {

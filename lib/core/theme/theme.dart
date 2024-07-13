@@ -60,28 +60,34 @@ class BrandedTheme extends ThemeExtension<BrandedTheme> {
     required this.primaryColor,
     required this.textColor,
     required this.accentColor,
+    // required this.backgroundColor,
   });
 
   /// Primary color. Used as general background color.
-  final Color? primaryColor;
+  final Color primaryColor;
 
   /// Text color. Used on texts and as accent color in buttons.
-  final Color? textColor;
+  final Color textColor;
 
   /// Accent color. Used on cards and other places where
   /// [primaryColor] and [textColor] are already used.
-  final Color? accentColor;
+  final Color accentColor;
+
+  /// Background color. Used for different surfaces as background color.
+  // final Color backgroundColor;
 
   @override
   BrandedTheme copyWith({
     Color? primaryColor,
     Color? textColor,
     Color? accentColor,
+    // Color? backgroundColor,
   }) {
     return BrandedTheme(
       primaryColor: primaryColor ?? this.primaryColor,
       textColor: textColor ?? this.textColor,
       accentColor: accentColor ?? this.accentColor,
+      // backgroundColor: backgroundColor ?? this.backgroundColor,
     );
   }
 
@@ -91,9 +97,11 @@ class BrandedTheme extends ThemeExtension<BrandedTheme> {
       return this;
     }
     return BrandedTheme(
-      primaryColor: Color.lerp(primaryColor, other.primaryColor, t),
-      textColor: Color.lerp(textColor, other.textColor, t),
-      accentColor: Color.lerp(accentColor, other.accentColor, t),
+      primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
+      textColor: Color.lerp(textColor, other.textColor, t)!,
+      accentColor: Color.lerp(accentColor, other.accentColor, t)!,
+      // backgroundColor: Color.lerp(backgroundColor, 
+      // other.backgroundColor, t)!,
     );
   }
 }
@@ -107,7 +115,7 @@ class PlainLightTheme extends DWITheme {
   BrandedTheme get brandedTheme => const BrandedTheme(
         primaryColor: DWIColors.brandWhite,
         textColor: DWIColors.brandBlue,
-        accentColor: Colors.white,
+        accentColor: Colors.white30,
       );
 
   @override
@@ -115,11 +123,12 @@ class PlainLightTheme extends DWITheme {
 
   @override
   ThemeData get themeData => ThemeData(
-        primarySwatch: DWIColors.blueSwatch,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: DWIColors.blueSwatch,
+        ),
         extensions: <ThemeExtension<dynamic>>[
           brandedTheme,
         ],
-        brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: brandedTheme.primaryColor,
@@ -130,64 +139,122 @@ class PlainLightTheme extends DWITheme {
           foregroundColor: brandedTheme.textColor,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+        ),
+        dividerColor: brandedTheme.accentColor,
+        dividerTheme: DividerThemeData(
+          color: brandedTheme.accentColor,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          fillColor: Colors.white,
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        dialogTheme: const DialogTheme(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+        ),
+        timePickerTheme: TimePickerThemeData(
+          backgroundColor: brandedTheme.primaryColor,
+          hourMinuteColor: brandedTheme.primaryColor,
+          hourMinuteTextColor: brandedTheme.textColor,
+          dayPeriodColor: brandedTheme.primaryColor,
+          dayPeriodTextColor: brandedTheme.textColor,
+          dialBackgroundColor: brandedTheme.accentColor,
+          dialTextColor: brandedTheme.textColor,
+          dialHandColor: brandedTheme.primaryColor,
+          inputDecorationTheme:  InputDecorationTheme(
+            contentPadding: EdgeInsets.zero,
+            fillColor: brandedTheme.primaryColor,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+        ),
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+          headerBackgroundColor: DWIColors.brandWhite,
+          headerForegroundColor: DWIColors.brandBlueTint1,
+          rangePickerBackgroundColor: DWIColors.brandWhite,
+          rangePickerSurfaceTintColor: DWIColors.brandBlue,
+          rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
+          rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
+            0.3,
+          ),
+          dayBackgroundColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? brandedTheme.primaryColor
+                : Colors.transparent,
+          ),
+        ),
         textTheme: TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
             fontWeight: FontWeight.bold,
             color: brandedTheme.textColor,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          caption: TextStyle(
+          bodySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          overline: TextStyle(
+          labelSmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
             color: brandedTheme.textColor,
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontSize: 18,
             color: brandedTheme.textColor,
           ),
         ),
-        splashColor: brandedTheme.textColor?.withOpacity(0.3),
+        splashColor: brandedTheme.textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            elevation: 0,
             foregroundColor: brandedTheme.textColor,
             side: BorderSide(
-              color: brandedTheme.textColor!,
+              color: brandedTheme.textColor,
               width: 1.5,
             ),
-            shape: const BeveledRectangleBorder(),
+            shape: const ContinuousRectangleBorder(),
           ),
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            elevation: 0,
+            shape: const ContinuousRectangleBorder(),
             foregroundColor: brandedTheme.textColor,
           ),
         ),
@@ -222,8 +289,10 @@ class DarkSideTheme extends DWITheme {
         extensions: <ThemeExtension<dynamic>>[
           brandedTheme,
         ],
-        primarySwatch: DWIColors.cyanSwatch,
-        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: DWIColors.cyanSwatch,
+          brightness: Brightness.dark,
+        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: brandedTheme.primaryColor,
@@ -233,57 +302,114 @@ class DarkSideTheme extends DWITheme {
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+        ),
+        dividerColor: brandedTheme.accentColor,
+        dividerTheme: DividerThemeData(
+          color: brandedTheme.accentColor,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          fillColor: DWIColors.rhino,
+          filled: true,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        dialogTheme: const DialogTheme(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+        ),
+        timePickerTheme: TimePickerThemeData(
+          backgroundColor: brandedTheme.primaryColor,
+          hourMinuteColor: brandedTheme.primaryColor,
+          hourMinuteTextColor: brandedTheme.textColor,
+          dayPeriodColor: brandedTheme.primaryColor,
+          dayPeriodTextColor: brandedTheme.textColor,
+          dialBackgroundColor: brandedTheme.accentColor,
+          dialTextColor: brandedTheme.textColor,
+          dialHandColor: brandedTheme.primaryColor,
+          inputDecorationTheme:  InputDecorationTheme(
+            contentPadding: EdgeInsets.zero,
+            fillColor: brandedTheme.primaryColor,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+        ),
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+          headerBackgroundColor: DWIColors.brandBlueTint1,
+          headerForegroundColor: DWIColors.brandWhite,
+          rangePickerBackgroundColor: DWIColors.brandBlueTint1,
+          rangePickerSurfaceTintColor: DWIColors.brandWhite,
+          rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
+          rangePickerHeaderForegroundColor: DWIColors.brandWhite,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
+            0.3,
+          ),
+          dayBackgroundColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? brandedTheme.primaryColor
+                : Colors.transparent,
+          ),
+        ),
         textTheme: TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
             fontWeight: FontWeight.bold,
             color: brandedTheme.textColor,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          caption: TextStyle(
+          bodySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          overline: TextStyle(
+          labelSmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
             color: brandedTheme.textColor,
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontSize: 18,
             color: brandedTheme.textColor,
           ),
         ),
-        splashColor: brandedTheme.textColor?.withOpacity(0.3),
+        splashColor: brandedTheme.textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            elevation: 0,
             foregroundColor: brandedTheme.textColor,
             side: BorderSide(
-              color: brandedTheme.textColor!,
+              color: brandedTheme.textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -291,6 +417,8 @@ class DarkSideTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            elevation: 0,
+            shape: const ContinuousRectangleBorder(),
             foregroundColor: brandedTheme.textColor,
           ),
         ),
@@ -325,9 +453,11 @@ class PassionRedTheme extends DWITheme {
         extensions: <ThemeExtension<dynamic>>[
           brandedTheme,
         ],
-        primarySwatch: DWIColors.passionRedSwatch,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: DWIColors.passionRedSwatch,
+          brightness: Brightness.dark,
+        ),
         scaffoldBackgroundColor: brandedTheme.primaryColor,
-        brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
         appBarTheme: AppBarTheme(
@@ -336,57 +466,114 @@ class PassionRedTheme extends DWITheme {
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
+        dividerColor: brandedTheme.accentColor,
+        dividerTheme: DividerThemeData(
+          color: brandedTheme.accentColor,
+        ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          fillColor: DWIColors.rhino,
+          filled: true,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        dialogTheme: const DialogTheme(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+        ),
+        timePickerTheme: TimePickerThemeData(
+          backgroundColor: brandedTheme.primaryColor,
+          hourMinuteColor: brandedTheme.primaryColor,
+          hourMinuteTextColor: brandedTheme.textColor,
+          dayPeriodColor: brandedTheme.primaryColor,
+          dayPeriodTextColor: brandedTheme.textColor,
+          dialBackgroundColor: brandedTheme.accentColor,
+          dialTextColor: brandedTheme.textColor,
+          dialHandColor: brandedTheme.primaryColor,
+          inputDecorationTheme:  InputDecorationTheme(
+            contentPadding: EdgeInsets.zero,
+            fillColor: brandedTheme.primaryColor,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+        ),
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+          headerBackgroundColor: DWIColors.brandBlueTint1,
+          headerForegroundColor: DWIColors.brandWhite,
+          rangePickerBackgroundColor: DWIColors.brandBlueTint1,
+          rangePickerSurfaceTintColor: DWIColors.brandWhite,
+          rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
+          rangePickerHeaderForegroundColor: DWIColors.brandWhite,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
+            0.3,
+          ),
+          dayBackgroundColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? brandedTheme.primaryColor
+                : Colors.transparent,
+          ),
+        ),
         textTheme: TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
             fontWeight: FontWeight.bold,
             color: brandedTheme.textColor,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          caption: TextStyle(
+          bodySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          overline: TextStyle(
+          labelSmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
             color: brandedTheme.textColor,
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontSize: 18,
             color: brandedTheme.textColor,
           ),
         ),
-        splashColor: brandedTheme.textColor?.withOpacity(0.3),
+        splashColor: brandedTheme.textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            elevation: 0,
             foregroundColor: brandedTheme.textColor,
             side: BorderSide(
-              color: brandedTheme.textColor!,
+              color: brandedTheme.textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -394,6 +581,8 @@ class PassionRedTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            elevation: 0,
+            shape: const ContinuousRectangleBorder(),
             foregroundColor: brandedTheme.textColor,
           ),
         ),
@@ -425,12 +614,14 @@ class JustPurpleTheme extends DWITheme {
 
   @override
   ThemeData get themeData => ThemeData(
-        primarySwatch: DWIColors.justPurpleSwatch,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: DWIColors.justPurpleSwatch,
+          brightness: Brightness.dark,
+        ),
         extensions: <ThemeExtension<dynamic>>[
           brandedTheme,
         ],
         scaffoldBackgroundColor: brandedTheme.primaryColor,
-        brightness: Brightness.dark,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
         appBarTheme: AppBarTheme(
@@ -440,57 +631,114 @@ class JustPurpleTheme extends DWITheme {
           centerTitle: false,
           systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+        ),
+        dividerColor: brandedTheme.accentColor,
+        dividerTheme: DividerThemeData(
+          color: brandedTheme.accentColor,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          fillColor: DWIColors.rhino,
+          filled: true,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        dialogTheme: const DialogTheme(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+        ),
+        timePickerTheme: TimePickerThemeData(
+          backgroundColor: brandedTheme.primaryColor,
+          hourMinuteColor: brandedTheme.primaryColor,
+          hourMinuteTextColor: brandedTheme.textColor,
+          dayPeriodColor: brandedTheme.primaryColor,
+          dayPeriodTextColor: brandedTheme.textColor,
+          dialBackgroundColor: brandedTheme.accentColor,
+          dialTextColor: brandedTheme.textColor,
+          dialHandColor: brandedTheme.primaryColor,
+          inputDecorationTheme:  InputDecorationTheme(
+            contentPadding: EdgeInsets.zero,
+            fillColor: brandedTheme.primaryColor,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+        ),
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: DWIColors.brandBlueTint1,
+          surfaceTintColor: DWIColors.brandWhite,
+          headerBackgroundColor: DWIColors.brandBlueTint1,
+          headerForegroundColor: DWIColors.brandWhite,
+          rangePickerBackgroundColor: DWIColors.brandBlueTint1,
+          rangePickerSurfaceTintColor: DWIColors.brandWhite,
+          rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
+          rangePickerHeaderForegroundColor: DWIColors.brandWhite,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
+            0.3,
+          ),
+          dayBackgroundColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? brandedTheme.primaryColor
+                : Colors.transparent,
+          ),
+        ),
         textTheme: TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
             fontWeight: FontWeight.bold,
             color: brandedTheme.textColor,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          caption: TextStyle(
+          bodySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          overline: TextStyle(
+          labelSmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
             color: brandedTheme.textColor,
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontSize: 18,
             color: brandedTheme.textColor,
           ),
         ),
-        splashColor: brandedTheme.textColor?.withOpacity(0.3),
+        splashColor: brandedTheme.textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            elevation: 0,
             foregroundColor: brandedTheme.textColor,
             side: BorderSide(
-              color: brandedTheme.textColor!,
+              color: brandedTheme.textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -498,6 +746,8 @@ class JustPurpleTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            elevation: 0,
+            shape: const ContinuousRectangleBorder(),
             foregroundColor: brandedTheme.textColor,
           ),
         ),
@@ -529,11 +779,12 @@ class GoldAmberTheme extends DWITheme {
 
   @override
   ThemeData get themeData => ThemeData(
-        primarySwatch: DWIColors.goldAmberSwatch,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: DWIColors.goldAmberSwatch,
+        ),
         extensions: <ThemeExtension<dynamic>>[
           brandedTheme,
         ],
-        brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: brandedTheme.primaryColor,
@@ -544,57 +795,113 @@ class GoldAmberTheme extends DWITheme {
           foregroundColor: brandedTheme.textColor,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+        ),
+        dividerColor: brandedTheme.accentColor,
+        dividerTheme: DividerThemeData(
+          color: brandedTheme.accentColor,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          fillColor: Colors.white,
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        dialogTheme: const DialogTheme(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+        ),
+        timePickerTheme: TimePickerThemeData(
+          backgroundColor: brandedTheme.primaryColor,
+          hourMinuteColor: brandedTheme.primaryColor,
+          hourMinuteTextColor: brandedTheme.textColor,
+          dayPeriodColor: brandedTheme.primaryColor,
+          dayPeriodTextColor: brandedTheme.textColor,
+          dialBackgroundColor: brandedTheme.accentColor,
+          dialTextColor: brandedTheme.textColor,
+          dialHandColor: brandedTheme.primaryColor,
+          inputDecorationTheme:  InputDecorationTheme(
+            contentPadding: EdgeInsets.zero,
+            fillColor: brandedTheme.primaryColor,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+        ),
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+          headerBackgroundColor: DWIColors.brandWhite,
+          headerForegroundColor: DWIColors.brandBlueTint1,
+          rangePickerBackgroundColor: DWIColors.brandWhite,
+          rangePickerSurfaceTintColor: DWIColors.brandBlue,
+          rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
+          rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
+            0.3,
+          ),
+          dayBackgroundColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? brandedTheme.primaryColor
+                : Colors.transparent,
+          ),
+        ),
         textTheme: TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
             fontWeight: FontWeight.bold,
             color: brandedTheme.textColor,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          caption: TextStyle(
+          bodySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          overline: TextStyle(
+          labelSmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
             color: brandedTheme.textColor,
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontSize: 18,
             color: brandedTheme.textColor,
           ),
         ),
-        splashColor: brandedTheme.textColor?.withOpacity(0.3),
+        splashColor: brandedTheme.textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            elevation: 0,
             foregroundColor: brandedTheme.textColor,
             side: BorderSide(
-              color: brandedTheme.textColor!,
+              color: brandedTheme.textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -602,6 +909,8 @@ class GoldAmberTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            elevation: 0,
+            shape: const ContinuousRectangleBorder(),
             foregroundColor: brandedTheme.textColor,
           ),
         ),
@@ -633,14 +942,19 @@ class HappyCyanTheme extends DWITheme {
 
   @override
   ThemeData get themeData => ThemeData(
-        primarySwatch: DWIColors.cyanSwatch,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: DWIColors.cyanSwatch,
+        ),
         extensions: <ThemeExtension<dynamic>>[
           brandedTheme,
         ],
-        brightness: Brightness.light,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: DWIFonts.appFont,
         scaffoldBackgroundColor: brandedTheme.primaryColor,
+        dividerColor: brandedTheme.accentColor,
+        dividerTheme: DividerThemeData(
+          color: brandedTheme.accentColor,
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: brandedTheme.primaryColor,
           elevation: 0,
@@ -648,57 +962,109 @@ class HappyCyanTheme extends DWITheme {
           foregroundColor: brandedTheme.textColor,
           systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
+        bottomSheetTheme: const BottomSheetThemeData(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          fillColor: Colors.white,
+          filled: true,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+        ),
+        dialogTheme: const DialogTheme(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+        ),
+        timePickerTheme: TimePickerThemeData(
+          backgroundColor: brandedTheme.primaryColor,
+          hourMinuteColor: brandedTheme.primaryColor,
+          hourMinuteTextColor: brandedTheme.textColor,
+          dayPeriodColor: brandedTheme.primaryColor,
+          dayPeriodTextColor: brandedTheme.textColor,
+          dialBackgroundColor: brandedTheme.accentColor,
+          dialTextColor: brandedTheme.textColor,
+          dialHandColor: brandedTheme.primaryColor,
+          inputDecorationTheme:  InputDecorationTheme(
+            contentPadding: EdgeInsets.zero,
+            fillColor: brandedTheme.primaryColor,
+            filled: true,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.zero,
+            ),
+          ),
+        ),
+        datePickerTheme: DatePickerThemeData(
+          backgroundColor: DWIColors.brandWhite,
+          surfaceTintColor: DWIColors.brandBlue,
+          headerBackgroundColor: DWIColors.brandWhite,
+          headerForegroundColor: DWIColors.brandBlueTint1,
+          rangePickerBackgroundColor: DWIColors.brandWhite,
+          rangePickerSurfaceTintColor: DWIColors.brandBlue,
+          rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
+          rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
+            0.3,
+          ),
+          dayBackgroundColor: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? brandedTheme.primaryColor
+                : Colors.transparent,
+          ),
+        ),
         textTheme: TextTheme(
-          headline1: TextStyle(
+          displayLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline2: TextStyle(
+          displayMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline3: TextStyle(
+          displaySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline4: TextStyle(
+          headlineMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          headline5: TextStyle(
+          headlineSmall: TextStyle(
             fontWeight: FontWeight.bold,
             color: brandedTheme.textColor,
           ),
-          headline6: TextStyle(
+          titleLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          caption: TextStyle(
+          bodySmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          overline: TextStyle(
+          labelSmall: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText1: TextStyle(
+          bodyLarge: TextStyle(
             color: brandedTheme.textColor,
           ),
-          bodyText2: TextStyle(
+          bodyMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle1: TextStyle(
+          titleMedium: TextStyle(
             color: brandedTheme.textColor,
           ),
-          subtitle2: TextStyle(
+          titleSmall: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w800,
             color: brandedTheme.textColor,
           ),
-          button: TextStyle(
+          labelLarge: TextStyle(
             fontSize: 18,
             color: brandedTheme.textColor,
           ),
         ),
-        splashColor: brandedTheme.textColor?.withOpacity(0.3),
+        splashColor: brandedTheme.textColor.withOpacity(0.3),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            elevation: 0,
             foregroundColor: brandedTheme.textColor,
             side: BorderSide(
-              color: brandedTheme.textColor!,
+              color: brandedTheme.textColor,
               width: 1.5,
             ),
             shape: const BeveledRectangleBorder(),
@@ -706,6 +1072,8 @@ class HappyCyanTheme extends DWITheme {
         ),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
+            elevation: 0,
+            shape: const ContinuousRectangleBorder(),
             foregroundColor: brandedTheme.textColor,
           ),
         ),

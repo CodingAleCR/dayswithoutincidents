@@ -1,0 +1,13 @@
+name: environment
+description: "Shared configs for DWI"
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.2.5 <4.0.0'
+
+dependencies:
+
+dev_dependencies:
+  test: ^1.9.4
+  very_good_analysis: ^5.0.0

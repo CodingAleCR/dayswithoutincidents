@@ -47,3 +47,5 @@ lib/generated_plugin_registrant.dart
 
 # Local configuration file (sdk path, etc)
 key.properties
+
+.fvm/flutter_sdk

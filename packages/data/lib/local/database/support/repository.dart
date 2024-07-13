@@ -90,7 +90,7 @@ abstract class Repository<Model, EntityClass extends Entity<Model>> {
   }
 
   /// Closes all database connections.
-  Future close() async {
+  Future<void> close() async {
     final db = await database;
     await db.close();
   }

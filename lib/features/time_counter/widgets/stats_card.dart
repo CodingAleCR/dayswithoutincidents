@@ -7,11 +7,12 @@ class StatsCard extends StatelessWidget {
   /// It has preconfigured styles and tap handlers.
   const StatsCard(
     this.iconData, {
-    Key? key,
     required this.title,
     required this.stat,
+    super.key,
     this.onTap,
-  }) : super(key: key);
+    this.color,
+  });
 
   /// Icon to be displayed
   final IconData iconData;
@@ -22,14 +23,17 @@ class StatsCard extends StatelessWidget {
   /// Value of the stat displayed
   final String stat;
 
+  /// Color of the card's background.
+  final Color? color;
+
   /// On tap handler for the card
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final color =
-        Theme.of(context).textTheme.bodyText1?.color?.withOpacity(0.15) ??
-            Colors.black12;
+    final color = this.color ??
+        Theme.of(context).textTheme.bodyLarge?.color?.withOpacity(0.15) ??
+        Colors.black12;
 
     return InkWell(
       splashColor: color,
@@ -59,7 +63,7 @@ class StatsCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           fontSize: 11,
                           fontWeight: FontWeight.normal,
                         ),
@@ -68,7 +72,7 @@ class StatsCard extends StatelessWidget {
                   Flexible(
                     child: Text(
                       stat,
-                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                             height: 1.16,

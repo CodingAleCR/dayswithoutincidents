@@ -1,6 +1,6 @@
-import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 part 'time_counter_state.dart';
@@ -50,6 +50,20 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
     }
   }
 
+  /// Updates the information of a counter
+  void counterChanged(String title, DateTime lastRestart) {
+    emit(
+      state.copyWith(
+        counter: state.counter.copyWith(
+          title: title,
+          createdAt: lastRestart,
+        ),
+      ),
+    );
+
+    saveCounter();
+  }
+
   /// Updates the title of a counter
   void titleChanged(String newTitle) {
     emit(
@@ -96,7 +110,12 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
 
       final updatedCounter = state.counter.copyWith(createdAt: restartDate);
       await _service.save(updatedCounter);
-      emit(state.copyWith(restartStatus: OperationStatus.success));
+      await fetchCounter();
+      emit(
+        state.copyWith(
+          restartStatus: OperationStatus.success,
+        ),
+      );
     } catch (exception, stackTrace) {
       await Sentry.captureException(
         exception,
@@ -109,6 +128,30 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       );
     } finally {
       await fetchCounter();
+    }
+  }
+
+  /// Permanently deletes the counter.
+  Future<void> deleteCounter() async {
+    try {
+      emit(state.copyWith(restartStatus: OperationStatus.loading));
+
+      await _service.deleteById(state.counter.id);
+      emit(
+        state.copyWith(
+          restartStatus: OperationStatus.success,
+        ),
+      );
+    } catch (exception, stackTrace) {
+      await Sentry.captureException(
+        exception,
+        stackTrace: stackTrace,
+      );
+      emit(
+        state.copyWith(
+          restartStatus: OperationStatus.failure,
+        ),
+      );
     }
   }
 }

@@ -7,6 +7,7 @@ class CounterListState extends Equatable {
     this.status = OperationStatus.loading,
     this.counters = const [],
     this.selectedIdx = 0,
+    this.preferredMode = DisplayModes.carousel,
   });
 
   /// Status of the operation for fetching counters, adding a counter
@@ -24,11 +25,15 @@ class CounterListState extends Equatable {
     return counters[selectedIdx];
   }
 
+  /// Preferred display mode for the list of counters.
+  final DisplayModes preferredMode;
+
   @override
   List<Object> get props => [
         status,
         counters,
         selectedIdx,
+        preferredMode,
       ];
 
   /// Provides a cloned instance.
@@ -36,11 +41,13 @@ class CounterListState extends Equatable {
     OperationStatus? status,
     List<TimeCounter>? counters,
     int? selectedIdx,
+    DisplayModes? preferredMode,
   }) {
     return CounterListState(
       status: status ?? this.status,
       counters: counters ?? this.counters,
       selectedIdx: selectedIdx ?? this.selectedIdx,
+      preferredMode: preferredMode ?? this.preferredMode,
     );
   }
 }

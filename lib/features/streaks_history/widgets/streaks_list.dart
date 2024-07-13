@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class StreaksList extends StatelessWidget {
   /// Displays a list of streaks as tiles inside a [ListView]
   const StreaksList({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class StreaksList extends StatelessWidget {
         var subtitle = '$startingDay '
             '→ $restartingDay';
 
-        if (restart.startedAt?.isSameDay(restart.restartedAt) == true) {
+        if (restart.startedAt?.isSameDay(restart.restartedAt) ?? false) {
           final startingHour = restart.startedAt?.toFormattedString('jm');
           final restartingHour = restart.restartedAt?.toFormattedString('jm');
 
@@ -39,7 +39,7 @@ class StreaksList extends StatelessWidget {
         return ListTile(
           title: Text(
             timeCounterCount(context, restart.streakDifference),
-            style: Theme.of(context).textTheme.bodyText1?.copyWith(
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
           ),

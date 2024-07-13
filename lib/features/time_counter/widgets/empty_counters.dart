@@ -8,7 +8,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class EmptyCounters extends StatelessWidget {
   /// Displays an empty state view for adding a new counter easily when
   /// there's no counters in storage.
-  const EmptyCounters({Key? key}) : super(key: key);
+  const EmptyCounters({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class EmptyCounters extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             S.of(context).countersEmptyStateTitle,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),

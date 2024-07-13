@@ -6,11 +6,11 @@ class ListEmptyState extends StatelessWidget {
   /// Displays an empty state view for adding a new counter easily when
   /// there's no counters in storage.
   const ListEmptyState({
-    Key? key,
-    required this.title,
     required this.subtitle,
+    required this.title,
+    super.key,
     this.action,
-  }) : super(key: key);
+  });
 
   /// Title to be displayed
   final String title;
@@ -41,7 +41,7 @@ class ListEmptyState extends StatelessWidget {
           const SizedBox(height: 24),
           Text(
             title,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
@@ -52,7 +52,7 @@ class ListEmptyState extends StatelessWidget {
           if (action != null) ...[
             const Spacer(),
             action!,
-          ]
+          ],
         ],
       ),
     );

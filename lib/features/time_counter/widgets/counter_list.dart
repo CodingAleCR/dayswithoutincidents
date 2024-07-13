@@ -1,111 +1,39 @@
 import 'package:domain/domain.dart';
-import 'package:dwi/features/theme_chooser/cubit/theme_chooser_cubit.dart';
-import 'package:dwi/features/time_counter/time_counter.dart';
-import 'package:dwi/features/time_counter/widgets/counter_view.dart';
+import 'package:dwi/features/time_counter/cubit/time_counter_cubit.dart';
+import 'package:dwi/features/time_counter/widgets/counter_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// [CounterList]
-class CounterList extends StatefulWidget {
-  /// Displays a list of counters in a page view format.
+class CounterList extends StatelessWidget {
+  /// Displays a list of counters in a list view format.
   const CounterList({
-    Key? key,
     required this.counters,
-    this.currentIndex = 0,
-  }) : super(key: key);
-
-  /// Current index selected.
-  final int currentIndex;
+    super.key,
+  });
 
   /// List of counters to be displayed.
   final List<TimeCounter> counters;
 
   @override
-  State<CounterList> createState() => _CounterListState();
-}
-
-class _CounterListState extends State<CounterList>
-    with TickerProviderStateMixin {
-  late List<TimeCounter> counters;
-  late PageController pageController;
-  late TabController controller;
-
-  @override
-  void initState() {
-    super.initState();
-
-    pageController = PageController(
-      initialPage: widget.currentIndex,
-    );
-    configureControllers();
-  }
-
-  void configureControllers() {
-    counters = widget.counters;
-
-    controller = TabController(
-      initialIndex: widget.currentIndex,
-      length: widget.counters.length,
-      vsync: this,
-    );
-  }
-
-  @override
-  void didUpdateWidget(covariant CounterList oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.counters != widget.counters) {
-      configureControllers();
-    }
-
-    if (oldWidget.currentIndex != widget.currentIndex ||
-        oldWidget.counters != widget.counters) {
-      pageController.animateToPage(
-        widget.currentIndex,
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.ease,
-      );
-      controller.animateTo(widget.currentIndex);
-      context.read<ThemeChooserCubit>().themeChanged(
-            counters[widget.currentIndex].theme,
-          );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Expanded(
-          child: PageView(
-            controller: pageController,
-            children: widget.counters
-                .map(
-                  (e) => Center(
-                    key: ValueKey(e.id),
-                    child: CounterView(
-                      counter: e,
-                    ),
-                  ),
-                )
-                .toList(),
-            onPageChanged: (selectedIdx) => context
-                .read<CounterListCubit>()
-                .selectedCounterChanged(selectedIdx),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 16),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: TabPageSelector(
-              controller: controller,
-              selectedColor: Theme.of(context).textTheme.bodyText1?.color,
-            ),
-          ),
-        ),
-      ],
+    return ListView.separated(
+      itemBuilder: (iCont, idx) {
+        return BlocProvider<TimeCounterCubit>(
+          create: (context) => TimeCounterCubit(
+            counters[idx],
+            RepositoryProvider.of<TimeCounterService>(context),
+            RepositoryProvider.of<CounterRestartService>(context),
+          )..fetchCounter(),
+          child: const CounterListItem(),
+        );
+      },
+      separatorBuilder: (sCont, idx) => const Divider(
+        thickness: 1,
+        indent: 16,
+        endIndent: 16,
+      ),
+      itemCount: counters.length,
     );
   }
 }

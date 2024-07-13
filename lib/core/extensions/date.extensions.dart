@@ -28,4 +28,9 @@ extension FormatDate on DateTime {
   String toFormattedString(String format) {
     return DateFormat(format).format(this);
   }
+
+  /// Prints the DateTime as a formatted string.
+  String toLocalizedString() {
+    return DateFormat.yMd().add_jm() .format(this);
+  }
 }

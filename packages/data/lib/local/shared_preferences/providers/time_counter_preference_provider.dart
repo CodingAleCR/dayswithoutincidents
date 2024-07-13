@@ -14,10 +14,10 @@ const String kLastIncident = 'last_incident';
 class TimeCounterSharedPreferenceProvider {
   /// Get current stored time counter.
   Future<TimeCounter> getCounter() async {
-    final _prefs = await SharedPreferences.getInstance();
-    if (_prefs.containsKey(kTitle) && _prefs.containsKey(kLastIncident)) {
-      final title = _prefs.getString(kTitle)!;
-      final lastIncidentString = _prefs.getString(kLastIncident)!;
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey(kTitle) && prefs.containsKey(kLastIncident)) {
+      final title = prefs.getString(kTitle)!;
+      final lastIncidentString = prefs.getString(kLastIncident)!;
       final lastIncident = DateTime.parse(lastIncidentString);
 
       return TimeCounter(
@@ -33,22 +33,22 @@ class TimeCounterSharedPreferenceProvider {
 
   /// Stores counter in local key-value storage.
   Future<void> setCounter(TimeCounter counter) async {
-    final _prefs = await SharedPreferences.getInstance();
-    await _prefs.setString(kTitle, counter.title);
-    await _prefs.setString(kLastIncident, counter.createdAt!.toIso8601String());
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(kTitle, counter.title);
+    await prefs.setString(kLastIncident, counter.createdAt!.toIso8601String());
   }
 
   /// Resets the counter time to now.
   Future<void> resetCounter() async {
-    final _prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     final now = DateTime.now().toIso8601String();
-    await _prefs.setString(kLastIncident, now);
+    await prefs.setString(kLastIncident, now);
   }
 
   /// Deletes all counter information from key-value storage.
   Future<void> clear() async {
-    final _prefs = await SharedPreferences.getInstance();
-    await _prefs.remove(kTitle);
-    await _prefs.remove(kLastIncident);
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(kTitle);
+    await prefs.remove(kLastIncident);
   }
 }

@@ -11,8 +11,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class StreaksChart extends StatelessWidget {
   /// Displays a list of streaks in a line chart.
   const StreaksChart({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class StreaksChart extends StatelessWidget {
               show: false,
               checkToShowVerticalLine: (value) => false,
             ),
-            titlesData: FlTitlesData(show: false),
+            titlesData: const FlTitlesData(show: false),
             maxY: lastFiveRestarts.map((r) => r.streak).reduce(max).toDouble() +
                 10,
             minY: -10,
@@ -71,7 +71,7 @@ class StreaksChart extends StatelessWidget {
               touchTooltipData: LineTouchTooltipData(
                 fitInsideHorizontally: true,
                 fitInsideVertically: true,
-                tooltipBgColor: brandedTheme.textColor,
+                getTooltipColor: (_) => brandedTheme.textColor,
                 tooltipRoundedRadius: 0,
                 getTooltipItems: (List<LineBarSpot> touchedSpots) {
                   return touchedSpots.map((LineBarSpot touchedSpot) {
@@ -106,7 +106,6 @@ class StreaksChart extends StatelessWidget {
                 isStrokeCapRound: true,
                 color: secondary,
                 dotData: FlDotData(
-                  show: true,
                   getDotPainter: (
                     FlSpot spot,
                     double xPercentage,

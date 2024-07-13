@@ -7,18 +7,18 @@ import 'package:domain/domain.dart';
 /// and stored locally.
 class CounterWidgetEntity extends Entity<CounterWidget> {
   /// Creates Entity from model
-  CounterWidgetEntity.fromModel(CounterWidget model)
+  CounterWidgetEntity.fromModel(super.model)
       : uuid = model.id,
         counterId = model.counter.id,
         widgetId = '',
-        super.fromModel(model);
+        super.fromModel();
 
   /// Creates entity from database map.
-  CounterWidgetEntity.fromDatabase(Map<String, dynamic> parsedJson)
+  CounterWidgetEntity.fromDatabase(super.parsedJson)
       : uuid = parsedJson[kId] as String,
         counterId = parsedJson[kCounterId] as String,
         widgetId = parsedJson[kWidgetId] as String,
-        super.fromDatabase(parsedJson);
+        super.fromDatabase();
 
   /// Unique identifier for the restart.
   final String uuid;
@@ -31,19 +31,19 @@ class CounterWidgetEntity extends Entity<CounterWidget> {
 
   @override
   CounterWidget toModel() => CounterWidget(
-    id: uuid,
-    counter: TimeCounter.empty.copyWith(
-      id: counterId,
-    ),
-    widgetId: widgetId,
-  );
+        id: uuid,
+        counter: TimeCounter.empty.copyWith(
+          id: counterId,
+        ),
+        widgetId: widgetId,
+      );
 
   @override
   Map<String, dynamic> toDatabaseMap() => <String, dynamic>{
-    kId: uuid,
-    kCounterId: counterId,
-    kWidgetId: widgetId,
-  };
+        kId: uuid,
+        kCounterId: counterId,
+        kWidgetId: widgetId,
+      };
 
   @override
   String get primaryKey => uuid;
