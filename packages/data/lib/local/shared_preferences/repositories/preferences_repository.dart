@@ -23,7 +23,7 @@ class PreferencesRepositoryImpl {
   Future<AppTheme> getDefaultTheme() async {
     final key = await _preferencesProvider.getDefaultTheme();
 
-    return AppThemeFromString.fromString(key);
+    return AppTheme.fromString(key);
   }
 
   /// Stores preferred display mode in local key-value storage.

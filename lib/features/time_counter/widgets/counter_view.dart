@@ -155,11 +155,7 @@ class _Counter extends StatelessWidget {
 
                   context.read<TimeCounterCubit>().dateChanged(updatedRestart);
                 },
-                title: S
-                    .of(
-                      context,
-                    )
-                    .counterDetailLastRestart,
+                title: S.of(context).counterDetailLastRestart,
                 stat: counter.createdAt!.toFormattedString('dd MMM yyyy'),
                 color: counterTheme.accentColor,
               ),

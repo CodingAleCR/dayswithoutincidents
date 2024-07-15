@@ -1,37 +1,78 @@
-import 'package:data/data.dart';
+import 'package:data/local/database/database.dart' as db;
 import 'package:domain/domain.dart';
+import 'package:drift/drift.dart';
 
 /// Service for handling counter restarts
 class CounterRestartServiceImpl extends CounterRestartService {
   /// Constructor
   CounterRestartServiceImpl({
-    CounterRestartRepository? repository,
-  }) : _repository = repository ?? CounterRestartRepository();
+    db.AppDatabase? database,
+  }) : _database = database ?? db.AppDatabase();
 
-  final CounterRestartRepository _repository;
+  final db.AppDatabase _database;
+
   @override
   Future<void> deleteById(String uuid) async {
-    await _repository.deleteById(uuid);
+    _database.delete(_database.counterRestarts).where(
+          (t) => t.id.equals(uuid),
+        );
   }
 
   @override
   Future<List<CounterRestart>> findAll() async {
-    final countersEntities = await _repository.findAll();
-    return countersEntities.map((entity) => entity.toModel()).toList();
+    final entities = await _database.select(_database.counterRestarts).get();
+
+    return entities
+        .map(
+          (e) => CounterRestart(
+            id: e.id,
+            counter: TimeCounter.empty.copyWith(
+              id: e.counterId,
+            ),
+            startedAt: DateTime.tryParse(e.startedAt),
+            restartedAt: DateTime.tryParse(e.restartedAt),
+          ),
+        )
+        .toList();
   }
 
   @override
   Future<CounterRestart> findById(String uuid) async {
-    final entity = await _repository.findById(uuid);
-    return entity.toModel();
+    final entity = await (_database.select(_database.counterRestarts)
+          ..where(
+            (t) => t.id.equals(uuid),
+          ))
+        .getSingle();
+
+    return CounterRestart(
+      id: entity.id,
+      counter: TimeCounter.empty.copyWith(
+        id: entity.counterId,
+      ),
+      startedAt: DateTime.tryParse(entity.startedAt),
+      restartedAt: DateTime.tryParse(entity.restartedAt),
+    );
   }
 
   @override
   Future<CounterRestart> save(CounterRestart model) async {
-    final entity = CounterRestartEntity.fromModel(model);
-    await _repository.save(entity);
+    final entity = db.CounterRestart(
+      id: model.id,
+      counterId: model.counter.id,
+      startedAt: model.startedAt!.toIso8601String(),
+      restartedAt: model.restartedAt!.toIso8601String(),
+    );
 
-    return model;
+    await _database.into(_database.counterRestarts).insert(entity);
+
+    return CounterRestart(
+      id: entity.id,
+      counter: TimeCounter.empty.copyWith(
+        id: entity.counterId,
+      ),
+      startedAt: DateTime.tryParse(entity.startedAt),
+      restartedAt: DateTime.tryParse(entity.restartedAt),
+    );
   }
 
   @override
@@ -40,12 +81,51 @@ class CounterRestartServiceImpl extends CounterRestartService {
     String? sortBy,
   }) async {
     if (sortBy != null) {
-      final countersEntities =
-          await _repository.findAllByCounterIdSortBy(counter.id, sortBy);
-      return countersEntities.map((entity) => entity.toModel()).toList();
+      final entities = await (_database.select(_database.counterRestarts)
+            ..where(
+              (t) => t.counterId.equals(counter.id),
+            )
+            ..orderBy(
+              [
+                (t) => OrderingTerm(
+                      expression:
+                          sortBy == 'startedAt' ? t.startedAt : t.restartedAt,
+                    ),
+              ],
+            ))
+          .get();
+
+      return entities
+          .map(
+            (e) => CounterRestart(
+              id: e.id,
+              counter: TimeCounter.empty.copyWith(
+                id: e.counterId,
+              ),
+              startedAt: DateTime.tryParse(e.startedAt),
+              restartedAt: DateTime.tryParse(e.restartedAt),
+            ),
+          )
+          .toList();
     }
 
-    final countersEntities = await _repository.findAllByCounterId(counter.id);
-    return countersEntities.map((entity) => entity.toModel()).toList();
+    final entities = await (_database.select(_database.counterRestarts)
+          ..where(
+            (t) => t.counterId.equals(counter.id),
+          ))
+        .get();
+
+    return entities
+        .map(
+          (e) => CounterRestart(
+            id: e.id,
+            counter: TimeCounter.empty.copyWith(
+              id: e.counterId,
+            ),
+            startedAt: DateTime.tryParse(e.startedAt),
+            restartedAt: DateTime.tryParse(e.restartedAt),
+          ),
+        )
+        .toList();
   }
 }
