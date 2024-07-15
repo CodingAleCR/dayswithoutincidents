@@ -27,9 +27,11 @@ class TimeCounterServiceImpl extends TimeCounterService {
 
   @override
   Future<void> deleteById(String uuid) async {
-    _database.delete(_database.timeCounters).where(
-          (t) => t.id.equals(uuid),
-        );
+    await (_database.delete(_database.timeCounters)
+          ..where(
+            (t) => t.id.equals(uuid),
+          ))
+        .go();
   }
 
   @override
