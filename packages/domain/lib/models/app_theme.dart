@@ -16,12 +16,17 @@ enum AppTheme {
   goldAmber,
 
   /// Cyan background with proper accesible foreground.
-  happyCyan
-}
+  happyCyan,
 
-/// Converts a value into a string and viceversa.
-extension AppThemeFromString on AppTheme {
-  /// Parses a string into a valid AppTheme.
+  /// Inverted theme of gold amber.
+  goldAmberInverted,
+
+  /// Inverted theme of passion red.
+  passionRedInverted,
+
+  /// Inverted theme of just purple.
+  justPurpleInverted;
+
   static AppTheme fromString(String? value) {
     switch (value) {
       case 'plain_light':
@@ -42,12 +47,20 @@ extension AppThemeFromString on AppTheme {
       case 'happy_cyan':
         return AppTheme.happyCyan;
 
+      case 'gold_amber_inverted':
+        return AppTheme.goldAmberInverted;
+
+      case 'passion_red_inverted':
+        return AppTheme.passionRedInverted;
+
+      case 'just_purple_inverted':
+        return AppTheme.justPurpleInverted;
+
       default:
         return AppTheme.happyCyan;
     }
   }
 
-  /// Returns the storage key of a valid AppTheme.
   String key() {
     switch (this) {
       case AppTheme.plainLight:
@@ -62,6 +75,12 @@ extension AppThemeFromString on AppTheme {
         return 'gold_amber';
       case AppTheme.happyCyan:
         return 'happy_cyan';
+      case AppTheme.goldAmberInverted:
+        return 'gold_amber_inverted';
+      case AppTheme.passionRedInverted:
+        return 'passion_red_inverted';
+      case AppTheme.justPurpleInverted:
+        return 'just_purple_inverted';
     }
   }
 
@@ -80,24 +99,12 @@ extension AppThemeFromString on AppTheme {
         return 'Gold Amber';
       case AppTheme.happyCyan:
         return 'Happy Cyan';
+      case AppTheme.goldAmberInverted:
+        return 'Dark Gold';
+      case AppTheme.passionRedInverted:
+        return 'Blood Red';
+      case AppTheme.justPurpleInverted:
+        return 'Light Purple';
     }
   }
-
-  /// Helper to determine if theme is plain light.
-  bool get isPlainLight => this == AppTheme.plainLight;
-
-  /// Helper to determine if theme is the darkside.
-  bool get isTheDarkside => this == AppTheme.darkSide;
-
-  /// Helper to determine if theme is passion red.
-  bool get isPassionRed => this == AppTheme.passionRed;
-
-  /// Helper to determine if theme is just purple.
-  bool get isJustPurple => this == AppTheme.justPurple;
-
-  /// Helper to determine if theme is gold amber.
-  bool get isGoldAmber => this == AppTheme.goldAmber;
-
-  /// Helper to determine if theme is another cyan.
-  bool get isAnotherCyan => this == AppTheme.happyCyan;
 }

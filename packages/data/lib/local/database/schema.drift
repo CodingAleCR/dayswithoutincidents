@@ -1,0 +1,27 @@
+CREATE TABLE time_counters (
+  id TEXT NOT NULL PRIMARY KEY,
+  title TEXT,
+  created_at TEXT,
+  theme text DEFAULT 'plain_light'
+);
+
+CREATE TABLE counter_widgets (
+  id TEXT NOT NULL PRIMARY KEY,
+  counter_id TEXT NOT NULL,
+  widget_id TEXT NOT NULL,
+  FOREIGN KEY (counter_id)
+    REFERENCES time_counters (id) 
+    ON UPDATE CASCADE 
+    ON DELETE CASCADE
+);
+
+CREATE TABLE counter_restarts (
+  id TEXT NOT NULL PRIMARY KEY,
+  counter_id TEXT NOT NULL,
+  started_at TEXT NOT NULL,
+  restarted_at TEXT NOT NULL,
+  FOREIGN KEY (counter_id)
+    REFERENCES time_counters (id) 
+    ON UPDATE CASCADE 
+    ON DELETE CASCADE
+);

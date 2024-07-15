@@ -1,76 +1,41 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:data/local/database/constants/constants.dart';
-import 'package:data/local/database/migrations/migrations.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:drift/drift.dart';
+import 'package:drift_sqflite/drift_sqflite.dart';
 
-export 'constants/constants.dart';
-export 'entities/entities.dart';
-export 'migrations/migrations.dart';
-export 'repositories/repositories.dart';
-export 'support/support.dart';
+part 'database.g.dart';
 
-Future<void> _onConfigure(Database db) async {
-  // Adds support for cascade delete
-  await db.execute('PRAGMA foreign_keys = ON');
-}
+@DriftDatabase(
+  include: {'schema.drift'},
+)
+class AppDatabase extends _$AppDatabase {
+  AppDatabase() : super(_openDatabase());
 
-Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-  try {
-    final pendingQty = newVersion - oldVersion;
-    final startingVersion = oldVersion + 1;
-    final pendingMigrations = List<int>.generate(
-      pendingQty,
-      (i) => i == 0 ? startingVersion : startingVersion + i,
-    );
-    log('Migrating database from $oldVersion to $newVersion');
-    await Future.forEach<int>(pendingMigrations, (currentVersion) async {
-      log('Applying up for migration $currentVersion');
-      return await migrations[currentVersion]?.up(db);
-    });
-  } catch (exception, stackTrace) {
-    await Sentry.captureException(
-      exception,
-      stackTrace: stackTrace,
+  @override
+  int get schemaVersion => 3;
+
+  @override
+  MigrationStrategy get migration {
+    return MigrationStrategy(
+      onCreate: (m) async {
+        await m.createAll();
+      },
+      onUpgrade: (m, from, to) async {
+        // This is similar to the `onUpgrade` callback from sqflite. When
+        // migrating to drift, it should contain your existing migration logic.
+        // You can access the raw database by using `customStatement`
+      },
+      beforeOpen: (details) async {
+        // This is a good place to enable pragmas you expect, e.g.
+        await customStatement('pragma foreign_keys = ON;');
+      },
     );
   }
-}
 
-Future<void> _onDowngrade(Database db, int oldVersion, int newVersion) async {
-  try {
-    final pendingQty = oldVersion - newVersion;
-    final pendingMigrations = List<int>.generate(
-      pendingQty,
-      (i) => i == 0 ? oldVersion : oldVersion - i,
-    );
-    log('Migrating database from $oldVersion to $newVersion');
-
-    await Future.forEach<int>(pendingMigrations, (currentVersion) async {
-      log('Applying down for migration $currentVersion');
-      return await migrations[currentVersion]?.down(db);
-    });
-  } catch (exception, stackTrace) {
-    await Sentry.captureException(
-      exception,
-      stackTrace: stackTrace,
-    );
+  Stream<List<TimeCounter>> watchAllCounters() {
+    return select(timeCounters).watch();
   }
-}
 
-/// Opens the app's database for I/O.
-Future<Database> openDWIDatabase() async {
-  final databasesPath = await getDatabasesPath();
-  final path = '$databasesPath/$kDatabaseName';
-
-  await Directory(databasesPath).create(recursive: true);
-
-  return openDatabase(
-    path,
-    version: kDatabaseVersion,
-    onConfigure: _onConfigure,
-    onUpgrade: _onUpgrade,
-    onDowngrade: _onDowngrade,
-  );
+  static QueryExecutor _openDatabase() {
+    return SqfliteQueryExecutor.inDatabaseFolder(path: kDatabaseName);
+  }
 }

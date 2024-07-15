@@ -1,4 +1,3 @@
-import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,7 +29,7 @@ class StreaksCubit extends Cubit<StreaksState> {
       );
       final restarts = await _restartService.findAllByCounter(
         state.counter,
-        sortBy: '${CounterRestartEntity.kStartedAt} DESC',
+        sortBy: 'startedAt',
       );
       emit(
         state.copyWith(
