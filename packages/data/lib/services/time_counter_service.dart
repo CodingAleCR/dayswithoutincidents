@@ -5,10 +5,10 @@ import 'package:domain/domain.dart';
 class TimeCounterServiceImpl extends TimeCounterService {
   /// Constructor
   TimeCounterServiceImpl({
-    db.AppDatabase? database,
-  }) : _database = database ?? db.AppDatabase();
+    db.DWIDatabase? database,
+  }) : _database = database ?? db.DWIDatabase();
 
-  final db.AppDatabase _database;
+  final db.DWIDatabase _database;
 
   @override
   Stream<List<TimeCounter>> get allCounters =>

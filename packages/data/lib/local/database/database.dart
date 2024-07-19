@@ -7,8 +7,8 @@ part 'database.g.dart';
 @DriftDatabase(
   include: {'schema.drift'},
 )
-class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openDatabase());
+class DWIDatabase extends _$DWIDatabase {
+  DWIDatabase() : super(_openDatabase());
 
   @override
   int get schemaVersion => 3;
