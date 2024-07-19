@@ -800,9 +800,9 @@ class CounterRestartsCompanion extends UpdateCompanion<CounterRestart> {
   }
 }
 
-abstract class _$AppDatabase extends GeneratedDatabase {
-  _$AppDatabase(QueryExecutor e) : super(e);
-  $AppDatabaseManager get managers => $AppDatabaseManager(this);
+abstract class _$DWIDatabase extends GeneratedDatabase {
+  _$DWIDatabase(QueryExecutor e) : super(e);
+  $DWIDatabaseManager get managers => $DWIDatabaseManager(this);
   late final TimeCounters timeCounters = TimeCounters(this);
   late final CounterWidgets counterWidgets = CounterWidgets(this);
   late final CounterRestarts counterRestarts = CounterRestarts(this);
@@ -863,14 +863,14 @@ typedef $TimeCountersUpdateCompanionBuilder = TimeCountersCompanion Function({
 });
 
 class $TimeCountersTableManager extends RootTableManager<
-    _$AppDatabase,
+    _$DWIDatabase,
     TimeCounters,
     TimeCounter,
     $TimeCountersFilterComposer,
     $TimeCountersOrderingComposer,
     $TimeCountersCreateCompanionBuilder,
     $TimeCountersUpdateCompanionBuilder> {
-  $TimeCountersTableManager(_$AppDatabase db, TimeCounters table)
+  $TimeCountersTableManager(_$DWIDatabase db, TimeCounters table)
       : super(TableManagerState(
           db: db,
           table: table,
@@ -910,7 +910,7 @@ class $TimeCountersTableManager extends RootTableManager<
 }
 
 class $TimeCountersFilterComposer
-    extends FilterComposer<_$AppDatabase, TimeCounters> {
+    extends FilterComposer<_$DWIDatabase, TimeCounters> {
   $TimeCountersFilterComposer(super.$state);
   ColumnFilters<String> get id => $state.composableBuilder(
       column: $state.table.id,
@@ -934,7 +934,7 @@ class $TimeCountersFilterComposer
 }
 
 class $TimeCountersOrderingComposer
-    extends OrderingComposer<_$AppDatabase, TimeCounters> {
+    extends OrderingComposer<_$DWIDatabase, TimeCounters> {
   $TimeCountersOrderingComposer(super.$state);
   ColumnOrderings<String> get id => $state.composableBuilder(
       column: $state.table.id,
@@ -973,14 +973,14 @@ typedef $CounterWidgetsUpdateCompanionBuilder = CounterWidgetsCompanion
 });
 
 class $CounterWidgetsTableManager extends RootTableManager<
-    _$AppDatabase,
+    _$DWIDatabase,
     CounterWidgets,
     CounterWidget,
     $CounterWidgetsFilterComposer,
     $CounterWidgetsOrderingComposer,
     $CounterWidgetsCreateCompanionBuilder,
     $CounterWidgetsUpdateCompanionBuilder> {
-  $CounterWidgetsTableManager(_$AppDatabase db, CounterWidgets table)
+  $CounterWidgetsTableManager(_$DWIDatabase db, CounterWidgets table)
       : super(TableManagerState(
           db: db,
           table: table,
@@ -1016,7 +1016,7 @@ class $CounterWidgetsTableManager extends RootTableManager<
 }
 
 class $CounterWidgetsFilterComposer
-    extends FilterComposer<_$AppDatabase, CounterWidgets> {
+    extends FilterComposer<_$DWIDatabase, CounterWidgets> {
   $CounterWidgetsFilterComposer(super.$state);
   ColumnFilters<String> get id => $state.composableBuilder(
       column: $state.table.id,
@@ -1035,7 +1035,7 @@ class $CounterWidgetsFilterComposer
 }
 
 class $CounterWidgetsOrderingComposer
-    extends OrderingComposer<_$AppDatabase, CounterWidgets> {
+    extends OrderingComposer<_$DWIDatabase, CounterWidgets> {
   $CounterWidgetsOrderingComposer(super.$state);
   ColumnOrderings<String> get id => $state.composableBuilder(
       column: $state.table.id,
@@ -1071,14 +1071,14 @@ typedef $CounterRestartsUpdateCompanionBuilder = CounterRestartsCompanion
 });
 
 class $CounterRestartsTableManager extends RootTableManager<
-    _$AppDatabase,
+    _$DWIDatabase,
     CounterRestarts,
     CounterRestart,
     $CounterRestartsFilterComposer,
     $CounterRestartsOrderingComposer,
     $CounterRestartsCreateCompanionBuilder,
     $CounterRestartsUpdateCompanionBuilder> {
-  $CounterRestartsTableManager(_$AppDatabase db, CounterRestarts table)
+  $CounterRestartsTableManager(_$DWIDatabase db, CounterRestarts table)
       : super(TableManagerState(
           db: db,
           table: table,
@@ -1118,7 +1118,7 @@ class $CounterRestartsTableManager extends RootTableManager<
 }
 
 class $CounterRestartsFilterComposer
-    extends FilterComposer<_$AppDatabase, CounterRestarts> {
+    extends FilterComposer<_$DWIDatabase, CounterRestarts> {
   $CounterRestartsFilterComposer(super.$state);
   ColumnFilters<String> get id => $state.composableBuilder(
       column: $state.table.id,
@@ -1142,7 +1142,7 @@ class $CounterRestartsFilterComposer
 }
 
 class $CounterRestartsOrderingComposer
-    extends OrderingComposer<_$AppDatabase, CounterRestarts> {
+    extends OrderingComposer<_$DWIDatabase, CounterRestarts> {
   $CounterRestartsOrderingComposer(super.$state);
   ColumnOrderings<String> get id => $state.composableBuilder(
       column: $state.table.id,
@@ -1165,9 +1165,9 @@ class $CounterRestartsOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
-class $AppDatabaseManager {
-  final _$AppDatabase _db;
-  $AppDatabaseManager(this._db);
+class $DWIDatabaseManager {
+  final _$DWIDatabase _db;
+  $DWIDatabaseManager(this._db);
   $TimeCountersTableManager get timeCounters =>
       $TimeCountersTableManager(_db, _db.timeCounters);
   $CounterWidgetsTableManager get counterWidgets =>

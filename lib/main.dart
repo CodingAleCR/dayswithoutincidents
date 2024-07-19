@@ -10,8 +10,8 @@ Future<void> main() async {
   await SentryFlutter.init(
     (options) {},
     appRunner: () => runApp(
-      Provider<AppDatabase>(
-        create: (context) => AppDatabase(),
+      Provider<DWIDatabase>(
+        create: (context) => DWIDatabase(),
         dispose: (context, value) => value.close(),
         child: const AppWithDatabase(),
       ),
@@ -28,12 +28,12 @@ class AppWithDatabase extends StatelessWidget {
       providers: [
         RepositoryProvider<TimeCounterService>(
           create: (context) => TimeCounterServiceImpl(
-            database: context.read<AppDatabase>(),
+            database: context.read<DWIDatabase>(),
           ),
         ),
         RepositoryProvider<CounterRestartService>(
           create: (context) => CounterRestartServiceImpl(
-            database: context.read<AppDatabase>(),
+            database: context.read<DWIDatabase>(),
           ),
         ),
         RepositoryProvider<PreferencesService>(

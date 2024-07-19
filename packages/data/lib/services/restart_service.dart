@@ -6,10 +6,10 @@ import 'package:drift/drift.dart';
 class CounterRestartServiceImpl extends CounterRestartService {
   /// Constructor
   CounterRestartServiceImpl({
-    db.AppDatabase? database,
-  }) : _database = database ?? db.AppDatabase();
+    db.DWIDatabase? database,
+  }) : _database = database ?? db.DWIDatabase();
 
-  final db.AppDatabase _database;
+  final db.DWIDatabase _database;
 
   @override
   Future<void> deleteById(String uuid) async {
