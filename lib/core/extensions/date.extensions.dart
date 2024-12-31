@@ -31,6 +31,6 @@ extension FormatDate on DateTime {
 
   /// Prints the DateTime as a formatted string.
   String toLocalizedString() {
-    return DateFormat.yMd().add_jm() .format(this);
+    return DateFormat.yMd().add_jm().format(this);
   }
 }

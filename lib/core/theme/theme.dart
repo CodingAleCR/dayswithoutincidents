@@ -534,7 +534,7 @@ class DarkGoldTheme extends DWITheme {
   String get name => AppTheme.goldAmberInverted.displayName;
 
   @override
-  BrandedTheme get brandedTheme =>  BrandedTheme(
+  BrandedTheme get brandedTheme => BrandedTheme(
         primaryColor: DWIColors.brandBlue,
         textColor: DWIColors.goldAmber,
         accentColor: DWIColors.goldAmber.withOpacity(0.1),
@@ -575,7 +575,7 @@ class BloodRedTheme extends DWITheme {
   String get name => AppTheme.passionRedInverted.displayName;
 
   @override
-  BrandedTheme get brandedTheme =>  BrandedTheme(
+  BrandedTheme get brandedTheme => BrandedTheme(
         primaryColor: DWIColors.brandBlue,
         textColor: DWIColors.passionRed,
         accentColor: DWIColors.bittersweet.withOpacity(0.1),

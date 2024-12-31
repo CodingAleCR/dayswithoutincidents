@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 
 /// Shows two dialogs to choose a date and time.
@@ -17,6 +15,7 @@ Future<DateTime?> showDateTimePicker(
   );
 
   if (date == null) return null;
+  if (!context.mounted) return null;
 
   final time = await showTimePicker(
     context: context,

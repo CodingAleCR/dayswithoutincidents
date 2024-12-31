@@ -6,7 +6,7 @@ class CounterListState extends Equatable {
   const CounterListState({
     this.status = OperationStatus.loading,
     this.counters = const [],
-    this.selectedIdx = 0,
+    this.selectedIdx = -1,
     this.preferredMode = DisplayModes.carousel,
   });
 

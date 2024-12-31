@@ -8,26 +8,25 @@ class TimeCounters extends Table with TableInfo<TimeCounters, TimeCounter> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   TimeCounters(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL PRIMARY KEY');
-  static const VerificationMeta _titleMeta = const VerificationMeta('title');
+  static const VerificationMeta _titleMeta = VerificationMeta('title');
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
       'title', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _createdAtMeta =
-      const VerificationMeta('createdAt');
+  static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
   late final GeneratedColumn<String> createdAt = GeneratedColumn<String>(
       'created_at', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _themeMeta = const VerificationMeta('theme');
+  static const VerificationMeta _themeMeta = VerificationMeta('theme');
   late final GeneratedColumn<String> theme = GeneratedColumn<String>(
       'theme', aliasedName, true,
       type: DriftSqlType.string,
@@ -282,21 +281,19 @@ class CounterWidgets extends Table
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   CounterWidgets(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL PRIMARY KEY');
-  static const VerificationMeta _counterIdMeta =
-      const VerificationMeta('counterId');
+  static const VerificationMeta _counterIdMeta = VerificationMeta('counterId');
   late final GeneratedColumn<String> counterId = GeneratedColumn<String>(
       'counter_id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _widgetIdMeta =
-      const VerificationMeta('widgetId');
+  static const VerificationMeta _widgetIdMeta = VerificationMeta('widgetId');
   late final GeneratedColumn<String> widgetId = GeneratedColumn<String>(
       'widget_id', aliasedName, false,
       type: DriftSqlType.string,
@@ -521,28 +518,26 @@ class CounterRestarts extends Table
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   CounterRestarts(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  static const VerificationMeta _idMeta = VerificationMeta('id');
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL PRIMARY KEY');
-  static const VerificationMeta _counterIdMeta =
-      const VerificationMeta('counterId');
+  static const VerificationMeta _counterIdMeta = VerificationMeta('counterId');
   late final GeneratedColumn<String> counterId = GeneratedColumn<String>(
       'counter_id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _startedAtMeta =
-      const VerificationMeta('startedAt');
+  static const VerificationMeta _startedAtMeta = VerificationMeta('startedAt');
   late final GeneratedColumn<String> startedAt = GeneratedColumn<String>(
       'started_at', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _restartedAtMeta =
-      const VerificationMeta('restartedAt');
+      VerificationMeta('restartedAt');
   late final GeneratedColumn<String> restartedAt = GeneratedColumn<String>(
       'restarted_at', aliasedName, false,
       type: DriftSqlType.string,
@@ -862,22 +857,94 @@ typedef $TimeCountersUpdateCompanionBuilder = TimeCountersCompanion Function({
   Value<int> rowid,
 });
 
+class $TimeCountersFilterComposer
+    extends Composer<_$DWIDatabase, TimeCounters> {
+  $TimeCountersFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get theme => $composableBuilder(
+      column: $table.theme, builder: (column) => ColumnFilters(column));
+}
+
+class $TimeCountersOrderingComposer
+    extends Composer<_$DWIDatabase, TimeCounters> {
+  $TimeCountersOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get theme => $composableBuilder(
+      column: $table.theme, builder: (column) => ColumnOrderings(column));
+}
+
+class $TimeCountersAnnotationComposer
+    extends Composer<_$DWIDatabase, TimeCounters> {
+  $TimeCountersAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  GeneratedColumn<String> get theme =>
+      $composableBuilder(column: $table.theme, builder: (column) => column);
+}
+
 class $TimeCountersTableManager extends RootTableManager<
     _$DWIDatabase,
     TimeCounters,
     TimeCounter,
     $TimeCountersFilterComposer,
     $TimeCountersOrderingComposer,
+    $TimeCountersAnnotationComposer,
     $TimeCountersCreateCompanionBuilder,
-    $TimeCountersUpdateCompanionBuilder> {
+    $TimeCountersUpdateCompanionBuilder,
+    (TimeCounter, BaseReferences<_$DWIDatabase, TimeCounters, TimeCounter>),
+    TimeCounter,
+    PrefetchHooks Function()> {
   $TimeCountersTableManager(_$DWIDatabase db, TimeCounters table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $TimeCountersFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $TimeCountersOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $TimeCountersFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $TimeCountersOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $TimeCountersAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String?> title = const Value.absent(),
@@ -906,57 +973,25 @@ class $TimeCountersTableManager extends RootTableManager<
             theme: theme,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
         ));
 }
 
-class $TimeCountersFilterComposer
-    extends FilterComposer<_$DWIDatabase, TimeCounters> {
-  $TimeCountersFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get theme => $state.composableBuilder(
-      column: $state.table.theme,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $TimeCountersOrderingComposer
-    extends OrderingComposer<_$DWIDatabase, TimeCounters> {
-  $TimeCountersOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get title => $state.composableBuilder(
-      column: $state.table.title,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get createdAt => $state.composableBuilder(
-      column: $state.table.createdAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get theme => $state.composableBuilder(
-      column: $state.table.theme,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $TimeCountersProcessedTableManager = ProcessedTableManager<
+    _$DWIDatabase,
+    TimeCounters,
+    TimeCounter,
+    $TimeCountersFilterComposer,
+    $TimeCountersOrderingComposer,
+    $TimeCountersAnnotationComposer,
+    $TimeCountersCreateCompanionBuilder,
+    $TimeCountersUpdateCompanionBuilder,
+    (TimeCounter, BaseReferences<_$DWIDatabase, TimeCounters, TimeCounter>),
+    TimeCounter,
+    PrefetchHooks Function()>;
 typedef $CounterWidgetsCreateCompanionBuilder = CounterWidgetsCompanion
     Function({
   required String id,
@@ -972,22 +1007,88 @@ typedef $CounterWidgetsUpdateCompanionBuilder = CounterWidgetsCompanion
   Value<int> rowid,
 });
 
+class $CounterWidgetsFilterComposer
+    extends Composer<_$DWIDatabase, CounterWidgets> {
+  $CounterWidgetsFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get counterId => $composableBuilder(
+      column: $table.counterId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get widgetId => $composableBuilder(
+      column: $table.widgetId, builder: (column) => ColumnFilters(column));
+}
+
+class $CounterWidgetsOrderingComposer
+    extends Composer<_$DWIDatabase, CounterWidgets> {
+  $CounterWidgetsOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get counterId => $composableBuilder(
+      column: $table.counterId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get widgetId => $composableBuilder(
+      column: $table.widgetId, builder: (column) => ColumnOrderings(column));
+}
+
+class $CounterWidgetsAnnotationComposer
+    extends Composer<_$DWIDatabase, CounterWidgets> {
+  $CounterWidgetsAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get counterId =>
+      $composableBuilder(column: $table.counterId, builder: (column) => column);
+
+  GeneratedColumn<String> get widgetId =>
+      $composableBuilder(column: $table.widgetId, builder: (column) => column);
+}
+
 class $CounterWidgetsTableManager extends RootTableManager<
     _$DWIDatabase,
     CounterWidgets,
     CounterWidget,
     $CounterWidgetsFilterComposer,
     $CounterWidgetsOrderingComposer,
+    $CounterWidgetsAnnotationComposer,
     $CounterWidgetsCreateCompanionBuilder,
-    $CounterWidgetsUpdateCompanionBuilder> {
+    $CounterWidgetsUpdateCompanionBuilder,
+    (
+      CounterWidget,
+      BaseReferences<_$DWIDatabase, CounterWidgets, CounterWidget>
+    ),
+    CounterWidget,
+    PrefetchHooks Function()> {
   $CounterWidgetsTableManager(_$DWIDatabase db, CounterWidgets table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $CounterWidgetsFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $CounterWidgetsOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $CounterWidgetsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $CounterWidgetsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $CounterWidgetsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> counterId = const Value.absent(),
@@ -1012,47 +1113,28 @@ class $CounterWidgetsTableManager extends RootTableManager<
             widgetId: widgetId,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
         ));
 }
 
-class $CounterWidgetsFilterComposer
-    extends FilterComposer<_$DWIDatabase, CounterWidgets> {
-  $CounterWidgetsFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get counterId => $state.composableBuilder(
-      column: $state.table.counterId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get widgetId => $state.composableBuilder(
-      column: $state.table.widgetId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $CounterWidgetsOrderingComposer
-    extends OrderingComposer<_$DWIDatabase, CounterWidgets> {
-  $CounterWidgetsOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get counterId => $state.composableBuilder(
-      column: $state.table.counterId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get widgetId => $state.composableBuilder(
-      column: $state.table.widgetId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
-
+typedef $CounterWidgetsProcessedTableManager = ProcessedTableManager<
+    _$DWIDatabase,
+    CounterWidgets,
+    CounterWidget,
+    $CounterWidgetsFilterComposer,
+    $CounterWidgetsOrderingComposer,
+    $CounterWidgetsAnnotationComposer,
+    $CounterWidgetsCreateCompanionBuilder,
+    $CounterWidgetsUpdateCompanionBuilder,
+    (
+      CounterWidget,
+      BaseReferences<_$DWIDatabase, CounterWidgets, CounterWidget>
+    ),
+    CounterWidget,
+    PrefetchHooks Function()>;
 typedef $CounterRestartsCreateCompanionBuilder = CounterRestartsCompanion
     Function({
   required String id,
@@ -1070,22 +1152,97 @@ typedef $CounterRestartsUpdateCompanionBuilder = CounterRestartsCompanion
   Value<int> rowid,
 });
 
+class $CounterRestartsFilterComposer
+    extends Composer<_$DWIDatabase, CounterRestarts> {
+  $CounterRestartsFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get counterId => $composableBuilder(
+      column: $table.counterId, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get startedAt => $composableBuilder(
+      column: $table.startedAt, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get restartedAt => $composableBuilder(
+      column: $table.restartedAt, builder: (column) => ColumnFilters(column));
+}
+
+class $CounterRestartsOrderingComposer
+    extends Composer<_$DWIDatabase, CounterRestarts> {
+  $CounterRestartsOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get counterId => $composableBuilder(
+      column: $table.counterId, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get startedAt => $composableBuilder(
+      column: $table.startedAt, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get restartedAt => $composableBuilder(
+      column: $table.restartedAt, builder: (column) => ColumnOrderings(column));
+}
+
+class $CounterRestartsAnnotationComposer
+    extends Composer<_$DWIDatabase, CounterRestarts> {
+  $CounterRestartsAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get counterId =>
+      $composableBuilder(column: $table.counterId, builder: (column) => column);
+
+  GeneratedColumn<String> get startedAt =>
+      $composableBuilder(column: $table.startedAt, builder: (column) => column);
+
+  GeneratedColumn<String> get restartedAt => $composableBuilder(
+      column: $table.restartedAt, builder: (column) => column);
+}
+
 class $CounterRestartsTableManager extends RootTableManager<
     _$DWIDatabase,
     CounterRestarts,
     CounterRestart,
     $CounterRestartsFilterComposer,
     $CounterRestartsOrderingComposer,
+    $CounterRestartsAnnotationComposer,
     $CounterRestartsCreateCompanionBuilder,
-    $CounterRestartsUpdateCompanionBuilder> {
+    $CounterRestartsUpdateCompanionBuilder,
+    (
+      CounterRestart,
+      BaseReferences<_$DWIDatabase, CounterRestarts, CounterRestart>
+    ),
+    CounterRestart,
+    PrefetchHooks Function()> {
   $CounterRestartsTableManager(_$DWIDatabase db, CounterRestarts table)
       : super(TableManagerState(
           db: db,
           table: table,
-          filteringComposer:
-              $CounterRestartsFilterComposer(ComposerState(db, table)),
-          orderingComposer:
-              $CounterRestartsOrderingComposer(ComposerState(db, table)),
+          createFilteringComposer: () =>
+              $CounterRestartsFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $CounterRestartsOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $CounterRestartsAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<String> id = const Value.absent(),
             Value<String> counterId = const Value.absent(),
@@ -1114,56 +1271,28 @@ class $CounterRestartsTableManager extends RootTableManager<
             restartedAt: restartedAt,
             rowid: rowid,
           ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
         ));
 }
 
-class $CounterRestartsFilterComposer
-    extends FilterComposer<_$DWIDatabase, CounterRestarts> {
-  $CounterRestartsFilterComposer(super.$state);
-  ColumnFilters<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get counterId => $state.composableBuilder(
-      column: $state.table.counterId,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get startedAt => $state.composableBuilder(
-      column: $state.table.startedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-
-  ColumnFilters<String> get restartedAt => $state.composableBuilder(
-      column: $state.table.restartedAt,
-      builder: (column, joinBuilders) =>
-          ColumnFilters(column, joinBuilders: joinBuilders));
-}
-
-class $CounterRestartsOrderingComposer
-    extends OrderingComposer<_$DWIDatabase, CounterRestarts> {
-  $CounterRestartsOrderingComposer(super.$state);
-  ColumnOrderings<String> get id => $state.composableBuilder(
-      column: $state.table.id,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get counterId => $state.composableBuilder(
-      column: $state.table.counterId,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get startedAt => $state.composableBuilder(
-      column: $state.table.startedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-
-  ColumnOrderings<String> get restartedAt => $state.composableBuilder(
-      column: $state.table.restartedAt,
-      builder: (column, joinBuilders) =>
-          ColumnOrderings(column, joinBuilders: joinBuilders));
-}
+typedef $CounterRestartsProcessedTableManager = ProcessedTableManager<
+    _$DWIDatabase,
+    CounterRestarts,
+    CounterRestart,
+    $CounterRestartsFilterComposer,
+    $CounterRestartsOrderingComposer,
+    $CounterRestartsAnnotationComposer,
+    $CounterRestartsCreateCompanionBuilder,
+    $CounterRestartsUpdateCompanionBuilder,
+    (
+      CounterRestart,
+      BaseReferences<_$DWIDatabase, CounterRestarts, CounterRestart>
+    ),
+    CounterRestart,
+    PrefetchHooks Function()>;
 
 class $DWIDatabaseManager {
   final _$DWIDatabase _db;

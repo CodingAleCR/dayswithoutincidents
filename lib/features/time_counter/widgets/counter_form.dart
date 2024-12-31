@@ -97,7 +97,7 @@ class _CounterFormState extends State<CounterForm> {
               const SizedBox(height: 4),
               TextField(
                 controller: _titleController,
-                decoration:  InputDecoration(
+                decoration: InputDecoration(
                   hintText: S.of(context).counterFormNameFieldHint,
                 ),
                 onTapOutside: (event) {
@@ -122,7 +122,7 @@ class _CounterFormState extends State<CounterForm> {
                     initialDate: DateTime.now(),
                     currentDate: widget.lastRestart,
                   );
-                  
+
                   if (updatedRestart != null) {
                     setState(() {
                       _lastRestartController.text =

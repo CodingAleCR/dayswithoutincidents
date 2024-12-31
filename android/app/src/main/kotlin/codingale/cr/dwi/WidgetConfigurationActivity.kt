@@ -17,7 +17,6 @@ import codingale.cr.dwi.database.counters.CounterEntity
 import codingale.cr.dwi.database.widgets.WidgetEntity
 import codingale.cr.dwi.databinding.ActivityWidgetConfigurationBinding
 import codingale.cr.dwi.utils.DbUtil
-import kotlinx.android.synthetic.main.activity_widget_configuration.*
 import java.util.*
 
 class WidgetConfigurationActivity : AppCompatActivity(), CustomAdapter.ClickListener {
@@ -48,8 +47,8 @@ class WidgetConfigurationActivity : AppCompatActivity(), CustomAdapter.ClickList
         // Setup UI & Counter list.
         counters = DbUtil.getAllCounters(this)
         val adapter = CustomAdapter(counters, this)
-        rv_counters.layoutManager = LinearLayoutManager(this)
-        rv_counters.adapter = adapter
+        binding.rvCounters.layoutManager = LinearLayoutManager(this)
+        binding.rvCounters.adapter = adapter
     }
 
     override fun onItemClick(position: Int, v: View?) {
