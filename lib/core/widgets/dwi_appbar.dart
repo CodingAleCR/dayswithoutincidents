@@ -129,7 +129,7 @@ class _DeleteCounterButton extends StatelessWidget {
             ),
             Divider(
               height: 1,
-              color: Colors.grey.withOpacity(0.3),
+              color: Colors.grey.withValues(alpha: 0.3),
             ),
             Row(
               children: [
