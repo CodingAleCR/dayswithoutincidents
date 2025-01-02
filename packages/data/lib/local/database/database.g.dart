@@ -8,25 +8,26 @@ class TimeCounters extends Table with TableInfo<TimeCounters, TimeCounter> {
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   TimeCounters(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL PRIMARY KEY');
-  static const VerificationMeta _titleMeta = VerificationMeta('title');
+  static const VerificationMeta _titleMeta = const VerificationMeta('title');
   late final GeneratedColumn<String> title = GeneratedColumn<String>(
       'title', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _createdAtMeta = VerificationMeta('createdAt');
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
   late final GeneratedColumn<String> createdAt = GeneratedColumn<String>(
       'created_at', aliasedName, true,
       type: DriftSqlType.string,
       requiredDuringInsert: false,
       $customConstraints: '');
-  static const VerificationMeta _themeMeta = VerificationMeta('theme');
+  static const VerificationMeta _themeMeta = const VerificationMeta('theme');
   late final GeneratedColumn<String> theme = GeneratedColumn<String>(
       'theme', aliasedName, true,
       type: DriftSqlType.string,
@@ -281,19 +282,21 @@ class CounterWidgets extends Table
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   CounterWidgets(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL PRIMARY KEY');
-  static const VerificationMeta _counterIdMeta = VerificationMeta('counterId');
+  static const VerificationMeta _counterIdMeta =
+      const VerificationMeta('counterId');
   late final GeneratedColumn<String> counterId = GeneratedColumn<String>(
       'counter_id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _widgetIdMeta = VerificationMeta('widgetId');
+  static const VerificationMeta _widgetIdMeta =
+      const VerificationMeta('widgetId');
   late final GeneratedColumn<String> widgetId = GeneratedColumn<String>(
       'widget_id', aliasedName, false,
       type: DriftSqlType.string,
@@ -518,26 +521,28 @@ class CounterRestarts extends Table
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   CounterRestarts(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _idMeta = VerificationMeta('id');
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
   late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL PRIMARY KEY');
-  static const VerificationMeta _counterIdMeta = VerificationMeta('counterId');
+  static const VerificationMeta _counterIdMeta =
+      const VerificationMeta('counterId');
   late final GeneratedColumn<String> counterId = GeneratedColumn<String>(
       'counter_id', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
-  static const VerificationMeta _startedAtMeta = VerificationMeta('startedAt');
+  static const VerificationMeta _startedAtMeta =
+      const VerificationMeta('startedAt');
   late final GeneratedColumn<String> startedAt = GeneratedColumn<String>(
       'started_at', aliasedName, false,
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: 'NOT NULL');
   static const VerificationMeta _restartedAtMeta =
-      VerificationMeta('restartedAt');
+      const VerificationMeta('restartedAt');
   late final GeneratedColumn<String> restartedAt = GeneratedColumn<String>(
       'restarted_at', aliasedName, false,
       type: DriftSqlType.string,
