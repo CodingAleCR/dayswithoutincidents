@@ -138,7 +138,7 @@ const _lightInputDecorationTheme = InputDecorationTheme(
 );
 
 const _darkInputDecorationTheme = InputDecorationTheme(
-  fillColor: Colors.white,
+  fillColor: DWIColors.brandBlueTint1,
   filled: true,
   border: OutlineInputBorder(
     borderRadius: BorderRadius.zero,
@@ -162,8 +162,12 @@ ThemeData buildDWITheme({
       : _darkBottomSheetTheme;
 
   final inputDecorationTheme = brightness == Brightness.light
-      ? _lightInputDecorationTheme
-      : _darkInputDecorationTheme;
+      ? _lightInputDecorationTheme.copyWith(
+          prefixIconColor: brandedTheme.textColor,
+        )
+      : _darkInputDecorationTheme.copyWith(
+          prefixIconColor: brandedTheme.textColor,
+        );
 
   return ThemeData(
     colorScheme: ColorScheme.fromSwatch(
@@ -230,18 +234,6 @@ ThemeData buildDWITheme({
       titleLarge: TextStyle(
         color: brandedTheme.textColor,
       ),
-      bodySmall: TextStyle(
-        color: brandedTheme.textColor,
-      ),
-      labelSmall: TextStyle(
-        color: brandedTheme.textColor,
-      ),
-      bodyLarge: TextStyle(
-        color: brandedTheme.textColor,
-      ),
-      bodyMedium: TextStyle(
-        color: brandedTheme.textColor,
-      ),
       titleMedium: TextStyle(
         color: brandedTheme.textColor,
       ),
@@ -250,8 +242,23 @@ ThemeData buildDWITheme({
         fontWeight: FontWeight.w800,
         color: brandedTheme.textColor,
       ),
+      bodyLarge: TextStyle(
+        color: brandedTheme.textColor,
+      ),
+      bodyMedium: TextStyle(
+        color: brandedTheme.textColor,
+      ),
+      bodySmall: TextStyle(
+        color: brandedTheme.textColor,
+      ),
       labelLarge: TextStyle(
         fontSize: 18,
+        color: brandedTheme.textColor,
+      ),
+      labelMedium: TextStyle(
+        color: brandedTheme.textColor,
+      ),
+      labelSmall: TextStyle(
         color: brandedTheme.textColor,
       ),
     ),
@@ -576,8 +583,8 @@ class BloodRedTheme extends DWITheme {
 
   @override
   BrandedTheme get brandedTheme => BrandedTheme(
-        primaryColor: DWIColors.brandBlue,
-        textColor: DWIColors.passionRed,
+        primaryColor: DWIColors.passionRedDark,
+        textColor: DWIColors.bittersweet,
         accentColor: DWIColors.bittersweet.withValues(alpha: 0.1),
       );
 

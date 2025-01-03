@@ -27,6 +27,8 @@ abstract class DWIColors {
   /// Brand Blue Tint 2 #32416A
   static const Color rhino = Color(0xff32416A);
 
+  static const Color passionRedDark = Color(0xff180909);
+
   /// Additional Theme Red Color #F05656
   static const Color passionRed = Color(0xffF05656);
 
