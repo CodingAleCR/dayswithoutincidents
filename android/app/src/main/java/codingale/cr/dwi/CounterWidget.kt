@@ -107,7 +107,8 @@ class CounterWidget : AppWidgetProvider() {
             )
 
             // Updates counter in storage
-            val counter = DbUtil.getAllCounters(context).firstOrNull()
+            val widget = DbUtil.getWidgetByWidgetId(context, widgetId.toString())
+            val counter = widget?.let { DbUtil.getCounterById(context, it.counterId) }
 
             if (counter != null) {
                 DbUtil.restartCounter(context, counter)

@@ -1,5 +1,5 @@
 /// Shared configs for DWI
-library environment;
+library;
 
 /// Environment Configuration variables
 abstract final class EnvironmentConfig {

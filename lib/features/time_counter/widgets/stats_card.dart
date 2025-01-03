@@ -32,7 +32,7 @@ class StatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = this.color ??
-        Theme.of(context).textTheme.bodyLarge?.color?.withOpacity(0.15) ??
+        Theme.of(context).textTheme.bodyLarge?.color?.withValues(alpha: 0.15) ??
         Colors.black12;
 
     return InkWell(

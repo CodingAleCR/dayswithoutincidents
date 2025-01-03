@@ -20,7 +20,7 @@ class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
     return PreferredSize(
       preferredSize: preferredSize,
       child: AppBar(
-        title: mode.isList ?  Text(S.of(context).listViewTitle) : null,
+        title: mode.isList ? Text(S.of(context).listViewTitle) : null,
         actions: [
           if (mode.isList) const _ToggleThemeButton(),
           const _AddCounterButton(),
@@ -127,9 +127,9 @@ class _DeleteCounterButton extends StatelessWidget {
                 ),
               ],
             ),
-             Divider(
+            Divider(
               height: 1,
-              color: Colors.grey.withOpacity(0.3),
+              color: Colors.grey.withValues(alpha: 0.3),
             ),
             Row(
               children: [
@@ -164,7 +164,6 @@ class _DeleteCounterButton extends StatelessWidget {
       await context.read<CounterListCubit>().deleteCurrentCounter();
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

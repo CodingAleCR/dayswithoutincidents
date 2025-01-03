@@ -56,7 +56,9 @@ class CounterListCubit extends Cubit<CounterListState> {
 
   /// Fetches all the counters from storage, and updates the selected time
   /// counter.
-  Future<void> fetchCounters({int selectedIdx = 0}) async {
+  Future<void> fetchCounters({
+    int selectedIdx = 0,
+  }) async {
     try {
       emit(
         state.copyWith(
@@ -70,7 +72,7 @@ class CounterListCubit extends Cubit<CounterListState> {
         state.copyWith(
           status: OperationStatus.success,
           counters: allCounters,
-          selectedIdx: selectedIdx,
+          selectedIdx: allCounters.isNotEmpty ? selectedIdx : null,
           preferredMode: preferredMode,
         ),
       );

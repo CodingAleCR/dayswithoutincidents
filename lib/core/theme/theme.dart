@@ -255,7 +255,7 @@ ThemeData buildDWITheme({
         color: brandedTheme.textColor,
       ),
     ),
-    splashColor: brandedTheme.textColor.withOpacity(0.3),
+    splashColor: brandedTheme.textColor.withValues(alpha: 0.3),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         elevation: 0,
@@ -313,8 +313,8 @@ class PlainLightTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandBlue,
           rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
           rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -354,8 +354,8 @@ class DarkSideTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandWhite,
           rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
           rangePickerHeaderForegroundColor: DWIColors.brandWhite,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -395,8 +395,8 @@ class PassionRedTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandWhite,
           rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
           rangePickerHeaderForegroundColor: DWIColors.brandWhite,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -436,8 +436,8 @@ class JustPurpleTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandWhite,
           rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
           rangePickerHeaderForegroundColor: DWIColors.brandWhite,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -476,8 +476,8 @@ class GoldAmberTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandBlue,
           rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
           rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -516,8 +516,8 @@ class HappyCyanTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandBlue,
           rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
           rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -534,10 +534,10 @@ class DarkGoldTheme extends DWITheme {
   String get name => AppTheme.goldAmberInverted.displayName;
 
   @override
-  BrandedTheme get brandedTheme =>  BrandedTheme(
+  BrandedTheme get brandedTheme => BrandedTheme(
         primaryColor: DWIColors.brandBlue,
         textColor: DWIColors.goldAmber,
-        accentColor: DWIColors.goldAmber.withOpacity(0.1),
+        accentColor: DWIColors.goldAmber.withValues(alpha: 0.1),
       );
 
   @override
@@ -557,8 +557,8 @@ class DarkGoldTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandBlue,
           rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
           rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -575,10 +575,10 @@ class BloodRedTheme extends DWITheme {
   String get name => AppTheme.passionRedInverted.displayName;
 
   @override
-  BrandedTheme get brandedTheme =>  BrandedTheme(
+  BrandedTheme get brandedTheme => BrandedTheme(
         primaryColor: DWIColors.brandBlue,
         textColor: DWIColors.passionRed,
-        accentColor: DWIColors.bittersweet.withOpacity(0.1),
+        accentColor: DWIColors.bittersweet.withValues(alpha: 0.1),
       );
 
   @override
@@ -598,8 +598,8 @@ class BloodRedTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandWhite,
           rangePickerHeaderBackgroundColor: DWIColors.brandBlueTint1,
           rangePickerHeaderForegroundColor: DWIColors.brandWhite,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
@@ -619,7 +619,7 @@ class PurpleWhiteTheme extends DWITheme {
   BrandedTheme get brandedTheme => BrandedTheme(
         primaryColor: DWIColors.brandWhite,
         textColor: DWIColors.justPurple,
-        accentColor: DWIColors.justPurple.withOpacity(0.1),
+        accentColor: DWIColors.justPurple.withValues(alpha: 0.1),
       );
 
   @override
@@ -638,8 +638,8 @@ class PurpleWhiteTheme extends DWITheme {
           rangePickerSurfaceTintColor: DWIColors.brandBlue,
           rangePickerHeaderBackgroundColor: DWIColors.brandWhite,
           rangePickerHeaderForegroundColor: DWIColors.brandBlueTint1,
-          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withOpacity(
-            0.3,
+          rangeSelectionBackgroundColor: brandedTheme.primaryColor.withValues(
+            alpha: 0.3,
           ),
           dayBackgroundColor: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)

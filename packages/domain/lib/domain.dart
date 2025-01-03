@@ -1,5 +1,5 @@
 /// This is the domain layer of the app.
-library domain;
+library;
 
 export './models/models.dart';
 export './services/services.dart';
