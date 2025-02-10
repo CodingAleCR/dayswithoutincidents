@@ -122,7 +122,9 @@ class _CountersState extends State<_Counters> {
 
     final currentTheme = context.read<ThemeChooserCubit>().state.theme;
 
-    if (selectedIdx != -1 && currentTheme != counters[selectedIdx].theme) {
+    if (selectedIdx != -1 &&
+        counters.isNotEmpty &&
+        currentTheme != counters[selectedIdx].theme) {
       context.read<ThemeChooserCubit>().themeChanged(
             counters[selectedIdx].theme,
           );

@@ -17,6 +17,8 @@ class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final mode = context.watch<CounterListCubit>().state.preferredMode;
+    final hasCounters =
+        context.watch<CounterListCubit>().state.counters.isNotEmpty;
     return PreferredSize(
       preferredSize: preferredSize,
       child: AppBar(
@@ -24,7 +26,7 @@ class DWIAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           if (mode.isList) const _ToggleThemeButton(),
           const _AddCounterButton(),
-          if (mode.isCarousel) const _DeleteCounterButton(),
+          if (mode.isCarousel && hasCounters) const _DeleteCounterButton(),
           const _AboutButton(),
         ],
       ),

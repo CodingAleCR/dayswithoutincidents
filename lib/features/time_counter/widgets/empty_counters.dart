@@ -37,7 +37,7 @@ class EmptyCounters extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const Spacer(),
-          OutlinedButton.icon(
+          ElevatedButton.icon(
             icon: const Icon(Icons.add),
             label: Text(
               S.of(context).countersEmptyStateAction,
