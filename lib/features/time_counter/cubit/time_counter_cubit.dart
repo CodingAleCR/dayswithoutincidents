@@ -34,6 +34,11 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       );
     } catch (exception, stacktrace) {
       await Sentry.captureException(exception, stackTrace: stacktrace);
+      emit(
+        state.copyWith(
+          status: OperationStatus.failure,
+        ),
+      );
     }
   }
 
@@ -104,7 +109,7 @@ class TimeCounterCubit extends Cubit<TimeCounterState> {
       final restartItem = CounterRestart.generated(
         counter: state.counter,
         startedAt: state.counter.createdAt,
-        restartedAt: DateTime.now(),
+        restartedAt: restartDate,
       );
       await _restartsService.save(restartItem);
 
