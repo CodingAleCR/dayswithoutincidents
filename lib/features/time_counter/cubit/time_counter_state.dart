@@ -26,7 +26,9 @@ class TimeCounterState extends Equatable {
   ///
   /// It is inferred from [restarts]
   Duration get currentStreak {
-    return DateTime.now().difference(counter.createdAt!);
+    final createdAt = counter.createdAt;
+    if (createdAt == null) return Duration.zero;
+    return DateTime.now().difference(createdAt);
   }
 
   /// Longest streak of [counter].
@@ -37,7 +39,7 @@ class TimeCounterState extends Equatable {
         .map((counterRestart) => counterRestart.streakDifference)
         .toList();
 
-    final currentStreak = DateTime.now().difference(counter.createdAt!);
+    final currentStreak = this.currentStreak;
     if (streaks.isEmpty) return currentStreak;
 
     final longestRestartStreak = streaks.reduce(
@@ -52,7 +54,7 @@ class TimeCounterState extends Equatable {
 
   /// Determines if the current streak is the longest streak alive.
   bool get isLongestStreakAlive {
-    final currentStreak = DateTime.now().difference(counter.createdAt!);
+    final currentStreak = this.currentStreak;
 
     return longestStreak.inHours == currentStreak.inHours;
   }
