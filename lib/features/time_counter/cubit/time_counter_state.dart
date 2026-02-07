@@ -56,7 +56,7 @@ class TimeCounterState extends Equatable {
   bool get isLongestStreakAlive {
     final currentStreak = this.currentStreak;
 
-    return longestStreak.inHours == currentStreak.inHours;
+    return longestStreak.inMinutes == currentStreak.inMinutes;
   }
 
   @override
