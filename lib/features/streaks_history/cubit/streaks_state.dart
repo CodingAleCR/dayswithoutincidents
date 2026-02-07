@@ -29,6 +29,7 @@ class StreaksState extends Equatable {
 
   @override
   List<Object> get props => [
+        status,
         counter,
         restarts,
       ];
