@@ -55,6 +55,7 @@ class _CounterSliderState extends State<CounterSlider>
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.counters != widget.counters) {
+      controller.dispose();
       configureControllers();
     }
 
@@ -70,6 +71,13 @@ class _CounterSliderState extends State<CounterSlider>
             counters[widget.currentIndex].theme,
           );
     }
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    controller.dispose();
+    super.dispose();
   }
 
   @override

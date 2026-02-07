@@ -20,6 +20,7 @@ class RestartsState extends Equatable {
 
   @override
   List<Object> get props => [
+        status,
         counter,
         restarts,
       ];
